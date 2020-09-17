@@ -28,7 +28,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index.html" class="logo logo-bg">
+    <a href="index.php" class="logo logo-bg">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>W</b>L</span>
       <!-- logo for regular state and mobile devices -->
@@ -41,8 +41,8 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li>
-            <a href="#">Login</a>
-          </li>  
+            <a href="login.php">Login</a>
+          </li>       
         </ul>
       </div>
     </nav>
@@ -55,7 +55,7 @@
       <div class="container">
         <div class="row latest-job margin-top-50 margin-bottom-20 bg-white">
           <h1 class="text-center margin-bottom-20">CREATE YOUR PROFILE</h1>
-          <form method="post" id="registerCandidates" action="#" enctype="multipart/form-data">
+          <form method="post" id="registerCandidates" action="adduser.php" enctype="multipart/form-data">
             <div class="col-md-6 latest-job ">
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="fname" name="fname" placeholder="First Name" required>
@@ -64,7 +64,7 @@
                 <input class="form-control input-lg" type="text" id="lname" name="lname" placeholder="Last Name" required>
               </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="text" id="email" name="email" placeholder="Email" required>
+                <input class="form-control input-lg" type="email" id="email" name="email" placeholder="Email" required>
               </div>
               <div class="form-group">
                 <textarea class="form-control input-lg" rows="4" id="aboutme" name="aboutme" placeholder="Brief intro about yourself" required></textarea>
@@ -89,14 +89,13 @@
               <div class="form-group">
                 <button class="btn btn-flat btn-success">Register</button>
               </div>
-
             </div>            
             <div class="col-md-6 latest-job ">
               <div class="form-group">
-                <input class="form-control input-lg" type="password" id="password" name="password" placeholder="Password" required>
+                <input class="form-control input-lg" type="password" id="password" name="password" placeholder="Password *" required>
               </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="password" id="cpassword" name="cpassword" placeholder="Confirm Password" required>
+                <input class="form-control input-lg" type="password" id="cpassword" name="cpassword" placeholder="Confirm Password *" required>
               </div>
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="contactno" name="contactno" minlength="10" maxlength="10" onkeypress="return validatePhone(event);" placeholder="Phone Number">
@@ -118,7 +117,7 @@
               </div>
 
               <div class="form-group">
-                <label style="color: red;">File Format PDF Only!</label>
+                <label style="color: red;"><label style="color: black;">Resume</label> (File Format PDF Only!)</label>
                 <input type="file" name="resume" class="btn btn-flat btn-danger" required>
               </div>
             </div>
@@ -127,6 +126,8 @@
         </div>
       </div>
     </section>
+
+    
   </div>
 
   <footer class="main-footer" style="margin-left: 0px;">
@@ -135,6 +136,7 @@
     reserved.
     </div>
   </footer>
+
 </div>
 
 <!-- jQuery 3 -->
@@ -143,5 +145,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
+
+<script type="text/javascript">
+      function validatePhone(event) {
+        var key = window.event ? event.keyCode : event.which;
+        if(event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 37 || event.keyCode == 39) {
+          return true;
+        } else if( key < 48 || key > 57 ) {
+          return false;
+        } else return true;
+      }
+</script>
 </body>
 </html>

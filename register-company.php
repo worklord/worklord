@@ -28,7 +28,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index.html" class="logo logo-bg">
+    <a href="index.php" class="logo logo-bg">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>W</b>L</span>
       <!-- logo for regular state and mobile devices -->
@@ -41,8 +41,8 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li>
-            <a href="#">Login</a>
-          </li>
+            <a href="login.php">Login</a>
+          </li>       
         </ul>
       </div>
     </nav>
@@ -55,7 +55,7 @@
       <div class="container">
         <div class="row latest-job margin-top-50 margin-bottom-20 bg-white">
           <h1 class="text-center margin-bottom-20">CREATE COMPANY PROFILE</h1>
-          <form method="post" id="registerCompanies" action="" enctype="multipart/form-data">
+          <form method="post" id="registerCompanies" action="addcompany.php" enctype="multipart/form-data">
             <div class="col-md-6 latest-job ">
               <div class="form-group">
                 <input class="form-control input-lg" type="text" name="name" placeholder="Full Name" required>
@@ -90,14 +90,14 @@
                 <input class="form-control input-lg" type="text" name="contactno" placeholder="Phone Number" minlength="10" maxlength="10" autocomplete="off" onkeypress="return validatePhone(event);" required>
               </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="country" name="country" placeholder="Country" required>
+                <input class="form-control input-lg" type="text" name="country" placeholder="Country" required>
+              </div>  
+              <div class="form-group">
+                <input class="form-control input-lg" type="text" name="state" placeholder="State" required>
+              </div>   
+              <div class="form-group">
+               <input class="form-control input-lg" type="text" name="city" placeholder="City" required>
               </div>
-              <div class="form-group">
-                <input class="form-control input-lg" type="state" name="state" placeholder="State" required>
-              </div> 
-              <div class="form-group">
-                <input class="form-control input-lg" type="city" name="city" placeholder="City" required>
-              </div> 
               <div class="form-group">
                 <label>Attach Company Logo</label>
                 <input type="file" name="image" class="form-control input-lg" required>
@@ -115,9 +115,7 @@
     reserved.
     </div>
   </footer>
-
 </div>
-<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -126,5 +124,16 @@
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
 
+<script type="text/javascript">
+      function validatePhone(event) {
+        var key = window.event ? event.keyCode : event.which;
+
+        if(event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 37 || event.keyCode == 39) {
+          return true;
+        } else if( key < 48 || key > 57 ) {
+          return false;
+        } else return true;
+      }
+</script>
 </body>
 </html>

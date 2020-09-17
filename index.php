@@ -22,58 +22,63 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index.html" class="logo logo-bg">
+    <a href="index.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>W</b>L</span>
+      <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Work</b>Lord</span>
     </a>
 
     <nav class="navbar navbar-static-top">
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#">Login</a>
+          </li>
+          <li>
+            <a href="sign-up.php">Sign Up</a>
+          </li>    
+        </ul>
+      </div>
     </nav>
   </header>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="margin-left: 0px;">
+
+    <section class="content-header bg-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center index-head">
+            <h1>“If you can <strong>DREAM</strong> it, you can DO it ”</h1>
+            <p><a class="btn btn-success btn-lg" href="#" role="button">Search Jobs</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="content-header">
       <div class="container">
-        <div class="row latest-job margin-top-50 margin-bottom-20">
-          <h1 class="text-center margin-bottom-20">Sign Up</h1>
-          <div class="col-md-6 latest-job ">
-            <div class="small-box bg-blue padding-5">
-              <div class="inner">
-                <h3 class="text-center">User Registration</h3>
-              </div>
-              <a href="register-candidates.html" class="small-box-footer">
-                Register <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-6 latest-job ">
-            <div class="small-box bg-red padding-5">
-              <div class="inner">
-                <h3 class="text-center">Company Registration</h3>
-              </div>
-              <a href="register-company.html" class="small-box-footer">
-                Register <i class="fa fa-arrow-circle-right"></i>
-              </a>
+        <div class="row">
+          <div class="col-md-12 latest-job margin-bottom-20">
+            <h1 class="text-center">Latest Jobs</h1>            
+            <div class="attachment-block clearfix">
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    
-
   </div>
+
   <footer class="main-footer" style="margin-left: 0px;">
     <div class="text-center">
-      <strong>Copyright &copy; 2020 WorkLord.</strong> All rights
+      <strong>Copyright &copy; 2020 WordLord</a>.</strong> All rights
     reserved.
     </div>
   </footer>
