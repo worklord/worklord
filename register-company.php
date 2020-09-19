@@ -55,7 +55,7 @@
       <div class="container">
         <div class="row latest-job margin-top-50 margin-bottom-20 bg-white">
           <h1 class="text-center margin-bottom-20">CREATE COMPANY PROFILE</h1>
-          <form method="post" id="registerCompanies" action="addcompany.php" enctype="multipart/form-data">
+          <form method="post" id="registerCompanies" action="addcompany.php" onsubmit="return validation()" enctype="multipart/form-data">
             <div class="col-md-6 latest-job ">
               <div class="form-group">
                 <input class="form-control input-lg" type="text" name="name" placeholder="Full Name" required>
@@ -90,13 +90,13 @@
                 <input class="form-control input-lg" type="text" name="contactno" placeholder="Phone Number" minlength="10" maxlength="10" autocomplete="off" onkeypress="return validatePhone(event);" required>
               </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="text" name="country" placeholder="Country" required>
+                <input class="form-control input-lg" type="text" name="country" id="country" placeholder="Country" required>
               </div>  
               <div class="form-group">
-                <input class="form-control input-lg" type="text" name="state" placeholder="State" required>
+                <input class="form-control input-lg" type="text" name="state" id="state" placeholder="State" required>
               </div>   
               <div class="form-group">
-               <input class="form-control input-lg" type="text" name="city" placeholder="City" required>
+               <input class="form-control input-lg" type="text" name="city"  id="city" placeholder="City" required>
               </div>
               <div class="form-group">
                 <label>Attach Company Logo</label>
@@ -134,6 +134,35 @@
           return false;
         } else return true;
       }
+	   function validation()
+	  {
+		  var s=registerCompanies.state.value;
+		  var c=registerCompanies.city.value;
+		  var cn=registerCompanies.country.value;
+		  var p=registerCompanies.password.value;
+		  var cp=registerCompanies.cpassword.value;
+		  var letters=/^[A-Za-z]+$/;
+		  if(p.length<8)
+		  {
+		      alert("password require minimum 8 characters")
+		  }
+		  if(p != cp)
+		  {
+			  alert("password is not matches");
+			  return false;
+		  }
+	     if(s.match(letters) && c.match(letters) && cn.match(letters) )
+		  {
+			return true;
+		  }
+          else
+		  {
+			  alert("City,State and Country must have alphabet characters only ");
+           	return false;
+		  }			
+		  
+	  
+	  }
 </script>
 </body>
 </html>
