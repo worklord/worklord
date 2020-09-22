@@ -28,10 +28,10 @@ if(isset($_POST)) {
     if($value["role"] == "user")
 	{
 	$result = "";
-	if($conn->query($sql2)->num_rows > 0)
-	{
-	$result = $conn->query($user);
-	}
+		if($conn->query($sql2)->num_rows > 0)
+		{
+		$result = $conn->query($user);
+		}
 	//if user table has this this login details
 	if($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
@@ -46,16 +46,8 @@ if(isset($_POST)) {
 				$_SESSION['name'] = $row['firstname'] . " " . $row['lastname'];
 				$_SESSION['id_user'] = $row['id_user'];
 
-				if(isset($_SESSION['callFrom'])) {
-					$location = $_SESSION['callFrom'];
-					unset($_SESSION['callFrom']);
-					
-					header("Location: " . $location);
-					exit();
-				} else {
 					header("Location: user/index.php");
 					exit();
-				}
 			} else if($row['active'] == '2') { 
 
 				$_SESSION['loginActiveError'] = "Your Account Is Deactivated. Contact Admin To Reactivate.";
@@ -63,12 +55,6 @@ if(isset($_POST)) {
 				exit();
 			}
 		}
- 	}
-	else {
-
- 		$_SESSION['loginError'] = $conn->error;
- 		header("Location: login.php");
-		exit();
  	}
 	}
 	else if($value["role"] == "company")
@@ -82,11 +68,11 @@ if(isset($_POST)) {
 		if($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 				if($row['active'] == '2') {
-					$_SESSION['companyLoginError'] = "Your Account Is Still Pending Approval By Admin.";
+					$_SESSION['loginActiveError'] = "Your Account Is Still Pending Approval By Admin.";
 					header("Location: login.php");
 					exit();
 				} else if($row['active'] == '0') {
-					$_SESSION['companyLoginError'] = "Your Account Is Rejected. Please Contact Admin For More Info.";
+					$_SESSION['loginActiveError'] = "Your Account Is Rejected. Please Contact Admin For More Info.";
 					header("Location: login.php");
 					exit();
 				} else if($row['active'] == '1') {
@@ -96,16 +82,11 @@ if(isset($_POST)) {
 					header("Location: company/index.php");
 					exit();
 				} else if($row['active'] == '3') {
-					$_SESSION['companyLoginError'] = "Your Account Is Deactivated. Contact Admin For Reactivation.";
+					$_SESSION['loginActiveError'] = "Your Account Is Deactivated. Contact Admin For Reactivation.";
 					header("Location: login.php");
 					exit();
 				}
 			}
-		}
-		 else {
- 		$_SESSION['loginError'] = $conn->error;
- 		header("Location: login.php");
-		exit();
 		}
 	}
 	else if($value["role"] == "admin")
@@ -129,10 +110,12 @@ if(isset($_POST)) {
 		exit();
  	}
 	}
+	else {
+	$_SESSION['loginError'] = true;
+	header("Location: login.php");
+	exit();
+}
 
  	$conn->close();
 
-} else {
-	header("Location: login.php");
-	exit();
 }

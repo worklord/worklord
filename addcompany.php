@@ -92,7 +92,7 @@ if(isset($_POST)) {
 		if(($conn->query($sql))&&($conn->query($sql2))===TRUE) {
 
 			//If data inserted successfully then Set some session variables for easy reference and redirect to company login
-			$_SESSION['registerCompleted'] = true;
+			$_SESSION['uploadSuccess'] = "Registered Successfully";
 			header("Location: login.php");
 			exit();
 
@@ -102,7 +102,7 @@ if(isset($_POST)) {
 		}
 	} else {
 		//if email found in database then show email already exists error.
-		$_SESSION['registerError'] = true;
+		$_SESSION['uploadError'] = "Already registered.";
 		header("Location: register-company.php");
 		exit();
 	}

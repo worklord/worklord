@@ -108,17 +108,6 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
     <br>
 
     <?php 
-    //If User have successfully registered then show them this success message
-    //Todo: Remove Success Message without reload?
-    if(isset($_SESSION['registerCompleted'])) {
-      ?>
-      <div>
-        <p id="successMessage" class="text-center">Check your email!</p>
-      </div>
-    <?php
-     unset($_SESSION['registerCompleted']); }
-    ?>   
-    <?php 
     //If User Failed To log in then show error message.
     if(isset($_SESSION['loginError'])) {
       ?>
@@ -128,17 +117,6 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
     <?php
      unset($_SESSION['loginError']); }
     ?>      
-
-    <?php 
-    //If User Failed To log in then show error message.
-    if(isset($_SESSION['userActivated'])) {
-      ?>
-      <div>
-        <p class="text-center">Your Account Is Active. You Can Login</p>
-      </div>
-    <?php
-     unset($_SESSION['userActivated']); }
-    ?>    
 
      <?php 
     //If User Failed To log in then show error message.
@@ -150,36 +128,6 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
     <?php
      unset($_SESSION['loginActiveError']); }
     ?>   
-        <?php 
-              //If Company have successfully registered then show them this success message
-              //Todo: Remove Success Message without reload?
-              if(isset($_SESSION['registerCompleted'])) {
-                ?>
-                <div>
-                  <p class="text-center">You Have Registered Successfully! Your Account Approval Is Pending By Admin</p>
-                </div>
-              <?php
-               unset($_SESSION['registerCompleted']); }
-              ?>   
-              <?php 
-              //If Company Failed To log in then show error message.
-              if(isset($_SESSION['loginError'])) {
-                ?>
-                <div>
-                  <p class="text-center">Invalid Email/Password! Try Again!</p>
-                </div>
-              <?php
-               unset($_SESSION['loginError']); }
-              ?>   
-              <?php 
-              if(isset($_SESSION['companyLoginError'])) {
-                ?>
-                <div>
-                  <p class="text-center"><?php echo $_SESSION['companyLoginError'] ?></p>
-                </div>
-              <?php
-               unset($_SESSION['companyLoginError']); }
-              ?>  
   </div>
   <!-- /.login-box-body -->
 </div>
@@ -202,10 +150,5 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
     });
   });
 </script>
-<script type="text/javascript">
-      $(function() {
-        $("#successMessage:visible").fadeOut(8000);
-      });
-    </script>
 </body>
 </html>
