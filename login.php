@@ -128,6 +128,17 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
     <?php
      unset($_SESSION['loginActiveError']); }
     ?>   
+	
+     <?php 
+    //If User Failed To log in then show error message.
+    if(isset($_SESSION['uploadSuccess'])) {
+      ?>
+      <div>
+        <p class="text-center"><?php echo $_SESSION['uploadSuccess']; ?></p>
+      </div>
+    <?php
+     unset($_SESSION['uploadSuccess']); }
+    ?>   
   </div>
   <!-- /.login-box-body -->
 </div>

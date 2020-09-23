@@ -89,6 +89,23 @@
               <div class="form-group">
                 <button class="btn btn-flat btn-success">Register</button>
               </div>
+			  <?php 
+              //If User already registered with this email then show error message.
+              if(isset($_SESSION['registerError'])) {
+                ?>
+                <div class="form-group">
+                  <label style="color: red;">Email Already Exists! Choose A Different Email!</label>
+                </div>
+              <?php
+               unset($_SESSION['registerError']); }
+              ?> 
+
+              <?php if(isset($_SESSION['uploadError'])) { ?>
+              <div class="form-group">
+                  <label style="color: red;"><?php echo $_SESSION['uploadError']; ?></label>
+              </div>
+              <?php unset($_SESSION['uploadError']); } ?>     
+
             </div>            
             <div class="col-md-6 latest-job ">
               <div class="form-group">

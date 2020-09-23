@@ -81,7 +81,7 @@
             </div>
             <div class="col-md-6 latest-job ">
               <div class="form-group">
-                <input class="form-control input-lg" type="password" name="password" placeholder="Password" required>
+                <input class="form-control input-lg" type="password" name="password" placeholder="Password (Minimum 8 characters)" required>
               </div>
               <div class="form-group">
                 <input class="form-control input-lg" type="password" name="cpassword" placeholder="Confirm Password" required>
@@ -144,11 +144,12 @@
 		  var letters=/^[A-Za-z]+$/;
 		  if(p.length<8)
 		  {
-		      alert("password require minimum 8 characters")
+		      alert("Password require minimum 8 characters");
+			  return false;
 		  }
 		  if(p != cp)
 		  {
-			  alert("password is not matches");
+			  alert("Password does not matches");
 			  return false;
 		  }
 	     if(s.match(letters) && c.match(letters) && cn.match(letters) )
@@ -160,8 +161,6 @@
 			  alert("City,State and Country must have alphabet characters only ");
            	return false;
 		  }			
-		  
-	  
 	  }
 </script>
 </body>
