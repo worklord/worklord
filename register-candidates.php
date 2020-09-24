@@ -121,7 +121,13 @@ require_once("db.php");
             </div>            
             <div class="col-md-6 latest-job ">
               <div class="form-group">
+			  
                 <input class="form-control input-lg" type="password" id="password" name="password" placeholder="Password *" required>
+	            <label style="color: red;">*Your password must include:</label><br>
+				 <label style="color: red;">*be a minimum of 8 characters.</label>
+				 <label style="color: red;">*include atleast one of the following mix of characters types:</label>
+				   <label style="color: red;"/>&nbsp;&nbsp;&nbsp;uppercase,lowercase,numbers,special symbols.</label>
+				
               </div>
               <div class="form-group">
                 <input class="form-control input-lg" type="password" id="cpassword" name="cpassword" placeholder="Confirm Password *" required>
@@ -207,10 +213,14 @@ require_once("db.php");
 		  var p=registerCandidates.password.value;
 		  var cp=registerCandidates.cpassword.value;
 		  var letters=/^[A-Za-z]+$/;
-		  if(p.length<8)
+		  if(p.match(/[a-z]/g) && p.match(/[A-Z]/g) && p.match(/[0-9]/g) && p.match(/[^a-zA-Z\d]/g) && p.length >=8)
 		  {
-		      alert("password require minimum 8 characters");
-			  return false;
+		      return true;
+		  }
+		  else
+		  {
+			alert("password require minimum 8 characters with atleast one Uppercase,one Lowercase and one Special character");	
+            return	false;		
 		  }
 		  if(p != cp)
 		  {
