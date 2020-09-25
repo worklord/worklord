@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) { 
+  header("Location: index.php");
+  exit();
+}
+require_once("db.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +79,9 @@
                 <input class="form-control input-lg" type="email" name="email" placeholder="Email" required>
               </div>
               <div class="form-group">
+                <input class="form-control input-lg" type="text" name="contactno" placeholder="Phone Number" minlength="10" maxlength="10" autocomplete="off" onkeypress="return validatePhone(event);" required>
+              </div>
+              <div class="form-group">
                 <textarea class="form-control input-lg" rows="4" name="aboutme" placeholder="Brief info about your company"></textarea>
               </div>
               <div class="form-group checkbox">
@@ -87,16 +99,30 @@
                 <input class="form-control input-lg" type="password" name="cpassword" placeholder="Confirm Password" required>
               </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="text" name="contactno" placeholder="Phone Number" minlength="10" maxlength="10" autocomplete="off" onkeypress="return validatePhone(event);" required>
-              </div>
-              <div class="form-group">
-                <input class="form-control input-lg" type="text" name="country" id="country" placeholder="Country" required>
+                <select class="form-control  input-lg" id="country" name="country" required>
+                <option selected="" value="">Select Country</option>
+                <?php
+                  $sql="SELECT * FROM countries";
+                  $result=$conn->query($sql);
+
+                  if($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                      echo "<option value='".$row['name']."' data-id='".$row['id']."'>".$row['name']."</option>";
+                    }
+                  }
+                ?>
+                  
+                </select>
               </div>  
-              <div class="form-group">
-                <input class="form-control input-lg" type="text" name="state" id="state" placeholder="State" required>
+              <div id="stateDiv" class="form-group" style="display: none;">
+                <select class="form-control  input-lg" id="state" name="state" required>
+                  <option value="" selected="">Select State</option>
+                </select>
               </div>   
-              <div class="form-group">
-               <input class="form-control input-lg" type="text" name="city"  id="city" placeholder="City" required>
+              <div id="cityDiv" class="form-group" style="display: none;">
+                <select class="form-control  input-lg" id="city" name="city" required>
+                  <option selected="">Select City</option>
+                </select>
               </div>
               <div class="form-group">
                 <label>Attach Company Logo</label>
@@ -163,5 +189,37 @@
 		  }			
 	  }
 </script>
+
+<script>
+  $("#country").on("change", function() {
+    var id = $(this).find(':selected').attr("data-id");
+    $("#state").find('option:not(:first)').remove();
+    if(id != '') {
+      $.post("state.php", {id: id}).done(function(data) {
+        $("#state").append(data);
+      });
+      $('#stateDiv').show();
+    } else {
+      $('#stateDiv').hide();
+      $('#cityDiv').hide();
+    }
+  });
+</script>
+
+<script>
+  $("#state").on("change", function() {
+    var id = $(this).find(':selected').attr("data-id");
+    $("#city").find('option:not(:first)').remove();
+    if(id != '') {
+      $.post("city.php", {id: id}).done(function(data) {
+        $("#city").append(data);
+      });
+      $('#cityDiv').show();
+    } else {
+      $('#cityDiv').hide();
+    }
+  });
+</script>
+
 </body>
 </html>

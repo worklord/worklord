@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) { 
+  header("Location: index.php");
+  exit();
+}
+require_once("db.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,6 +76,9 @@
                 <input class="form-control input-lg" type="email" id="email" name="email" placeholder="Email" required>
               </div>
               <div class="form-group">
+                <input class="form-control input-lg" type="text" id="contactno" name="contactno" minlength="10" maxlength="10" onkeypress="return validatePhone(event);" placeholder="Phone Number" required>
+              </div>
+              <div class="form-group">
                 <textarea class="form-control input-lg" rows="4" id="aboutme" name="aboutme" placeholder="Brief intro about yourself" required></textarea>
               </div>
               <div class="form-group">
@@ -115,16 +127,33 @@
                 <input class="form-control input-lg" type="password" id="cpassword" name="cpassword" placeholder="Confirm Password *" required>
               </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="text" id="contactno" name="contactno" minlength="10" maxlength="10" onkeypress="return validatePhone(event);" placeholder="Phone Number" required>
-              </div>
-              <div class="form-group">
                 <textarea class="form-control input-lg" rows="4" id="address" name="address" placeholder="Address" required></textarea>
               </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="text" id="city" name="city"  placeholder="City" required>
-              </div>
-              <div class="form-group">
-                <input class="form-control input-lg" type="text" id="state" name="state" placeholder="State" required>
+                <select class="form-control  input-lg" id="country" name="country" required>
+                <option selected="" value="">Select Country</option>
+                <?php
+                  $sql="SELECT * FROM countries";
+                  $result=$conn->query($sql);
+
+                  if($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                      echo "<option value='".$row['name']."' data-id='".$row['id']."'>".$row['name']."</option>";
+                    }
+                  }
+                ?>
+                  
+                </select>
+              </div>  
+              <div id="stateDiv" class="form-group" style="display: none;">
+                <select class="form-control  input-lg" id="state" name="state" required>
+                  <option value="" selected="">Select State</option>
+                </select>
+              </div>   
+              <div id="cityDiv" class="form-group" style="display: none;">
+                <select class="form-control  input-lg" id="city" name="city" required>
+                  <option selected="">Select City</option>
+                </select>
               </div>
               <div class="form-group">
                 <textarea class="form-control input-lg" rows="4" id="skills" name="skills" placeholder="Enter Skills" required></textarea>
@@ -202,5 +231,37 @@
 	  }
 	  
 </script>
+
+<script>
+  $("#country").on("change", function() {
+    var id = $(this).find(':selected').attr("data-id");
+    $("#state").find('option:not(:first)').remove();
+    if(id != '') {
+      $.post("state.php", {id: id}).done(function(data) {
+        $("#state").append(data);
+      });
+      $('#stateDiv').show();
+    } else {
+      $('#stateDiv').hide();
+      $('#cityDiv').hide();
+    }
+  });
+</script>
+
+<script>
+  $("#state").on("change", function() {
+    var id = $(this).find(':selected').attr("data-id");
+    $("#city").find('option:not(:first)').remove();
+    if(id != '') {
+      $.post("city.php", {id: id}).done(function(data) {
+        $("#city").append(data);
+      });
+      $('#cityDiv').show();
+    } else {
+      $('#cityDiv').hide();
+    }
+  });
+</script>
+
 </body>
 </html>
