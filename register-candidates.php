@@ -96,7 +96,7 @@ require_once("db.php");
                 <input class="form-control input-lg" type="text" id="stream" name="stream" placeholder="Stream" required>
               </div>                    
               <div class="form-group checkbox">
-                <label><input type="checkbox" required> I accept terms & conditions</label>
+                <label><input type="checkbox" required> I accept <a href="terms.php">terms & conditions</a></label>
               </div>
               <div class="form-group">
                 <button class="btn btn-flat btn-success">Register</button>

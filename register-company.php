@@ -85,7 +85,7 @@ require_once("db.php");
                 <textarea class="form-control input-lg" rows="4" name="aboutme" placeholder="Brief info about your company"></textarea>
               </div>
               <div class="form-group checkbox">
-                <label><input type="checkbox" required> I accept terms & conditions</label>
+                <label><input type="checkbox" required>i accept <a href="terms.php"> terms & conditions</a></label>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-flat btn-success">Register</button>

@@ -74,6 +74,8 @@ require_once("../db.php");
                   <li><a href=""><i class="fa fa-briefcase"></i> Active Jobs</a></li>
                   <li><a href=""><i class="fa fa-address-card-o"></i> Applications</a></li>
                   <li><a href=""><i class="fa fa-book"></i> Exams</a></li>
+				 
+				  
                   <li><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li>
                   <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
