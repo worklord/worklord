@@ -82,8 +82,14 @@ require_once("db.php");
                 <textarea class="form-control input-lg" rows="4" id="aboutme" name="aboutme" placeholder="Brief intro about yourself" required></textarea>
               </div>
               <div class="form-group">
-                <label>Date Of Birth</label>
-                <input class="form-control input-lg" type="date" id="dob" min="1960-01-01" max="1999-01-31" name="dob" placeholder="Date Of Birth" required>
+                <label>Date Of Birth (Age must be 18 or above)</label>
+                <input class="form-control input-lg" type="date" id="dob" min="1985-01-01" max="2002-01-31" name="dob" placeholder="Date Of Birth" required>
+              </div>
+              <div id="incorrectyear" class="btn btn-flat btn-danger hide-me" >
+                    Enter A Valid Date of Birth !! 
+                  </div>
+              <div class="form-group">
+                <input class="form-control input-lg" type="text" id="age" name="age" placeholder="Age" readonly>
               </div>
               <div class="form-group">
                 <label>Passing Year</label>
@@ -165,7 +171,7 @@ require_once("db.php");
                 <textarea class="form-control input-lg" rows="4" id="skills" name="skills" placeholder="Enter Skills" required></textarea>
               </div>              
               <div class="form-group">
-                <input class="form-control input-lg" type="text" id="designation" name="designation" placeholder="Designation">
+                <input class="form-control input-lg" type="text" id="designation" name="designation" placeholder="Designation" required>
               </div>
 
               <div class="form-group">
@@ -240,6 +246,28 @@ require_once("db.php");
 		  
 	  }
 	  
+</script>
+<script type="text/javascript">
+  $('#dob').on('change', function() {
+    var today = new Date();
+    var birthDate = new Date($(this).val());
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+
+    if(m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    $('#age').val(age);
+	if(age < 18 || age > 30)
+	{
+		$('#incorrectyear').show();
+	}
+	else
+	{
+	    $('#incorrectyear').hide();
+	}
+  });
 </script>
 
 <script>
