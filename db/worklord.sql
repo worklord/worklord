@@ -52448,7 +52448,6 @@ CREATE TABLE `users` (
   `age` varchar(255) DEFAULT NULL,
   `designation` varchar(255) DEFAULT NULL,
   `resume` varchar(255) DEFAULT NULL,
-  `active` int(11) NOT NULL DEFAULT 1,
   `aboutme` text NOT NULL,
   `skills` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -52457,8 +52456,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `firstname`, `lastname`, `email`, `address`, `city`, `state`, `contactno`, `qualification`, `stream`, `passingyear`, `dob`, `age`, `designation`, `resume`, `active`, `aboutme`, `skills`) VALUES
-(29, 'user', 'user', 'user@gmail.com', 'user_Addressses', 'city', 'dfdsfs', '3432425435', 'gfdgfdg', 'fdgdfg', '2020-09-25', '1999-01-15', '', 'dfdsfsd', '5f6324ec86f5c.pdf', 1, 'sdasd', 'fsdfdsf');
+INSERT INTO `users` (`id_user`, `firstname`, `lastname`, `email`, `address`, `city`, `state`, `contactno`, `qualification`, `stream`, `passingyear`, `dob`, `age`, `designation`, `resume`, `aboutme`, `skills`) VALUES
+(29, 'user', 'user', 'user@gmail.com', 'user_Addressses', 'city', 'dfdsfs', '3432425435', 'gfdgfdg', 'fdgdfg', '2020-09-25', '1999-01-15', '', 'dfdsfsd', '5f6324ec86f5c.pdf', 'sdasd', 'fsdfdsf');
 
 --
 -- Indexes for table `cities`
