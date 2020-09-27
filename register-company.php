@@ -78,6 +78,11 @@ require_once("db.php");
               <div class="form-group">
                 <input class="form-control input-lg" type="email" name="email" placeholder="Email" required>
               </div>
+			  <?php if(isset($_SESSION['uploadError'])) { ?>
+              <div class="form-group">
+                  <label style="color: red;"><?php echo $_SESSION['uploadError']; ?></label>
+              </div>
+              <?php unset($_SESSION['uploadError']); } ?>
               <div class="form-group">
                 <input class="form-control input-lg" type="text" name="contactno" placeholder="Phone Number" minlength="10" maxlength="10" autocomplete="off" onkeypress="return validatePhone(event);" required>
               </div>
@@ -125,7 +130,7 @@ require_once("db.php");
                 </select>
               </div>   
               <div id="cityDiv" class="form-group" style="display: none;">
-                <select class="form-control  input-lg" id="city" name="city" required>
+                <select class="form-control  input-lg" id="city" name="city" >
                   <option selected="">Select City</option>
                 </select>
               </div>

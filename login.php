@@ -89,11 +89,11 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
 
     <form method="post" action="checklogin.php">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
