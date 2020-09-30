@@ -136,7 +136,7 @@ require_once("db.php");
               </div>
               <div class="form-group">
                 <label>Attach Company Logo</label>
-                <input type="file" name="image" class="form-control input-lg" required>
+                <input type="file" name="image" id="image" class="form-control input-lg" onchange="return fileValidation()" required>
               </div>
             </div>
           </form>
@@ -234,6 +234,39 @@ require_once("db.php");
     }
   });
 </script>
-
+    <script> 
+        function fileValidation() { 
+            var fileInput =  
+                document.getElementById('image'); 
+              
+            var filePath = fileInput.value; 
+          
+            // Allowing file type 
+            var allowedExtensions =  
+/(\.png|\.jpeg|\.jpg)$/i; 
+              
+            if (!allowedExtensions.exec(filePath)) { 
+                alert('Invalid file type'); 
+                fileInput.value = ''; 
+                return false; 
+            }  
+		const fi = document.getElementById('image'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 1024) { 
+                    alert( 
+                      "File too Big, please select a file less than 4mb"); 
+					  fi.value = ''; 
+					  return false; 
+                }
+            } 
+        }
+        } 
+    </script> 
 </body>
 </html>

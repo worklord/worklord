@@ -75,11 +75,6 @@ require_once("db.php");
               <div class="form-group">
                 <input class="form-control input-lg" type="email" id="email" name="email" placeholder="Email" required>
               </div>
-			  <?php if(isset($_SESSION['uploadError'])) { ?>
-              <div class="form-group">
-                  <label style="color: red;"><?php echo $_SESSION['uploadError']; ?></label>
-              </div>
-              <?php unset($_SESSION['uploadError']); } ?>
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="contactno" name="contactno" minlength="10" maxlength="10" onkeypress="return validatePhone(event);" placeholder="Phone Number" required>
               </div>
@@ -181,7 +176,7 @@ require_once("db.php");
 
               <div class="form-group">
                 <label style="color: red;"><label style="color: black;">Resume</label> (File Format PDF Only!)</label>
-                <input type="file" name="resume" class="btn btn-flat btn-danger" required>
+                <input type="file" name="resume" id="resume" class="btn btn-flat btn-danger" onchange="return fileValidation()" required>
               </div>
             </div>
           </form>
@@ -305,6 +300,39 @@ require_once("db.php");
     }
   });
 </script>
-
+    <script> 
+        function fileValidation() { 
+            var fileInput =  
+                document.getElementById('resume'); 
+              
+            var filePath = fileInput.value; 
+          
+            // Allowing file type 
+            var allowedExtensions =  
+/(\.pdf)$/i; 
+              
+            if (!allowedExtensions.exec(filePath)) { 
+                alert('Invalid file type'); 
+                fileInput.value = ''; 
+                return false; 
+            }  
+		const fi = document.getElementById('resume'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 4096) { 
+                    alert( 
+                      "File too Big, please select a file less than 4mb"); 
+					  fi.value = ''; 
+					  return false; 
+                }
+            } 
+        }
+        } 
+    </script> 
 </body>
 </html>
