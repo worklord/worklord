@@ -78,7 +78,7 @@
 
   <footer class="main-footer" style="margin-left: 0px;">
     <div class="text-center">
-      <strong>Copyright &copy; 2020 WordLord</a>.</strong> All rights
+      <strong>Copyright &copy; 2020 WorkLord</a>.</strong> All rights
     reserved.
     </div>
   </footer>
