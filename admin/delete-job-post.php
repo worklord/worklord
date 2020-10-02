@@ -8,17 +8,14 @@ if((!empty($_SESSION['id_company'])) || (!empty($_SESSION['id_user']))) {
   exit();
 }
 
-
 require_once("../db.php");
 
 if(isset($_GET)) {
-
-	//Approve Company using id and redirect
-	$sql = "UPDATE company SET active='1' WHERE id_company='$_GET[id]'";
+	$sql = "UPDATE job_post SET active=0 where id_jobpost='$_GET[id]'";
 	if($conn->query($sql)) {
-		header("Location: companies.php");
+		header("Location: active-jobs.php");
 		exit();
 	} else {
-		echo "Error";
+		echo "<script> alert('Error') </script>";
 	}
 }

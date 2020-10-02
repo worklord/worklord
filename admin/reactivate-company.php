@@ -2,9 +2,10 @@
 
 session_start();
 
-if(empty($_SESSION['loginid'])) {
-	header("Location: index.php");
-	exit();
+//If user Not logged in then redirect them back to homepage. 
+if((!empty($_SESSION['id_company'])) || (!empty($_SESSION['id_user']))) {
+  header("Location: ../index.php");
+  exit();
 }
 
 require_once("../db.php");

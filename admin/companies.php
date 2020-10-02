@@ -2,8 +2,9 @@
 
 session_start();
 
-if(empty($_SESSION['loginid'])) {
-  header("Location: index.php");
+//If user Not logged in then redirect them back to homepage. 
+if((!empty($_SESSION['id_company'])) || (!empty($_SESSION['id_user']))) {
+  header("Location: ../index.php");
   exit();
 }
 
@@ -73,7 +74,7 @@ require_once("../db.php");
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                  <li><a href=""><i class="fa fa-briefcase"></i> Active Jobs</a></li>
+                  <li><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
                   <li><a href=""><i class="fa fa-address-card-o"></i> Applications</a></li>
 				  <li><a href=""><i class="fa fa-book"></i> Exams</a></li>
                   <li class="active"><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li>

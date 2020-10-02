@@ -24,6 +24,8 @@ require_once("../db.php");
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../css/AdminLTE.min.css">
   <link rel="stylesheet" href="../css/_all-skins.min.css">
@@ -52,7 +54,7 @@ require_once("../db.php");
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-                   
+              
         </ul>
       </div>
     </nav>
@@ -71,8 +73,8 @@ require_once("../db.php");
               </div>
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
-                  <li class="active"><a href="index.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-                  <li><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
+                  <li><a href="index.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                  <li class="active"><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
                   <li><a href=""><i class="fa fa-address-card-o"></i> Applications</a></li>
                   <li><a href=""><i class="fa fa-book"></i> Exams</a></li>
                   <li><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li>
@@ -83,52 +85,39 @@ require_once("../db.php");
           </div>
           <div class="col-md-9 bg-white padding-2">
 
-            <h3>WorkLord Statistics</h3>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-red"><i class="ion ion-briefcase"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Active Company Registered</span>
-                    <span class="info-box-number">5</span>
-                  </div>
-                </div>                
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-red"><i class="ion ion-briefcase"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Pending Company Approval</span>
-                    <span class="info-box-number">6</span>
-                    
-                  </div>
-                </div>                
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-green"><i class="ion ion-person-stalker"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Registered Candidates</span>
-                    <span class="info-box-number">25</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-aqua"><i class="ion ion-person-add"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Total Job Posts</span>
-                    <span class="info-box-number">5</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-yellow"><i class="ion ion-ios-browsers"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Total Applications</span>
-                    <span class="info-box-number">5</span>
-                  </div>
+            <h3>Active Job Posts</h3>
+            <div class="row margin-top-20">
+              <div class="col-md-12">
+                <div class="box-body table-responsive no-padding">
+                  <table id="example2" class="table table-hover">
+                    <thead>
+                      <th>Job Name</th>
+                      <th>Company Name</th>
+                      <th>Date Created</th>
+                      <th>View</th>
+                      <th>Delete</th>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $sql = "SELECT job_post.*, company.companyname FROM job_post INNER JOIN company ON job_post.id_company=company.id_company where job_post.active=1";
+                      $result = $conn->query($sql);
+                      if($result->num_rows > 0) {
+                        $i = 0;
+                        while($row = $result->fetch_assoc()) {
+                      ?>
+                      <tr>
+                        <td><?php echo $row['jobtitle']; ?></td>
+                        <td><?php echo $row['companyname']; ?></td>
+                        <td><?php echo date("d-M-Y", strtotime($row['createdat'])); ?></td>
+                        <td><a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-address-card-o"></i></a></td>
+                        <td><a href="delete-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><input type="button" value="Delete"></a></td>
+                      </tr>  
+                            <?php
+                        }
+                      }
+                    ?>
+                    </tbody>                    
+                  </table>
                 </div>
               </div>
             </div>
@@ -137,10 +126,10 @@ require_once("../db.php");
         </div>
       </div>
     </section>
-
     
 
   </div>
+  <!-- /.content-wrapper -->
 
   <footer class="main-footer" style="margin-left: 0px;">
     <div class="text-center">
@@ -150,12 +139,28 @@ require_once("../db.php");
   </footer>
 
 </div>
+<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
+
+<script>
+  $(function () {
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    });
+  });
+</script>
 </body>
 </html>
