@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+require_once("db.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,12 +44,37 @@
     <nav class="navbar navbar-static-top">
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <?php if((empty($_SESSION['id_company']))&&(empty($_SESSION['id_user']))&&(empty($_SESSION['loginid']))) { ?>
           <li>
             <a href="login.php">Login</a>
           </li>
           <li>
             <a href="sign-up.php">Sign Up</a>
-          </li>    
+          </li>  
+          <?php } else { 
+
+            if(isset($_SESSION['id_user'])) { 
+          ?>        
+          <li>
+            <a href="user/index.php">Dashboard</a>
+          </li>
+          <?php
+          } else if(isset($_SESSION['id_company'])) { 
+          ?>        
+          <li>
+            <a href="company/index.php">Dashboard</a>
+          </li>
+		  <?php
+		  } else if(!(isset($_SESSION['id_user'])) || !(isset($_SESSION['id_user']))) {
+			?>
+		<li>
+            <a href="admin/index.php">Dashboard</a>
+          </li>
+          <?php } ?>
+          <li>
+            <a href="logout.php">Logout</a>
+          </li>
+          <?php } ?>  
         </ul>
       </div>
     </nav>
