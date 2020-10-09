@@ -50,17 +50,6 @@ require_once("db.php");
     <nav class="navbar navbar-static-top">
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li>
-		  <?php 
-            if(!isset($_SESSION["id_user"])) { ?>
-            <a href="login.php">Login</a>
-          </li>
-          <li>
-            <a href="sign-up.php">Sign Up</a>
-          </li>
-		  <?php } ?>
-        </ul>
       </div>
     </nav>
   </header>
