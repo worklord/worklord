@@ -91,7 +91,7 @@ require_once("db.php");
 		   <div class="row">
           <div class="col-md-12 text-center index-head">
             <h1>“If you can <strong>DREAM</strong> it, you can DO it ”</h1>
-            <p><a class="btn btn-success btn-lg" href="#search" role="button">Search Jobs</a></p>
+            <p><a class="btn btn-success btn-lg" href="jobs.php" role="button">Search Jobs</a></p>
           </div>
         </div>
 		  </div>
