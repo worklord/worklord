@@ -101,12 +101,11 @@ require_once("db.php");
 				{
 					echo "<div style='color:red'>Already Applied</div>";
 				}
-			}
             else if(isset($_SESSION["id_user"])) { ?>
             <div>
               <a href="apply.php?id=<?php echo $row['id_jobpost']; ?>" class="btn btn-success btn-flat margin-top-50">Apply</a>
             </div>
-            <?php } ?>
+            <?php }} ?>
           </div>
 		  
           <div class="col-md-3">
@@ -125,10 +124,9 @@ require_once("db.php");
 				{
 					echo "<div style='color:red'>Already Applied</div>";
 				}
-			}
             else if(isset($_SESSION["id_user"])) { ?>
                   <div class="col-md-5"><a href="apply.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-address-card-o"></i> Apply</a></div>
-			<?php } ?>
+			<?php }} ?>
                   <div class="col-md-5"><a href="mailto:me"><i class="fa fa-envelope"></i> Email</a></div>
                 </div>
               </div>
