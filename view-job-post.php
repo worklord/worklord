@@ -76,7 +76,7 @@ require_once("db.php");
               <h2><b><i><?php echo $row['jobtitle']; ?></i></b></h2>
             </div>
             <div class="pull-right">
-              <a href="jobs.php" class="btn btn-default btn-lg btn-flat margin-top-20"><i class="fa fa-arrow-circle-left"></i> Back</a>
+              <!--<a href="jobs.php" class="btn btn-default btn-lg btn-flat margin-top-20"><i class="fa fa-arrow-circle-left"></i> Back</a>-->
             </div>
             <div class="clearfix"></div>
             <hr>
@@ -93,6 +93,7 @@ require_once("db.php");
               <?php echo "Qualification : ".stripcslashes($row['qualification']); ?>
             </div>
             <?php 
+			if(isset($_SESSION['id_user'])) { 
 				$sql2 = "SELECT * FROM apply_job_post WHERE id_jobpost='$_GET[id]' and id_user=$_SESSION[id_user]";
 				$result2 = $conn->query($sql2);
 			
@@ -100,6 +101,7 @@ require_once("db.php");
 				{
 					echo "<div style='color:red'>Already Applied</div>";
 				}
+			}
             else if(isset($_SESSION["id_user"])) { ?>
             <div>
               <a href="apply.php?id=<?php echo $row['id_jobpost']; ?>" class="btn btn-success btn-flat margin-top-50">Apply</a>
@@ -115,6 +117,7 @@ require_once("db.php");
                 <hr>
                 <div class="row">
 				<?php 
+			if(isset($_SESSION['id_user'])) { 
 				$sql2 = "SELECT * FROM apply_job_post WHERE id_jobpost='$_GET[id]' and id_user=$_SESSION[id_user]";
 				$result2 = $conn->query($sql2);
 			
@@ -122,6 +125,7 @@ require_once("db.php");
 				{
 					echo "<div style='color:red'>Already Applied</div>";
 				}
+			}
             else if(isset($_SESSION["id_user"])) { ?>
                   <div class="col-md-5"><a href="apply.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-address-card-o"></i> Apply</a></div>
 			<?php } ?>
