@@ -22,7 +22,7 @@ $start_from = ($page-1) * $limit;
 
   } else if(isset($_GET['filter']) && $_GET['filter']=='experience') {
 
-    $sql = "SELECT * FROM job_post WHERE experience>='$_GET[search]' LIMIT $start_from, $limit";
+    $sql = "SELECT * FROM job_post WHERE active='1' && experience>='$_GET[search]' LIMIT $start_from, $limit";
 
   }
 

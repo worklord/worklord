@@ -104,7 +104,7 @@ require_once("db.php");
 
           $limit = 4;
 
-          $sql = "SELECT COUNT(id_jobpost) AS id FROM job_post";
+          $sql = "SELECT COUNT(id_jobpost) AS id FROM job_post where active=1";
           $result = $conn->query($sql);
           if($result->num_rows > 0)
           {
