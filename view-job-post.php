@@ -84,7 +84,13 @@ require_once("db.php");
               <p><span class="margin-right-10"><i class="fa fa-location-arrow text-green"></i> <?php echo $row['city']; ?></span> <i class="fa fa-calendar text-green"></i> <?php echo date("d-M-Y", strtotime($row['createdat'])); ?></p>              
             </div>
             <div>
-              <?php echo stripcslashes($row['description']); ?>
+              <?php echo "Description : ".stripcslashes($row['description']); ?>
+            </div>
+			<div>
+              <?php echo "Experience : ".stripcslashes($row['experience'])." Year";  ?>
+            </div>
+			 <div>
+              <?php echo "Qualification : ".stripcslashes($row['qualification']); ?>
             </div>
             <?php 
             if(isset($_SESSION["id_user"])) { ?>
@@ -92,7 +98,6 @@ require_once("db.php");
               <a href="apply.php?id=<?php echo $row['id_jobpost']; ?>" class="btn btn-success btn-flat margin-top-50">Apply</a>
             </div>
             <?php } ?>
-            
             
           </div>
           <div class="col-md-3">
