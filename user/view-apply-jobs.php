@@ -1,7 +1,9 @@
 <?php
 
+//To Handle Session Variables on This Page
 session_start();
 
+//If user Not logged in then redirect them back to homepage. 
 if(empty($_SESSION['id_user'])) {
   header("Location: ../index.php");
   exit();
@@ -31,11 +33,14 @@ require_once("../db.php");
   <!-- Custom -->
   <link rel="stylesheet" href="../css/custom.css">
 
+  <script src="../js/tinymce/tinymce.min.js"></script>
+  <script>tinymce.init({ selector:'description', height: 150 });</script>
+
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -50,6 +55,12 @@ require_once("../db.php");
 
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+                   
+        </ul>
+      </div>
     </nav>
   </header>
 
@@ -78,6 +89,42 @@ require_once("../db.php");
               </div>
             </div>
           </div>
+		   <div class="col-md-9 bg-white padding-2">
+            <h2><i>Recent Applications</i></h2>
+            <p>Below you will find job roles you have applied for</p>
+
+            <?php
+             $sql = "SELECT * FROM job_post INNER JOIN apply_job_post ON job_post.id_jobpost=apply_job_post.id_jobpost WHERE apply_job_post.id_user='$_SESSION[id_user]'";
+                  $result = $conn->query($sql);
+
+                  if($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) 
+                    {     
+            ?>
+            <div class="attachment-block clearfix padding-2">
+                <h4 class="attachment-heading"><a href="../view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><?php echo $row['jobtitle']; ?></a></h4>
+                <div class="attachment-text padding-2">
+                  <div class="pull-left"><i class="fa fa-calendar"></i> <?php echo $row['createdat']; ?></div>  
+                  <?php 
+
+                  if($row['status'] == 0) {
+                    echo '<div class="pull-right"><strong class="text-orange">Pending</strong></div>';
+                  } else if ($row['status'] == 1) {
+                    echo '<div class="pull-right"><strong class="text-red">Rejected</strong></div>';
+                  } else if ($row['status'] == 2) {
+                    echo '<div class="pull-right"><strong class="text-green">Under Review</strong></div> ';
+                  }
+                  ?>
+                                
+                </div>
+            </div>
+
+            <?php
+              }
+            }
+            ?>
+            
+          </div>
         </div>
       </div>
     </section>
@@ -85,6 +132,7 @@ require_once("../db.php");
     
 
   </div>
+  <!-- /.content-wrapper -->
 
   <footer class="main-footer" style="margin-left: 0px;">
     <div class="text-center">
@@ -93,7 +141,13 @@ require_once("../db.php");
     </div>
   </footer>
 
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+
 </div>
+<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

@@ -17,7 +17,7 @@ require_once("../db.php");
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>WorkLord</title>
     <!-- Favicons -->
-  <link rel="icon" href="img/logo.png">
+  <link rel="icon" href="../img/logo.png">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -77,7 +77,7 @@ require_once("../db.php");
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href="index.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
                   <li class="active"><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
-                  <li><a href=""><i class="fa fa-address-card-o"></i> Applications</a></li>
+                  <li><a href=""><i class="fa fa-address-card-o"></i> Applicants</a></li>
                   <li><a href=""><i class="fa fa-book"></i> Exams</a></li>
                   <li><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li>
                   <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>

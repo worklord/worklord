@@ -160,7 +160,7 @@ require_once("db.php");
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>WorkLord</span> 2020</strong>. All Rights Reserved
+         <strong>Copyright &copy; 2020 WorkLord </strong>.</Strong> All rights reserved
       </div>
     </div>
   </footer><!-- End Footer -->
