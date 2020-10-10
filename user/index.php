@@ -68,7 +68,7 @@ require_once("../db.php");
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href=""><i class="fa fa-user"></i> Edit Profile</a></li>
                   <li><a href=""><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                  <li><a href=""><i class="fa fa-list-ul"></i> Jobs</a></li>
+                  <li><a href="../jobs.php"><i class="fa fa-list-ul"></i> Jobs</a></li>
                   <li><a href=""><i class="fa fa-book"></i> Exams</a></li>
 				  
                   <li><a href=""><i class="fa fa-envelope"></i> Mailbox</a></li>
