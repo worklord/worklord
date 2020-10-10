@@ -124,7 +124,6 @@ require_once("db.php");
             <div class="text-center">
               <ul class="pagination text-center" id="pagination"></ul>
             </div> 
-
           </div>
         </div>
       </div>

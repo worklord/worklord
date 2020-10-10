@@ -106,6 +106,14 @@ require_once("db.php");
               <a href="apply.php?id=<?php echo $row['id_jobpost']; ?>" class="btn btn-success btn-flat margin-top-50">Apply</a>
             </div>
             <?php }} ?>
+			   <?php 
+    
+    if(isset($_SESSION['jobApplySuccess'])) {
+      ?>
+			<div class='apply' style='display:none'>Applied Successfully..</div>
+    <?php
+     unset($_SESSION['jobApplySuccess']); }
+    ?>       
           </div>
 		  
           <div class="col-md-3">
@@ -162,6 +170,8 @@ require_once("db.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
-
+<script>
+$('.apply').fadeIn(400).delay(3000).fadeOut(400); //fade out after 3 seconds
+</script>
 </body>
 </html>

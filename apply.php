@@ -31,7 +31,7 @@ if(isset($_GET)) {
 
 		if($conn->query($sql)===TRUE) {
 			$_SESSION['jobApplySuccess'] = true;
-			header("Location: user/index.php");
+			header("Location: view-job-post.php?id=$row[id_jobpost]");
 			exit();
 		} else {
 			echo "Error " . $sql . "<br>" . $conn->error;
