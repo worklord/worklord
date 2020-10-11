@@ -3,7 +3,7 @@
 //To Handle Session Variables on This Page
 session_start();
 
-///If user Not logged in then redirect them back to homepage. 
+//If user Not logged in then redirect them back to homepage. 
 if(empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
@@ -33,11 +33,14 @@ require_once("../db.php");
   <!-- Custom -->
   <link rel="stylesheet" href="../css/custom.css">
 
+  <script src="../js/tinymce/tinymce.min.js"></script>
+  <script>tinymce.init({ selector:'description', height: 150 });</script>
+
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -55,7 +58,7 @@ require_once("../db.php");
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-                  
+                   
         </ul>
       </div>
     </nav>
@@ -80,7 +83,6 @@ require_once("../db.php");
                   <li><a href="view-posted-job.php"><i class="fa fa-file-o"></i> My Job Post</a></li>
                   <li><a href=""><i class="fa fa-file-o"></i> Job Application</a></li>
 				  <li><a href=""><i class="fa fa-book"></i> Exam </a></li>
-				  
                   <li><a href=""><i class="fa fa-envelope"></i> Mailbox</a></li>
                   <li><a href=""><i class="fa fa-gear"></i> Settings</a></li>
                   <li><a href=""><i class="fa fa-user"></i> Resume Database</a></li>
@@ -90,41 +92,42 @@ require_once("../db.php");
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
+            <h2><i>My Job Posts</i></h2>
+            <p>In this section you can view all job posts created by you.</p>
+            <div class="row margin-top-20">
+              <div class="col-md-12">
+                <div class="box-body table-responsive no-padding">
+                  <table id="example2" class="table table-hover">
+                    <thead>
+                      <th>Job Title</th>
+                      <th>View</th>
+					  <th>Delete</th>
+                    </thead>
+                    <tbody>
+                    <?php
+                     $sql = "SELECT * FROM job_post WHERE id_company='$_SESSION[id_company]' AND active=1";
+                      $result = $conn->query($sql);
 
-            <h3>Overview</h3>
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Job Posted</span>
-					<?php
-                    $sql = "SELECT * FROM job_post WHERE id_company='$_SESSION[id_company]'";
-                    $result = $conn->query($sql);
-
-                    if($result->num_rows > 0) {
-                      $total = $result->num_rows; 
-                    } else {
-                      $total = 0;
-                    }
-
-                    ?>
-                    <span class="info-box-number"><?php echo $total; ?></span>
-                  </div>
-                </div>                
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-green"><i class="ion ion-ios-browsers"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Application For Jobs</span>
-                    <span class="info-box-number">5</span>
-                  </div>
+                      //If Job Post exists then display details of post
+                      if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) 
+                        {
+                      ?>
+                      <tr>
+                        <td><?php echo $row['jobtitle']; ?></td>
+                        <td><a href="../view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-address-card-o"></i></a></td>
+						<td><a href="delete-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><input type="button" value="Delete"></a></td>
+                      </tr>
+                      <?php
+                       }
+                     }
+                     ?>
+                    </tbody>                    
+                  </table>
                 </div>
               </div>
             </div>
-
+            
           </div>
         </div>
       </div>
@@ -141,6 +144,7 @@ require_once("../db.php");
     </div>
   </footer>
 
+
 </div>
 
 <!-- jQuery 3 -->
@@ -149,5 +153,8 @@ require_once("../db.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
+<script>
+$('.error').fadeIn(400).delay(3000).fadeOut(400); //fade out after 3 seconds
+</script>
 </body>
 </html>

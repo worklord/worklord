@@ -92,7 +92,12 @@ if($result1->num_rows > 0)
             <div>
               <?php echo stripcslashes($row['description']); ?>
             </div>
-            
+            <div>
+              <?php echo "Experience : ".stripcslashes($row['experience'])." Year";  ?>
+            </div>
+			 <div>
+              <?php echo "Qualification : ".stripcslashes($row['qualification']); ?>
+            </div>
             
           </div>
           <div class="col-md-3">
