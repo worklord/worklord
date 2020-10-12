@@ -62,9 +62,9 @@ require_once("db.php");
           <div class="col-md-12 latest-job margin-top-50 margin-bottom-20">
           <h1 class="text-center">Search Job</h1>  
             <div class="input-group input-group-lg">
-                <input type="text" id="searchBar" class="form-control" placeholder="Search job">
+				<input type="text" id="searchBar" onkeyup="myFunction()" class="form-control" placeholder="Search for names.." title="Type in a name">
                 <span class="input-group-btn">
-                  <button id="searchBtn" type="button" class="btn btn-info btn-flat">Go!</button>
+                  <button id="searchBtn" type="button" class="btn btn-info btn-flat"></button>
                 </span>
             </div>
           </div>
@@ -169,6 +169,7 @@ require_once("db.php");
 </script>
 
 <script>
+  document.getElementById("searchBtn").style.visibility = "hidden";
   $("#searchBtn").on("click", function(e) {
     e.preventDefault();
     var searchResult = $("#searchBar").val();
@@ -191,6 +192,13 @@ input.addEventListener("keyup", function(event) {
    document.getElementById("searchBtn").click();
   }
 });
+</script>
+
+<script>
+function myFunction()
+{
+   document.getElementById("searchBtn").click();
+}
 </script>
 
 <script>
