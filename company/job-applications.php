@@ -33,14 +33,11 @@ require_once("../db.php");
   <!-- Custom -->
   <link rel="stylesheet" href="../css/custom.css">
 
-  <script src="../js/tinymce/tinymce.min.js"></script>
-  <script>tinymce.init({ selector:'description', height: 150 });</script>
-
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -58,7 +55,7 @@ require_once("../db.php");
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-                   
+                  
         </ul>
       </div>
     </nav>
@@ -91,53 +88,40 @@ require_once("../db.php");
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
-            <h2><i>Create Job Post</i></h2>
-            <div class="row">
-              <form method="post" action="addpost.php">
-                <div class="col-md-12 latest-job ">
-                  <div class="form-group">
-                    <input class="form-control input-lg" type="text" id="jobtitle" name="jobtitle" placeholder="Job Title">
-                  </div>
-                  <div class="form-group">
-                    <textarea class="form-control input-lg" id="description" name="description" placeholder="Job Description"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input type="number" class="form-control  input-lg" id="minimumsalary" min="1000" max="1000000" autocomplete="off" name="minimumsalary" placeholder="Minimum Salary" required="">
-                  </div>
-                  <div class="form-group">
-                    <input type="number" class="form-control  input-lg" id="maximumsalary" name="maximumsalary" min="1000" max="1000000" placeholder="Maximum Salary" required="">
-                  </div>
-                  <div class="form-group">
-                <input type="number" class="form-control  input-lg" id="experience" autocomplete="off" name="experience" placeholder="Experience (in Years) Required" required="">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control  input-lg" id="qualification" name="qualification" placeholder="Qualification Required" required="">
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-flat btn-success" onclick="myFunction()">Create</button>
-                  </div>
+            <h2><i>Recent Applications</i></h2>
+
+            <?php
+             $sql = "SELECT * FROM job_post INNER JOIN apply_job_post ON job_post.id_jobpost=apply_job_post.id_jobpost  INNER JOIN users ON users.id_user=apply_job_post.id_user WHERE apply_job_post.id_company='$_SESSION[id_company]'";
+                  $result = $conn->query($sql);
+
+                  if($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) 
+                    {     
+            ?>
+            <div class="attachment-block clearfix padding-2">
+                <h4 class="attachment-heading"><a href="user-application.php?id=<?php echo $row['id_user']; ?>&id_jobpost=<?php echo $row['id_jobpost']; ?>"><?php echo $row['jobtitle'].' @ ('.$row['firstname'].' '.$row['lastname'].')'; ?></a></h4>
+                <div class="attachment-text padding-2">
+                  <div class="pull-left"><i class="fa fa-calendar"></i> <?php echo $row['createdat']; ?></div>  
+                  <?php 
+
+                  if($row['status'] == 0) {
+                    echo '<div class="pull-right"><strong class="text-orange">Pending</strong></div>';
+                  } else if ($row['status'] == 1) {
+                    echo '<div class="pull-right"><strong class="text-red">Rejected</strong></div>';
+                  } else if ($row['status'] == 2) {
+                    echo '<div class="pull-right"><strong class="text-green">Under Review</strong></div> ';
+                  }
+                  ?>
+                                
                 </div>
-              </form>
             </div>
-   <?php 
-    
-    if(isset($_SESSION['jobPostSuccess'])) {
-      ?>
-			<div class='error' style='display:none'>Added Successfully..</div>
-    <?php
-     unset($_SESSION['jobPostSuccess']); }
-    ?>      
-	<?php 
-    
-    if(isset($_SESSION['jobPostFailed'])) {
-      ?>
-			<div class='error' style='display:none'>Unable to Add Job Post..</div>
-    <?php
-     unset($_SESSION['jobPostFailed']); }
-    ?>      
+
+            <?php
+              }
+            }
+            ?>
             
           </div>
-        </div>
       </div>
     </section>
 
@@ -152,7 +136,6 @@ require_once("../db.php");
     </div>
   </footer>
 
-
 </div>
 
 <!-- jQuery 3 -->
@@ -161,8 +144,5 @@ require_once("../db.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
-<script>
-$('.error').fadeIn(400).delay(3000).fadeOut(400); //fade out after 3 seconds
-</script>
 </body>
 </html>
