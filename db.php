@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
 //Your Mysql Config
 $servername = "localhost";
 $username = "root";

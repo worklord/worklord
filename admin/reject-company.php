@@ -8,6 +8,12 @@ if((!empty($_SESSION['id_company'])) || (!empty($_SESSION['id_user']))) {
   exit();
 }
 
+//If user Not logged in then redirect them back to homepage. 
+if(empty($_SESSION['loginid'])) {
+  header("Location: ../../index.php");
+  exit();
+}
+
 require_once("../db.php");
 
 if(isset($_GET)) {

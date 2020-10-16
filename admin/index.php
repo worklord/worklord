@@ -7,6 +7,11 @@ if((!empty($_SESSION['id_company'])) || (!empty($_SESSION['id_user']))) {
   header("Location: ../index.php");
   exit();
 }
+//If user Not logged in then redirect them back to homepage. 
+if(empty($_SESSION['loginid'])) {
+  header("Location: ../../index.php");
+  exit();
+}
 
 require_once("../db.php");
 ?>
@@ -76,7 +81,7 @@ require_once("../db.php");
                   <li class="active"><a href="index.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
                   <li><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
                   <li><a href=""><i class="fa fa-address-card-o"></i> Applicants</a></li>
-                  <li><a href=""><i class="fa fa-book"></i> Exams</a></li>
+                  <li><a href="../exams/admin/index.php"><i class="fa fa-book"></i> Exams</a></li>
                   <li><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li>
                   <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
