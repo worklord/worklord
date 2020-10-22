@@ -103,6 +103,7 @@ require_once("db.php");
           <?php
 
           $limit = 4;
+		  
 
           $sql = "SELECT COUNT(id_jobpost) AS id FROM job_post where active=1";
           $result = $conn->query($sql);

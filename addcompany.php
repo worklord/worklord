@@ -54,8 +54,7 @@ if(isset($_POST)) {
 		//We check if file is saved to our temp location or not.
 		if(file_exists($_FILES['image']['tmp_name'])) { 
 
-			//Next we need to check if file type is of our allowed extention or not.
-			if($imageFileType == "jpg" || $imageFileType == "png")  {
+			
 
 				//Next need to check file size with our limit size. 
 				if($_FILES['image']['size'] < 500000) { // File size is less than 5MB
@@ -68,11 +67,7 @@ if(isset($_POST)) {
 					$_SESSION['uploadError'] = "Wrong Size. Max Size Allowed : 5MB";
 					$uploadOk = false;
 				}
-			} else {
-				//Format Error
-				$_SESSION['uploadError'] = "Wrong Format. Only jpg & png Allowed";
-				$uploadOk = false;
-			}
+			
 		} else {
 				//File not copied to temp location error.
 				$_SESSION['uploadError'] = "Something Went Wrong. File Not Uploaded. Try Again.";

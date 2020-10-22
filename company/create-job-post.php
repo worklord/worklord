@@ -113,6 +113,10 @@ require_once("../db.php");
                   <div class="form-group">
                     <input type="text" class="form-control  input-lg" id="qualification" name="qualification" placeholder="Qualification Required" required="">
                   </div>
+				  <div class="form-group">
+				  <label>Due Date</label>
+                    <input type="date" class="form-control  input-lg" id="duedate" name="duedate" min="<?php echo date("Y-m-d",strtotime("+ 1 day")); ?>"  placeholder="Due Date" required="">
+                  </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-flat btn-success" onclick="myFunction()">Create</button>
                   </div>

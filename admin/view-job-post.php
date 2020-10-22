@@ -102,6 +102,9 @@ if($result1->num_rows > 0)
 			 <div>
               <?php echo "Qualification : ".stripcslashes($row['qualification']); ?>
             </div>
+			<div>
+              <?php echo "Due Date : " ?> <?php echo date("d-M-Y", strtotime($row['duedate']));  ?>
+            </div>
             
           </div>
           <div class="col-md-3">

@@ -92,6 +92,9 @@ require_once("db.php");
 			 <div>
               <?php echo "Qualification : ".stripcslashes($row['qualification']); ?>
             </div>
+			<div>
+              <?php echo "Due Date : " ?> <?php echo date("d-M-Y", strtotime($row['duedate']));  ?>
+            </div>
             <?php 
 			if(isset($_SESSION['id_user'])) { 
 				$sql2 = "SELECT * FROM apply_job_post WHERE id_jobpost='$_GET[id]' and id_user=$_SESSION[id_user]";
