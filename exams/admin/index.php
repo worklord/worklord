@@ -79,10 +79,9 @@ if(empty($_SESSION['loginid'])) {
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 		<li><a href="./">Overview</a></li>
-		<li><a href="">Examinations</a></li>
-		<li><a href="">Questions</a></li>
-		<li><a href="">Notice</a></li>
-		<li><a href="">Exam Results</a></li>
+		<li><a href="examinations.php">Examinations</a></li>
+		<!--<li><a href="">Notice</a></li>
+		<li><a href="">Exam Results</a></li>-->
 		<li><a href="../../logout.php">Logout</a></li>   		  
         </ul>
       </div>
@@ -152,7 +151,7 @@ if(empty($_SESSION['loginid'])) {
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<!--<div class="row">
 				<div class="col-lg-12 col-md-12">
 					<div class="panel panel-white">
 						<div class="row">
@@ -168,7 +167,7 @@ if(empty($_SESSION['loginid'])) {
 					</div>
 				</div>
 
-			</div>
+			</div>-->
 		</div>
 		
 	</div>
