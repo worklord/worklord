@@ -28,7 +28,7 @@ if ($result->num_rows > 0) {
 $sql = "UPDATE questions SET question='$question', option1='$opt1', option2='$opt2', option3='$opt3', option4='$opt4', answer='$answer' WHERE question_id='$question_id'";
 
 if ($conn->query($sql) === TRUE) {
-    header("location:../view-questions.php?rp=7823&eid=$examid");	
+    header("location:../examinations.php?rp=7823&eid=$examid");	
 } else {
  header("location:../edit-question.php?rp=1298&id=$question_id");	
 }

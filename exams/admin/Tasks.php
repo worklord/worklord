@@ -91,7 +91,7 @@ include 'includes/check_reply.php';
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Manage Examinations</h3>
+                    <h3>Manage Tasks</h3>
 
 
 
@@ -108,8 +108,8 @@ include 'includes/check_reply.php';
                                    
                                             <ul class="nav nav-tabs" role="tablist">
 			
-                                                <li role="presentation" class="active"><a href="#tab5" role="tab" data-toggle="tab">Examinations</a></li>
-                                                <li role="presentation"><a href="#tab6" role="tab" data-toggle="tab">Add Exam</a></li>										
+                                                <li role="presentation" class="active"><a href="#tab5" role="tab" data-toggle="tab">Tasks</a></li>
+                                                <li role="presentation"><a href="#tab6" role="tab" data-toggle="tab">Add Tasks</a></li>										
 												
 						
 
@@ -120,7 +120,7 @@ include 'includes/check_reply.php';
                                            <div class="table-responsive">
 										   <?php
 										   include '../../../db.php';
-										   $sql = "SELECT * FROM examinations";
+										   $sql = "SELECT * FROM tasks";
                                            $result = $conn->query($sql);
 
                                            if ($result->num_rows > 0) {
@@ -148,15 +148,15 @@ include 'includes/check_reply.php';
 											   $status = $row['status'];
 											   if ($status == "Active") {
 											   $st = '<p class="text-success">ACTIVE</p>';
-											   $stl = '<a href="pages/make_ex_in.php?id='.$row['exam_id'].'">Make Inactive</a>';
+											   $stl = '<a href="pages/make_tsk_in.php?id='.$row['task_id'].'">Make Inactive</a>';
 											   }else{
 											   $st = '<p class="text-danger">INACTIVE</p>'; 
-                                               $stl = '<a href="pages/make_ex_ac.php?id='.$row['exam_id'].'">Make Active</a>';											   
+                                               $stl = '<a href="pages/make_tsk_ac.php?id='.$row['task_id'].'">Make Active</a>';											   
 											   }
                                           print '
 										       <tr>
-                                                <td>'.$row['exam_name'].'</td>
-												<td>'.$row['exam_id'].'</td>
+                                                <td>'.$row['task_name'].'</td>
+												<td>'.$row['task_id'].'</td>
 												<td>'.$st.'</td>
                                                 <td><div class="btn-group" role="group">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -165,10 +165,10 @@ include 'includes/check_reply.php';
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>'.$stl.'</li>
-													<li><a href="edit-exam.php?eid='.$row['exam_id'].'">Edit Exam</a></li>
-													<li><a href="view-questions.php?eid='.$row['exam_id'].'">View Questions</a></li>
-													<li><a href="add-questions.php?eid='.$row['exam_id'].'">Add Questions</a></li>
-                                                    <li><a'; ?> onclick = "return confirm('Drop <?php echo $row['exam_name']; ?> ?')" <?php print ' href="pages/drop_ex.php?id='.$row['exam_id'].'">Drop Exam</a></li>
+													<li><a href="edit-task.php?tid='.$row['task_id'].'">Edit Task</a></li>
+													<li><a href="">View Question</a></li>
+													<li><a href="add-taskqstn.php?tid='.$row['task_id'].'">Add Questions</a></li>
+                                                    <li><a'; ?> onclick = "return confirm('Drop <?php echo $row['task_name']; ?> ?')" <?php print ' href="pages/drop_tsk.php?id='.$row['task_id'].'">Drop Task</a></li>
                                                 </ul>
                                             </div></td>
           
@@ -196,15 +196,12 @@ include 'includes/check_reply.php';
                                                        
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane fade" id="tab6">
-                                         <form action="pages/add_exam.php" method="POST">
+                                         <form action="pages/add_task.php" method="POST">
 										<div class="form-group">
-                                            <label for="exampleInputEmail1">Exam Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter exam name" name="exam" required autocomplete="off">
+                                            <label for="exampleInputEmail1">Task Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter task name" name="task" required autocomplete="off">
                                         </div>
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Exam Duration (Minutes)</label>
-                                            <input type="number" class="form-control" placeholder="Enter exam duration" name="duration" required autocomplete="off">
-                                        </div>
+										
 										<div class="form-group">
                                             <label for="exampleInputEmail1">Passmark (%)</label>
                                             <input type="number" class="form-control" placeholder="Enter passmark" name="passmark" required autocomplete="off">
@@ -276,7 +273,7 @@ function myFunction() {
     var x = document.getElementById("snackbar")
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-	setTimeout(function(){ window.location.href = 'examinations.php';}, 1000);
+	setTimeout(function(){ window.location.href = 'Tasks.php';}, 1000);
 }
 </script>
     </body>

@@ -100,6 +100,7 @@ $conn->close();
         <ul class="nav navbar-nav">
 		<li><a href="./">Overview</a></li>
 		<li><a href="examinations.php">Examinations</a></li>
+		<li><a href="Tasks.php">Tasks</a></li>
 		<!--<li><a href="">Notice</a></li>
 		<li><a href="">Exam Results</a></li>-->
 		<li><a href="../../logout.php">Logout</a></li>   		  

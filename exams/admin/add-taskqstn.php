@@ -1,5 +1,4 @@
 <?php 
-session_start();
 //If user Not logged in then redirect them back to homepage. 
 if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
@@ -7,39 +6,25 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
 }
 include 'includes/check_reply.php';
 
+if (isset($_GET['tid'])) {
 include '../../../db.php';
-if (isset($_GET['id'])) {
-$question_id = mysqli_real_escape_string($conn, $_GET['id']);
+$task_id = mysqli_real_escape_string($conn, $_GET['tid']);	
 
-$sql = "SELECT * FROM questions WHERE question_id = '$question_id'";
+$sql = "SELECT * FROM tasks WHERE task_id = '$task_id'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
-    $type = $row['type'];
-	$question = $row['question'];
-	if ($type == "FB") {
-	$ans = $row['answer'];
-	$act = "tab2";
-	}else{
-	$opt1 = $row['option1'];
-	$opt2 = $row['option2'];
-	$opt3 = $row['option3'];
-	$opt4 = $row['option4'];
-	$ans = $row['answer'];
-	}
+    $task_name =$row['task_name'];
     }
 } else {
-    header("location:./");
+header("location:./");	
 }
 
-	
 }else{
-	header("location:./");	
+header("location:./");	
 }
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,8 +68,73 @@ if ($result->num_rows > 0) {
         <script src="../assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        
+<style>
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+</style>
     </head>
     <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
         <main class="content-wrap">
@@ -105,7 +155,7 @@ if ($result->num_rows > 0) {
         <ul class="nav navbar-nav">
 		<li><a href="./">Overview</a></li>
 		<li><a href="examinations.php">Examinations</a></li>
-		<li><a href=Taskss.php">Tasks</a></li>
+		<li><a href="Tasks.php">Tasks</a></li>
 		<!--<li><a href="">Notice</a></li>
 		<li><a href="">Exam Results</a></li>-->
 		<li><a href="../../logout.php">Logout</a></li>   		  
@@ -115,7 +165,7 @@ if ($result->num_rows > 0) {
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Edit Questions : <?php echo "$question_id"; ?></h3>
+                    <h3>Add Questions - <?php echo "$task_name"; ?></h3>
                 </div>
                 <div id="main-wrapper">
                     <div class="row">
@@ -125,98 +175,43 @@ if ($result->num_rows > 0) {
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                 <?php
-								 if ($type == "MC") {
-									 print '
-									  <form action="pages/update_question.php?type=mc" method="POST">
+                                        <div role="tabpanel">
+                                   
+                                    
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active fade in" id="tab5">
+                                                <form action="pages/add_taskqstn.php" method="POST">
 												<div class="form-group">
                                                 <label for="exampleInputEmail1">Question</label>
-                                                <input type="text" class="form-control" value="'.$question.'" placeholder="Enter question" name="question" required autocomplete="off">
+                                                <input type="text" class="form-control" placeholder="Enter question" name="question" required autocomplete="off">
                                                 </div>
 												
-                                      <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th width="100">Option No.</th>
-                                                <th>Option</th>
-                                                <th  width="100" >Answer</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row" >1</th>
-                                                <td>
-												<div class="form-group">
-                                                <label for="exampleInputEmail1">Option 1</label>
-                                                <input type="text" value="'.$opt1.'" class="form-control" placeholder="Enter option 1" name="opt1" required autocomplete="off">
-                                                </div>
-												</td>
-                                                <td><label> Option 1 <input type="radio"'; if ($ans == "option1") { print ' checked '; } print ' name="answer" value="option1" required></lable></td>
-                            
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>
-												<div class="form-group">
-                                                <label for="exampleInputEmail1">Option 2</label>
-                                                <input type="text" class="form-control" value="'.$opt2.'" placeholder="Enter option 2" name="opt2" required autocomplete="off">
-                                                </div>
-												</td>
-                                                <td><label> Option 2 <input type="radio"'; if ($ans == "option2") { print ' checked="true" '; } print ' name="answer" value="option2" required></td>
-                
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>
-												<div class="form-group">
-                                                <label for="exampleInputEmail1">Option 3</label>
-                                                <input type="text" class="form-control" value="'.$opt3.'" placeholder="Enter option 3" name="opt3" required autocomplete="off">
-                                                </div>
-												</td>
-                                                <td><label> Option 3 <input type="radio"'; if ($ans == "option3") { print ' checked="true" '; } print ' name="answer" value="option3" required></td>
-                                
-                                            </tr>
-											
-											<tr>
-                                                <th scope="row">4</th>
-                                                <td>
-												<div class="form-group">
-                                                <label for="exampleInputEmail1">Option 4</label>
-                                                <input type="text" class="form-control" value="'.$opt4.'" placeholder="Enter option 4" name="opt4" required autocomplete="off">
-                                                </div>
-												</td>
-                                                <td><label> Option 4 <input type="radio"'; if ($ans == "option4") { print ' checked="true" '; } print ' name="answer" value="option4" required></td>
-                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
-									<input type="hidden" name="type" value="MC">
-									<input type="hidden" name="question_id" value="'.$question_id.'">
-									
+                                     
+									<input type="hidden" name="task_id" value="<?php echo "$task_id"; ?>">
 									 <button type="submit" class="btn btn-primary">Submit</button>
 												
 
 												
-												</form>';
-									 
-								 }else{
-									print '
-                                         <form action="pages/update_question.php?type=fib" method="POST">
+												</form>
+                                                       
+                                                </div>
+                                                <!--<div role="tabpanel" class="tab-pane fade" id="tab6">
+                                         <form action="pages/add_question.php?type=fib" method="POST">
 												<div class="form-group">
                                                 <label for="exampleInputEmail1">Question</label>
-                                                <input type="text" class="form-control"  value="'.$question.'" placeholder="Enter question" name="question" required autocomplete="off">
+                                                <input type="text" class="form-control" placeholder="Enter question" name="question" required autocomplete="off">
                                                 </div>
 												<div class="form-group">
                                                 <label for="exampleInputEmail1">Answer</label>
-                                                <input type="text" class="form-control"  value="'.$ans.'" placeholder="Enter answer" name="answer" required autocomplete="off">
+                                                <input type="text" class="form-control" placeholder="Enter answer" name="answer" required autocomplete="off">
                                                 </div>
-                                         <input type="hidden" name="question_id"  value="'.$question_id.'">
+                                         <input type="hidden" name="exam_id" value="<?php echo "$task_id"; ?>">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                       </form>';									
-									 
-								 }
-								 
-								 ?>
+                                       </form>
+                                                </div>-->
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>  
   
