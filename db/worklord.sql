@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2020 at 07:25 AM
+-- Generation Time: Oct 23, 2020 at 08:41 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -21,6 +21,98 @@ SET time_zone = "+00:00";
 --
 -- Database: `worklord`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alerts`
+--
+
+CREATE TABLE `alerts` (
+  `id` int(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `alerts`
+--
+
+INSERT INTO `alerts` (`id`, `code`, `description`) VALUES
+(1, '9275', 'Department was added successfully'),
+(2, '1185', 'Duplicate record found'),
+(3, '5426', 'Could not add department'),
+(4, '7823', 'Settings applied successfully'),
+(5, '1298', 'Could not apply settings'),
+(6, '1289', 'Category was added successfully'),
+(7, '7732', 'Could not add category'),
+(8, '3598', 'Subject was added successfully'),
+(9, '1925', 'Could not add subject'),
+(11, '9157', 'Could not register User'),
+(12, '2074', 'Duplicate phone number found'),
+(13, '1189', 'Duplicate email found'),
+(14, '2932', 'Examination was added successfully'),
+(15, '7788', 'Could not add examination'),
+(16, '0357', 'New question was added successfully'),
+(17, '3903', 'Could not add question'),
+(18, '9174', 'Notice was added successfully'),
+(19, '6389', 'Could not add notice'),
+(20, '9135', 'You must be admin to access the control panel'),
+(21, '9422', 'You must login first'),
+(22, '0912', 'Invalid username or password'),
+(23, '9122', 'You must be a User to acces the exams'),
+(24, '5732', 'Your account has been disabled'),
+(25, '8924', 'Account not found'),
+(26, '1804', 'New password has been sent to you through your email'),
+(27, '1100', 'Could not reset your password');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `apply_job_post`
+--
+
+CREATE TABLE `apply_job_post` (
+  `id_apply` int(11) NOT NULL,
+  `id_jobpost` int(11) NOT NULL,
+  `id_company` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `apply_job_post`
+--
+
+INSERT INTO `apply_job_post` (`id_apply`, `id_jobpost`, `id_company`, `id_user`, `status`) VALUES
+(27, 46, 24, 29, 1),
+(28, 49, 24, 29, 2),
+(29, 47, 24, 29, 0),
+(30, 48, 24, 29, 0),
+(31, 46, 24, 30, 0),
+(32, 50, 24, 29, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assessment_records`
+--
+
+CREATE TABLE `assessment_records` (
+  `record_id` varchar(255) NOT NULL,
+  `id_user` varchar(255) NOT NULL,
+  `exam_id` varchar(255) NOT NULL,
+  `score` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assessment_records`
+--
+
+INSERT INTO `assessment_records` (`record_id`, `id_user`, `exam_id`, `score`, `status`, `date`) VALUES
+('RS97168686727559', '29', 'EX-474901', '100', 'PASS', '09/25/2020');
 
 -- --------------------------------------------------------
 
@@ -48031,7 +48123,14 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`id_company`, `name`, `companyname`, `country`, `state`, `city`, `contactno`, `website`, `email`, `aboutme`, `logo`, `createdAt`, `active`) VALUES
-(24, 'company', 'dsadasf', 'dsfdfdsf', 'dfdsfd', 'dfdsfsd', '4354354354', 'dfdsfdsf', 'company@gmail.com', 'dfdsfgdg', '5f6325e761e47.png', '2020-09-17 09:01:27', 1);
+(24, 'company', 'dsadasf', 'dsfdfdsf', 'dfdsfd', 'dfdsfsd', '4354354354', 'dfdsfdsf', 'company@gmail.com', 'dfdsfgdg', '5f6325e761e47.png', '2020-09-17 09:01:27', 1),
+(25, 'nnn', 'df', 'Australia', 'Cherrybrook', 'Select City', '5678900987', 'ghb', 'n@gmail.com', 'v bn', '5f6ce5536ed98.jpg', '2020-09-24 18:28:35', 1),
+(26, 'lkm', 'mmm', 'Aruba', 'Aruba', 'Aruba', '3243555555', 'nbvnb', 'coo@gmail.com', 'asdsdffgs', '5f703f9988bb9.jpg', '2020-09-27 07:30:33', 0),
+(27, 'bbbnb', 'nbnn', 'Australia', 'Chatswood', 'Chatswood', '3456788888', 'nmn', 'c2@gmail.com', 'jhjhjjk', '5f704ba15f728.jpg', '2020-09-27 08:21:53', 3),
+(28, 'ghgh', 'hjghj', 'Antigua And Barbuda', 'Saint Mary', 'Select City', '7896786767', 'nbnm', 'c1@gmail.com', 'mnbnbnmnm', '5f778dc771704.jpg', '2020-10-02 20:29:59', 1),
+(29, 'Boss', 'Micro', 'Australia', 'Chatswood', 'Chatswood', '7678986544', 'www.microsoft.com', 'micrO@gmail.com', 'bnbnbn', '5f7eab38142af.png', '2020-10-08 06:01:28', 1),
+(30, 'Boney', 'Microsoft', 'American Samoa', 'Eastern', 'Leloaloa', '7845699543', 'www.microsoft.com', 'microsoft@gmail.com', 'Microsoft Corporation  is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. It', '5f80ad80e7372.png', '2020-10-09 18:35:44', 1),
+(31, 'cruse', 'google', 'American Samoa', 'Eastern', 'Afono', '8568495049', 'www.google.com', 'google@gmail.com', 'Google is a multinational, publicly-traded organization built around the company\'s hugely popular search engine. Google\'s other enterprises include Internet analytics, cloud computing, advertising technologies, and Web app, browser and operating system de', '5f80b2aeade72.png', '2020-10-09 18:57:50', 1);
 
 -- --------------------------------------------------------
 
@@ -48298,6 +48397,72 @@ INSERT INTO `countries` (`id`, `sortname`, `name`, `phonecode`) VALUES
 (245, 'ZM', 'Zambia', 260),
 (246, 'ZW', 'Zimbabwe', 263);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `examinations`
+--
+
+CREATE TABLE `examinations` (
+  `exam_id` varchar(255) NOT NULL,
+  `exam_name` varchar(255) NOT NULL,
+  `duration` int(255) NOT NULL,
+  `passmark` int(255) NOT NULL,
+  `terms` longtext NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `examinations`
+--
+
+INSERT INTO `examinations` (`exam_id`, `exam_name`, `duration`, `passmark`, `terms`, `status`) VALUES
+('EX-128766', 'Dsd', 23, 34, 'FGEYS', 'Active'),
+('EX-145845', 'Fdfdf', 87, 78, 'Dfdsfsd\r\n\r\n', 'Inactive'),
+('EX-148652', 'Sdsd', 43, 4, 'Vvdf\r\n', 'Active'),
+('EX-174163', 'Rfgdg', 65, 54, 'Dfd', 'Inactive'),
+('EX-238060', 'Ugugu', 67, 67, 'Jhjh', 'Inactive'),
+('EX-338375', 'Dfsdfs', 43, 454, 'Dfdsfsd', 'Inactive'),
+('EX-339110', 'Fgfd', 78, 78, 'Hjhkh\r\n', 'Inactive'),
+('EX-420852', 'Fdf', 7, 76, 'Jhhj', 'Inactive'),
+('EX-474901', 'Dsfdsf', 34, 34, 'Fdsfsd', 'Active'),
+('EX-664216', 'Cdfd', 78, 89, 'Jhhh', 'Inactive'),
+('EX-771803', 'Fdfd7', 88, 78, 'Jhjh', 'Inactive'),
+('EX-795740', 'Fdfd', 545, 545, 'Ggfg', 'Inactive');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_post`
+--
+
+CREATE TABLE `job_post` (
+  `id_jobpost` int(11) NOT NULL,
+  `id_company` int(11) NOT NULL,
+  `jobtitle` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `minimumsalary` varchar(255) NOT NULL,
+  `maximumsalary` varchar(255) NOT NULL,
+  `experience` varchar(255) NOT NULL,
+  `qualification` varchar(255) NOT NULL,
+  `createdat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `duedate` date NOT NULL,
+  `active` int(2) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `job_post`
+--
+
+INSERT INTO `job_post` (`id_jobpost`, `id_company`, `jobtitle`, `description`, `minimumsalary`, `maximumsalary`, `experience`, `qualification`, `createdat`, `duedate`, `active`) VALUES
+(46, 24, 'Java  Developer', '3+ years’ experience developing large scale web applications using Java, Kotlin, Go (or similar languages)\r\nSignificant Java programming skills, data structures and Micro-services architecture and development\r\nSignificant experience with the Spring Framework (Persistence, REST, Messaging, Integrations) such as Spring Boot.\r\nProven Experience in building RESTful APIs and a deep understanding of REST principles\r\n', '45000', '85000', '3', 'degree in computer science or related fields.', '2020-10-09 18:51:56', '0000-00-00', 1),
+(47, 24, 'Application Engineer', '\r\nApplication Engineers understand internal processes and what it takes to run Google at speed with its ever growing scale. As an Application Engineer, you\'ll focus on solving problems and creating value for Googlers by building solutions that are reliable and scalable to work with the size and scope of the company.\r\n\r\nYou will play a major role in developing, deploying, and supporting Google’s internal business applications. You will be tasked with creating custom-built software on google stack, and you will be part of teams that implement vendor sourced enterprise software, configuring that software, customizing it, and integrating with other internal systems.\r\n', '85000', '150000', '8', 'degree in computer science or related fields', '2020-10-09 19:08:42', '0000-00-00', 1),
+(48, 24, 'Database Administrator', 'The Database Administrator is responsible for maintaining operational performance, integrity and security of enterprise database services to the organization. This role will provide database expertise in planning, development and deployment of databases as well as troubleshooting issues. \r\n', '25000', '125000', '8', 'degree in computer science or related fields', '2020-10-09 19:14:51', '0000-00-00', 1),
+(49, 24, 'Test Engineer', ' Test Engineers at Google aren\'t manual testers -- you write scripts to automate testing and create tools so developers can test their own code. As a Test Engineer, you navigate Google\'s massive codebase, identify weak spots and constantly design better and creative ways to break software and identify potential problems. You\'ll have a huge impact on the quality of Google\'s growing suite of products and services.\r\n\r\nYou use your knowledge of testing and testability to influence better software design, promote proper engineering practice, bug prevention strategies, testability, accessibility, privacy, and other advanced quality concepts across products.', '50000', '90000', '2', 'degree in computer science or related fields.', '2020-10-09 19:22:26', '0000-00-00', 1),
+(50, 24, 'Android Developer', 'efmdf', '15000', '50000', '2', 'degree', '2020-10-11 00:40:55', '0000-00-00', 1);
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `login`
 --
@@ -48316,7 +48481,99 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`loginid`, `email`, `password`, `role`) VALUES
 (1, 'admin@gmail.com', 'MDdiNDMyZDI1MTcwYjQ2OWI1NzA5NWNhMjY5YmMyMDI=', 'admin'),
 (9, 'user@gmail.com', 'MDdiNDMyZDI1MTcwYjQ2OWI1NzA5NWNhMjY5YmMyMDI=', 'user'),
-(10, 'company@gmail.com', 'MDdiNDMyZDI1MTcwYjQ2OWI1NzA5NWNhMjY5YmMyMDI=', 'company');
+(10, 'company@gmail.com', 'MDdiNDMyZDI1MTcwYjQ2OWI1NzA5NWNhMjY5YmMyMDI=', 'company'),
+(11, 'n@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(12, 'coo@gmail.com', 'M2U5ZmJlNzM1ZDNkYmMyNTg2NDgwMWY1NTcwOWU4Nzg=', 'company'),
+(13, 'c2@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(14, 'c1@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(15, 'microsoft@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(17, 'google@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(18, 'dev@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(19, 'althafvly@gmail.com', 'MzdlMTA4NzJhNzFlYjAxZWUxYmE5ZGU5ODQ2Zjg0Njk=', 'user'),
+(20, 'jl@gmail.com', 'MzdlMTA4NzJhNzFlYjAxZWUxYmE5ZGU5ODQ2Zjg0Njk=', 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mailbox`
+--
+
+CREATE TABLE `mailbox` (
+  `id_mailbox` int(11) NOT NULL,
+  `id_fromuser` int(11) NOT NULL,
+  `fromuser` varchar(255) NOT NULL,
+  `id_touser` int(11) NOT NULL,
+  `subject` varchar(256) NOT NULL,
+  `message` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notice`
+--
+
+CREATE TABLE `notice` (
+  `id` int(255) NOT NULL,
+  `notice_id` varchar(255) NOT NULL,
+  `post_date` varchar(255) NOT NULL,
+  `last_update` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `title` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notice`
+--
+
+INSERT INTO `notice` (`id`, `notice_id`, `post_date`, `last_update`, `description`, `title`) VALUES
+(3, 'NT-95754735', '25/09/2020 06:44:54', '25/09/2020 06:44:54', 'dsfdsf', 'Dffdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `question_id` varchar(255) NOT NULL,
+  `exam_id` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `question` longtext NOT NULL,
+  `option1` varchar(255) NOT NULL DEFAULT '-',
+  `option2` varchar(255) NOT NULL DEFAULT '-',
+  `option3` varchar(255) NOT NULL DEFAULT '-',
+  `option4` varchar(255) NOT NULL DEFAULT '-',
+  `answer` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`question_id`, `exam_id`, `type`, `question`, `option1`, `option2`, `option3`, `option4`, `answer`) VALUES
+('QS-207021', 'EX-474901', 'MC', 'dfdsf', 'fdf', 'fdsf', 'fdsf', 'fdsf', 'option2'),
+('QS-621160', 'EX-128766', 'MC', 'fdf', 'hhj', 'hjhj', 'jh', 'jhj', 'option1'),
+('QS-635418', '', 'MC', '', '', '', '', '', ''),
+('QS-683095', 'EX-128766', 'MC', 'kjk', 'jojlj', 'lj', 'ds', 'k', 'option2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reply_mailbox`
+--
+
+CREATE TABLE `reply_mailbox` (
+  `id_reply` int(11) NOT NULL,
+  `id_mailbox` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `usertype` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `states`
@@ -52448,6 +52705,7 @@ CREATE TABLE `users` (
   `age` varchar(255) DEFAULT NULL,
   `designation` varchar(255) DEFAULT NULL,
   `resume` varchar(255) DEFAULT NULL,
+  `active` int(11) NOT NULL DEFAULT 1,
   `aboutme` text NOT NULL,
   `skills` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -52456,8 +52714,34 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `firstname`, `lastname`, `email`, `address`, `city`, `state`, `contactno`, `qualification`, `stream`, `passingyear`, `dob`, `age`, `designation`, `resume`, `aboutme`, `skills`) VALUES
-(29, 'user', 'user', 'user@gmail.com', 'user_Addressses', 'city', 'dfdsfs', '3432425435', 'gfdgfdg', 'fdgdfg', '2020-09-25', '1999-01-15', '', 'dfdsfsd', '5f6324ec86f5c.pdf', 'sdasd', 'fsdfdsf');
+INSERT INTO `users` (`id_user`, `firstname`, `lastname`, `email`, `address`, `city`, `state`, `contactno`, `qualification`, `stream`, `passingyear`, `dob`, `age`, `designation`, `resume`, `active`, `aboutme`, `skills`) VALUES
+(29, 'user', 'user', 'user@gmail.com', 'user_Addressses', 'city', 'dfdsfs', '3432425435', 'gfdgfdg', 'fdgdfg', '2020-09-25', '1999-01-15', '', 'dfdsfsd', '5f6324ec86f5c.pdf', 1, 'sdasd', 'fsdfdsf'),
+(30, 'Deepak', 'Dev', 'dev@gmail.com', 'calicut', 'Kozhikode', 'Kerala', '3242355346', 'pg', 'cs', '2020-10-03', '2002-01-22', '18', 'ef', '5f80e4c78d749.pdf', 1, 'efergeg', 'sfdf'),
+(31, 'althaf', 'mohammed', 'althafvly@gmail.com', 'fdfds', 'Malappuram', 'Kerala', '4342342343', 'pg', 'mca', '2020-10-16', '2002-01-18', '18', 'fdfsd', '5f8d2f5d6ccd2.pdf', 1, 'ffsdfdsf', 'dsd'),
+(32, 'dsffqkj', 'jl', 'jl@gmail.com', 'dfd', 'Select City', 'Su urland', '3435435345', 'sdsdDS', 'JIJLIJ', '2020-10-22', '2002-01-20', '18', 'dsfs', '5f8d3030ed2c1.pdf', 1, 'klkljlj', 'dsdsd');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `alerts`
+--
+ALTER TABLE `alerts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`);
+
+--
+-- Indexes for table `apply_job_post`
+--
+ALTER TABLE `apply_job_post`
+  ADD PRIMARY KEY (`id_apply`);
+
+--
+-- Indexes for table `assessment_records`
+--
+ALTER TABLE `assessment_records`
+  ADD PRIMARY KEY (`record_id`);
 
 --
 -- Indexes for table `cities`
@@ -52479,12 +52763,42 @@ ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `examinations`
+--
+ALTER TABLE `examinations`
+  ADD PRIMARY KEY (`exam_id`);
+
+--
+-- Indexes for table `job_post`
+--
+ALTER TABLE `job_post`
+  ADD PRIMARY KEY (`id_jobpost`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`loginid`),
   ADD UNIQUE KEY `unique` (`email`);
 
+--
+-- Indexes for table `mailbox`
+--
+ALTER TABLE `mailbox`
+  ADD PRIMARY KEY (`id_mailbox`);
+
+--
+-- Indexes for table `notice`
+--
+ALTER TABLE `notice`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `notice_id` (`notice_id`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`question_id`);
 
 --
 -- Indexes for table `states`
@@ -52505,6 +52819,18 @@ ALTER TABLE `users` ADD FULLTEXT KEY `age` (`age`);
 --
 
 --
+-- AUTO_INCREMENT for table `alerts`
+--
+ALTER TABLE `alerts`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `apply_job_post`
+--
+ALTER TABLE `apply_job_post`
+  MODIFY `id_apply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
@@ -52514,7 +52840,7 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `id_company` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_company` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -52522,11 +52848,29 @@ ALTER TABLE `company`
 ALTER TABLE `countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
 
--
+--
+-- AUTO_INCREMENT for table `job_post`
+--
+ALTER TABLE `job_post`
+  MODIFY `id_jobpost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `loginid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `loginid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `mailbox`
+--
+ALTER TABLE `mailbox`
+  MODIFY `id_mailbox` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `notice`
+--
+ALTER TABLE `notice`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `states`
@@ -52538,7 +52882,7 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
