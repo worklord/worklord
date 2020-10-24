@@ -166,7 +166,7 @@ include 'includes/check_reply.php';
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>'.$stl.'</li>
 													<li><a href="edit-task.php?tid='.$row['task_id'].'">Edit Task</a></li>
-													<li><a href="">View Question</a></li>
+													<li><a href="view-taskquestions.php?tid='.$row['task_id'].'">View Question</a></li>
 													<li><a href="add-taskqstn.php?tid='.$row['task_id'].'">Add Questions</a></li>
                                                     <li><a'; ?> onclick = "return confirm('Drop <?php echo $row['task_name']; ?> ?')" <?php print ' href="pages/drop_tsk.php?id='.$row['task_id'].'">Drop Task</a></li>
                                                 </ul>
