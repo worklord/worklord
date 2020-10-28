@@ -13,24 +13,26 @@ $opt1 = mysqli_real_escape_string($conn, $_POST['opt1']);
 $opt2 = mysqli_real_escape_string($conn, $_POST['opt2']);
 $opt3 = mysqli_real_escape_string($conn, $_POST['opt3']);
 $opt4 = mysqli_real_escape_string($conn, $_POST['opt4']);
-
+$examid = mysqli_real_escape_string($conn, $_POST['exam_id']);
 
 $sql = "SELECT * FROM questions WHERE exam_id = '$examid' AND question = '$question' AND question_id != '$question_id'";
 $result = $conn->query($sql);
-
+		
 if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
- header("location:../edit-question.php?rp=1185&id=$question_id");
+ header("location:../edit-question.php?id=$question_id");
     }
 } else {
 
 $sql = "UPDATE questions SET question='$question', option1='$opt1', option2='$opt2', option3='$opt3', option4='$opt4', answer='$answer' WHERE question_id='$question_id'";
 
 if ($conn->query($sql) === TRUE) {
-    header("location:../examinations.php?rp=7823&eid=$examid");	
+    #echo "<script>alert('$examid')</script>";
+    header("location:../edit-question.php?rp=7823&id=$question_id");	
 } else {
- header("location:../edit-question.php?rp=1298&id=$question_id");	
+
+    header("location:../edit-question.php?rp=1298&id=$question_id");	
 }
 
 }

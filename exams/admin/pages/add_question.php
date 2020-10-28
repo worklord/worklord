@@ -30,7 +30,7 @@ $sql = "INSERT INTO questions (question_id, exam_id, type, question, option1, op
 VALUES ('$question_id', '$examid', 'MC', '$question', '$opt1', '$opt2', '$opt3', '$opt4', '$answer')";
 
 if ($conn->query($sql) === TRUE) {
-    header("location:../examinations.php?rp=0357&eid=$examid");	
+    header("location:../add-questions.php?rp=0357&eid=$examid");	
 } else {
  header("location:../add-questions.php?rp=3903&eid=$examid");	
 }

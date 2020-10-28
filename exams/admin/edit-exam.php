@@ -4,9 +4,10 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
   exit();
 }
+session_start();
 include 'includes/check_reply.php';
 if (isset($_GET['eid'])) {
-include '../../../db.php';
+include '../../db.php';
 $exam_id = mysqli_real_escape_string($conn, $_GET['eid']);
 $sql = "SELECT * FROM examinations WHERE exam_id = '$exam_id'";
 $result = $conn->query($sql);

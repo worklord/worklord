@@ -15,16 +15,16 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
-header("location:../examinations.php?rp=1185");
+header("location:../edit-exam.php?rp=1185");
     }
 } else {
 
 $sql = "UPDATE examinations SET exam_name = '$exam', duration = '$duration', passmark = '$passmark', terms = '$terms' WHERE exam_id='$exam_id'";
 
 if ($conn->query($sql) === TRUE) {
-header("location:../examinations.php?rp=7823&id=$exam_id");
+header("location:../edit-exam.php?rp=7823&eid=$exam_id");
 } else {
-header("location:../examinations.php?rp=1298&id=$exam_id");
+header("location:../edit-exam.php?rp=1298&eid=$exam_id");
 }
 
 

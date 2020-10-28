@@ -4,13 +4,14 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
   exit();
 }
+session_start();
 include 'includes/check_reply.php';
 
 if (isset($_GET['eid'])) {
-include '../../../db.php';
-$exam_id = mysqli_real_escape_string($conn, $_GET['eid']);	
+include '../../db.php';
+$exam_id = "$_GET[eid]";
 
-$sql = "SELECT * FROM examinations WHERE exam_id = '$exam_id'";
+$sql = "SELECT * FROM examinations";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -19,7 +20,7 @@ if ($result->num_rows > 0) {
     $exam_name =$row['exam_name'];
     }
 } else {
-header("location:./");	
+header("location:./");
 }
 
 }else{

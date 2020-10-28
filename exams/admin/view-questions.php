@@ -4,6 +4,7 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
   exit();
 }
+session_start();
 include 'includes/check_reply.php';
 if (isset($_GET['eid'])) {
 include '../../db.php';

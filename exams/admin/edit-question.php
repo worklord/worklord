@@ -7,7 +7,7 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
 }
 include 'includes/check_reply.php';
 
-include '../../../db.php';
+include '../../db.php';
 if (isset($_GET['id'])) {
 $question_id = mysqli_real_escape_string($conn, $_GET['id']);
 
@@ -31,6 +31,7 @@ if ($result->num_rows > 0) {
 	}
     }
 } else {
+	
     header("location:./");
 }
 
@@ -105,7 +106,7 @@ if ($result->num_rows > 0) {
         <ul class="nav navbar-nav">
 		<li><a href="./">Overview</a></li>
 		<li><a href="examinations.php">Examinations</a></li>
-		<li><a href=Taskss.php">Tasks</a></li>
+		<li><a href="Tasks.php">Tasks</a></li>
 		<!--<li><a href="">Notice</a></li>
 		<li><a href="">Exam Results</a></li>-->
 		<li><a href="../../logout.php">Logout</a></li>   		  

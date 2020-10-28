@@ -119,7 +119,7 @@ include 'includes/check_reply.php';
                                                 <div role="tabpanel" class="tab-pane active fade in" id="tab5">
                                            <div class="table-responsive">
 										   <?php
-										   include '../../../db.php';
+										   include '../../db.php';
 										   $sql = "SELECT * FROM examinations";
                                            $result = $conn->query($sql);
 
@@ -275,8 +275,7 @@ include 'includes/check_reply.php';
 function myFunction() {
     var x = document.getElementById("snackbar")
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-	setTimeout(function(){ window.location.href = 'examinations.php';}, 1000);
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 </script>
     </body>
