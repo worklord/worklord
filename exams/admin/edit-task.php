@@ -4,9 +4,10 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
   exit();
 }
+session_start();
 include 'includes/check_reply.php';
 if (isset($_GET['tid'])) {
-include '../../../db.php';
+include '../../db.php';
 $task_id = mysqli_real_escape_string($conn, $_GET['tid']);
 $sql = "SELECT * FROM tasks WHERE task_id = '$task_id'";
 $result = $conn->query($sql);

@@ -4,6 +4,7 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
   exit();
 }
+session_start();
 include 'includes/check_reply.php';
 if (isset($_GET['tid'])) {
 include '../../db.php';
@@ -173,7 +174,7 @@ header("location:./");
                                        
                                             <div class="tab-content">
 											<?php 
-											include '../../../db.php';
+											include '../../db.php';
 											$sql = "SELECT * FROM task_questions WHERE task_id = '$task_id'";
                                             $result = $conn->query($sql);
 

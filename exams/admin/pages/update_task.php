@@ -15,16 +15,16 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
-header("location:../Tasks.php?rp=1185");
+header("location:../edit-task.php?rp=1185");
     }
 } else {
 
 $sql = "UPDATE tasks SET task_name = '$task', passmark = '$passmark', terms = '$terms' WHERE task_id='$task_id'";
 
 if ($conn->query($sql) === TRUE) {
-header("location:../Tasks.php?rp=7823&id=$task_id");
+header("location:../edit-task.php?rp=7823&tid=$task_id");
 } else {
-header("location:../Tasks.php?rp=1298&id=$task_id");
+header("location:../edit-task.php?rp=1298&tid=$task_id");
 }
 
 

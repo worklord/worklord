@@ -7,7 +7,7 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
 }
 include 'includes/check_reply.php';
 
-include '../../../db.php';
+include '../../db.php';
 if (isset($_GET['id'])) {
 $question_id = mysqli_real_escape_string($conn, $_GET['id']);
 
