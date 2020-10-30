@@ -5,11 +5,34 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   exit();
 }
 include 'includes/check_reply.php';
+
+if (isset($_GET['eid'])) {
+include '../../db.php';
+$exam_id = $_GET['eid'];
+$sql = "SELECT * FROM assessment_records WHERE exam_id = '$exam_id'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    while($row = $result->fetch_assoc()) {
+    $exam_name = $row['exam_name'];
+    }
+} else {
+
+}
+$conn->close();
+	
+}else{
+	
+header("location:./");	
+}
 ?>
 <!DOCTYPE html>
 <html>
    
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>WorkLord</title>
 <!-- Favicons -->
 <link rel="icon" href="../../img/logo.png">
@@ -47,8 +70,7 @@ include 'includes/check_reply.php';
         <link href="../assets/css/snack.css" rel="stylesheet" type="text/css"/>
         <script src="../assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="../assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-	
-<!-- Google Font -->
+		<!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 
@@ -62,9 +84,9 @@ include 'includes/check_reply.php';
 
         
     </head>
-    <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?>  >
+    <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
         <main class="content-wrap">
-<header class="main-header">
+  <header class="main-header">
 
     <!-- Logo -->
     <a href="../../index.php" class="logo logo-bg">
@@ -90,7 +112,7 @@ include 'includes/check_reply.php';
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Manage Examinations</h3>
+                    <h3><?php echo "$exam_name" ?> Results</h3>
 
 
 
@@ -103,23 +125,11 @@ include 'includes/check_reply.php';
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                        <div role="tabpanel">
-                                   
-                                            <ul class="nav nav-tabs" role="tablist">
-			
-                                                <li role="presentation" class="active"><a href="#tab5" role="tab" data-toggle="tab">Examinations</a></li>
-                                                <li role="presentation"><a href="#tab6" role="tab" data-toggle="tab">Add Exam</a></li>										
-												
-						
-
-                                            </ul>
-                                    
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane active fade in" id="tab5">
-                                           <div class="table-responsive">
+                                                        <div class="table-responsive">
 										   <?php
 										   include '../../db.php';
-										   $sql = "SELECT * FROM examinations";
+										   $sql = "SELECT * FROM assessment_records,users,examinations WHERE assessment_records.exam_id = '$exam_id' && examinations.exam_id = '$exam_id' && users.id_user=assessment_records.id_user";
+										  
                                            $result = $conn->query($sql);
 
                                            if ($result->num_rows > 0) {
@@ -127,47 +137,47 @@ include 'includes/check_reply.php';
 										<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>ID</th>
-												<th>Status</th>
+                                                <th>USER Name</th>
+												<th>USER ID</th>
+												<th>Exam Name</th>
+                                                <th>Score</th>
+                                                <th>Status</th>
+												<th>Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>ID</th>
-												<th>Status</th>
+                                                <th>USER Name</th>
+												<th>USER ID</th>
+												<th>Exam Name</th>
+                                                <th>Score</th>
+                                                <th>Status</th>
+												<th>Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>';
      
                                            while($row = $result->fetch_assoc()) {
-											   $status = $row['status'];
-											   if ($status == "Active") {
-											   $st = '<p class="text-success">ACTIVE</p>';
-											   $stl = '<a href="pages/make_ex_in.php?id='.$row['exam_id'].'">Make Inactive</a>';
-											   }else{
-											   $st = '<p class="text-danger">INACTIVE</p>'; 
-                                               $stl = '<a href="pages/make_ex_ac.php?id='.$row['exam_id'].'">Make Active</a>';											   
-											   }
                                           print '
 										       <tr>
+                                                <td>'.$row['firstname'].' '.$row['lastname'].'</td>
+												<td>'.$row['id_user'].'</td>
                                                 <td>'.$row['exam_name'].'</td>
-												<td>'.$row['exam_id'].'</td>
-												<td>'.$st.'</td>
-                                                <td><div class="btn-group" role="group">
+                                                <td><b>'.$row['score'].'%</b></td>
+												<td>'.$row['status'].'</td>
+												<td>'.$row['date'].'</td>
+												<td><div class="btn-group" role="group">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     Select Action
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li>'.$stl.'</li>
-													<li><a href="edit-exam.php?eid='.$row['exam_id'].'">Edit Exam</a></li>
-													<li><a href="view-questions.php?eid='.$row['exam_id'].'">View Questions</a></li>
-													<li><a href="add-questions.php?eid='.$row['exam_id'].'">Add Questions</a></li>
-                                                    <li><a'; ?> onclick = "return confirm('Drop <?php echo $row['exam_name']; ?> ?')" <?php print ' href="pages/drop_ex.php?id='.$row['exam_id'].'">Drop Exam</a></li>
+                                                  
+													<li><a'; ?> onclick = "return confirm('Reactivate exam for <?php echo $row['firstname'].' '.$row['lastname']; ?> ?')" <?php print ' href="pages/re-activate.php?rid='.$row['record_id'].'&eid='.$exam_id.'">Re-activate</a></li>
+									
+													
                                                 </ul>
                                             </div></td>
           
@@ -192,34 +202,6 @@ include 'includes/check_reply.php';
                  
 
                                     </div>
-                                                       
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane fade" id="tab6">
-                                         <form action="pages/add_exam.php" method="POST">
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Exam Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter exam name" name="exam" required autocomplete="off">
-                                        </div>
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Exam Duration (Minutes)</label>
-                                            <input type="number" class="form-control" placeholder="Enter exam duration" name="duration" required autocomplete="off">
-                                        </div>
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Passmark (%)</label>
-                                            <input type="number" class="form-control" placeholder="Enter passmark" name="passmark" required autocomplete="off">
-                                        </div>
-									<div class="form-group">
-                                            <label for="exampleInputEmail1">Terms and conditions</label>
-                                            <textarea style="resize: none;" rows="6" class="form-control" placeholder="Enter Terms and conditions" name="instructions" required autocomplete="off"></textarea>
-                                     </div>
-
-
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                       </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>  
   
@@ -230,14 +212,13 @@ include 'includes/check_reply.php';
                         </div>
                     </div>
                 </div>
-               
+                
             </div>
         </main>
 		<?php if ($ms == "1") {
-?> <div class="alert alert-success" id="snackbar"><?php echo "$description";
- ?></div> <?php
+?> <div class="alert alert-success" id="snackbar"><?php echo "$description"; ?></div> <?php	
 }else{
-
+	
 }
 ?>
 

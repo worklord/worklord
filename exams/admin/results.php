@@ -10,6 +10,8 @@ include 'includes/check_reply.php';
 <html>
    
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>WorkLord</title>
 <!-- Favicons -->
 <link rel="icon" href="../../img/logo.png">
@@ -47,8 +49,7 @@ include 'includes/check_reply.php';
         <link href="../assets/css/snack.css" rel="stylesheet" type="text/css"/>
         <script src="../assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="../assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-	
-<!-- Google Font -->
+		<!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 
@@ -62,9 +63,9 @@ include 'includes/check_reply.php';
 
         
     </head>
-    <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?>  >
+    <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
         <main class="content-wrap">
-<header class="main-header">
+  <header class="main-header">
 
     <!-- Logo -->
     <a href="../../index.php" class="logo logo-bg">
@@ -90,10 +91,7 @@ include 'includes/check_reply.php';
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Manage Examinations</h3>
-
-
-
+                    <h3>Results</h3>
                 </div>
                 <div id="main-wrapper">
                     <div class="row">
@@ -103,20 +101,7 @@ include 'includes/check_reply.php';
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                        <div role="tabpanel">
-                                   
-                                            <ul class="nav nav-tabs" role="tablist">
-			
-                                                <li role="presentation" class="active"><a href="#tab5" role="tab" data-toggle="tab">Examinations</a></li>
-                                                <li role="presentation"><a href="#tab6" role="tab" data-toggle="tab">Add Exam</a></li>										
-												
-						
-
-                                            </ul>
-                                    
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane active fade in" id="tab5">
-                                           <div class="table-responsive">
+                                                        <div class="table-responsive">
 										   <?php
 										   include '../../db.php';
 										   $sql = "SELECT * FROM examinations";
@@ -128,7 +113,8 @@ include 'includes/check_reply.php';
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>ID</th>
+                                                <th>Duration</th>
+												<th>Passmark</th>
 												<th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -136,7 +122,8 @@ include 'includes/check_reply.php';
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>ID</th>
+                                                <th>Duration</th>
+												<th>Passmark</th>
 												<th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -155,7 +142,8 @@ include 'includes/check_reply.php';
                                           print '
 										       <tr>
                                                 <td>'.$row['exam_name'].'</td>
-												<td>'.$row['exam_id'].'</td>
+												<td>'.$row['duration'].'<b> min.</b></td>
+												<td>'.$row['passmark'].'<b>%</b></td>
 												<td>'.$st.'</td>
                                                 <td><div class="btn-group" role="group">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -163,11 +151,10 @@ include 'includes/check_reply.php';
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li>'.$stl.'</li>
-													<li><a href="edit-exam.php?eid='.$row['exam_id'].'">Edit Exam</a></li>
-													<li><a href="view-questions.php?eid='.$row['exam_id'].'">View Questions</a></li>
-													<li><a href="add-questions.php?eid='.$row['exam_id'].'">Add Questions</a></li>
-                                                    <li><a'; ?> onclick = "return confirm('Drop <?php echo $row['exam_name']; ?> ?')" <?php print ' href="pages/drop_ex.php?id='.$row['exam_id'].'">Drop Exam</a></li>
+                                                  
+													<li><a href="view-results.php?eid='.$row['exam_id'].'">View Results</a></li>
+									                
+													
                                                 </ul>
                                             </div></td>
           
@@ -192,34 +179,6 @@ include 'includes/check_reply.php';
                  
 
                                     </div>
-                                                       
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane fade" id="tab6">
-                                         <form action="pages/add_exam.php" method="POST">
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Exam Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter exam name" name="exam" required autocomplete="off">
-                                        </div>
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Exam Duration (Minutes)</label>
-                                            <input type="number" class="form-control" placeholder="Enter exam duration" name="duration" required autocomplete="off">
-                                        </div>
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Passmark (%)</label>
-                                            <input type="number" class="form-control" placeholder="Enter passmark" name="passmark" required autocomplete="off">
-                                        </div>
-									<div class="form-group">
-                                            <label for="exampleInputEmail1">Terms and conditions</label>
-                                            <textarea style="resize: none;" rows="6" class="form-control" placeholder="Enter Terms and conditions" name="instructions" required autocomplete="off"></textarea>
-                                     </div>
-
-
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                       </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>  
   
@@ -230,14 +189,13 @@ include 'includes/check_reply.php';
                         </div>
                     </div>
                 </div>
-               
+                
             </div>
         </main>
 		<?php if ($ms == "1") {
-?> <div class="alert alert-success" id="snackbar"><?php echo "$description";
- ?></div> <?php
+?> <div class="alert alert-success" id="snackbar"><?php echo "$description"; ?></div> <?php	
 }else{
-
+	
 }
 ?>
 
