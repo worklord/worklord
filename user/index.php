@@ -69,8 +69,7 @@ require_once("../db.php");
                   <li><a href=""><i class="fa fa-user"></i> Edit Profile</a></li>
                   <li><a href="view-apply-jobs.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
                   <li><a href="../jobs.php"><i class="fa fa-list-ul"></i> Jobs</a></li>
-                  <li><a href=""><i class="fa fa-book"></i> Exams</a></li>
-				  
+                  <li><a href="../exams/user"><i class="fa fa-book"></i> Exams</a></li>
                   <li><a href=""><i class="fa fa-envelope"></i> Mailbox</a></li>
                   <li><a href=""><i class="fa fa-gear"></i> Settings</a></li>
                   <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
