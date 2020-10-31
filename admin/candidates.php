@@ -31,6 +31,8 @@ require_once("../db.php");
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../css/AdminLTE.min.css">
   <link rel="stylesheet" href="../css/_all-skins.min.css">
@@ -78,10 +80,10 @@ require_once("../db.php");
               </div>
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
-                  <li class="active"><a href="index.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                  <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                   <li><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
-                  <li><a href="candidates.php"><i class="fa fa-address-card-o"></i> Applicants</a></li>
-                  <li><a href="../exams/admin/index.php"><i class="fa fa-book"></i> Exams</a></li>
+                  <li class="active"><a href="candidates.php"><i class="fa fa-address-card-o"></i> Applicants</a></li>
+				  <li><a href="../exams/admin/index.php"><i class="fa fa-book"></i> Exams</a></li>
                   <li><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li>
                   <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
@@ -90,52 +92,59 @@ require_once("../db.php");
           </div>
           <div class="col-md-9 bg-white padding-2">
 
-            <h3>WorkLord Statistics</h3>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-red"><i class="ion ion-briefcase"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Active Company Registered</span>
-                    <span class="info-box-number">5</span>
-                  </div>
-                </div>                
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-red"><i class="ion ion-briefcase"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Pending Company Approval</span>
-                    <span class="info-box-number">6</span>
-                    
-                  </div>
-                </div>                
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-green"><i class="ion ion-person-stalker"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Registered Candidates</span>
-                    <span class="info-box-number">25</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-aqua"><i class="ion ion-person-add"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Total Job Posts</span>
-                    <span class="info-box-number">5</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box bg-c-yellow">
-                  <span class="info-box-icon bg-yellow"><i class="ion ion-ios-browsers"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Total Applications</span>
-                    <span class="info-box-number">5</span>
-                  </div>
+            <h3>Candidates Database</h3>
+            <div class="row margin-top-20">
+              <div class="col-md-12">
+                <div class="box-body table-responsive no-padding">
+                  <table id="example2" class="table table-hover">
+                    <thead>
+                      <th>Candidate</th>
+                      <th>Highest Qualification</th>
+                      <th>Skills</th>
+                      <th>City</th>
+                      <th>State</th>
+                      <th>Download Resume</th>
+                    </thead>
+                    <tbody>
+                      <?php
+                       $sql = "SELECT * FROM users";
+                            $result = $conn->query($sql);
+
+                            if($result->num_rows > 0) {
+                              while($row = $result->fetch_assoc()) 
+                              {     
+
+                                $skills = $row['skills'];
+                                $skills = explode(',', $skills);
+                      ?>
+                      <tr>
+                        <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
+                        <td><?php echo $row['qualification']; ?></td>
+                        <td>
+                          <?php
+                          foreach ($skills as $value) {
+                            echo $value;
+							
+                          }
+                          ?>
+                        </td>
+                        <td><?php echo $row['city']; ?></td>
+                        <td><?php echo $row['state']; ?></td>
+                        <?php if($row['resume'] != '') { ?>
+                        <td><a href="../uploads/resume/<?php echo $row['resume']; ?>" download="<?php echo $row['firstname'].' Resume'; ?>"><i class="fa fa-file-pdf-o"></i></a></td>
+                        <?php } else { ?>
+                        <td>No Resume Uploaded</td>
+                        <?php } ?>
+                      </tr>
+
+                      <?php
+
+                        }
+                      }
+                      ?>
+                      
+                    </tbody>                    
+                  </table>
                 </div>
               </div>
             </div>
@@ -144,10 +153,11 @@ require_once("../db.php");
         </div>
       </div>
     </section>
+	 
 
-    
 
   </div>
+  <!-- /.content-wrapper -->
 
   <footer class="main-footer" style="margin-left: 0px;">
     <div class="text-center">
@@ -162,7 +172,22 @@ require_once("../db.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
+
+<script>
+  $(function () {
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    });
+  });
+</script>
 </body>
 </html>

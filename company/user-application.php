@@ -127,8 +127,7 @@ if($result->num_rows == 0)
                     $skills = explode(',', $skills);
                     echo 'Email: '.$row['email'];
                     echo '<br>';
-                    echo 'City: '.$row['city'];
-                    echo '<br>';
+                    
 					echo 'Name: '.$row['firstname'].' '.$row['lastname'];
                     echo '<br>';
 					echo 'Qualifications: '.$row['qualification'];
