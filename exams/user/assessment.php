@@ -129,29 +129,39 @@ if ($conn->query($sql) === TRUE) {
 </style>
     </head>
 	<body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="sidebar-pusher">
+                        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <div class="logo-box">
+                        <a class="logo-text"><span><div id="quiz-time-left"></div></span></a>
+                    </div>
 
+                    <div class="topmenu-outer">
+                        <div class="top-menu">
+						 <ul class="nav navbar-nav navbar-left">
+
+
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="../../logout.php" class="log-out waves-effect waves-button waves-classic">
+                                        <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
+                                    </a>
+                                </li>
+                                <li>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         <main class="content-wrap">
- <header class="main-header">
-
-    <!-- Logo -->
-    <a href="../../index.php" class="logo logo-bg">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>W</b>L</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Work</b>Lord</span>
-    </a>
-
-<!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-		<li><a href="../../logout.php">Logout</a></li>   		  
-        </ul>
-      </div>
-    </nav>
-  </header>
             <div class="page-inner">
                 <div class="page-title">
                     <h3>Examination</h3>
