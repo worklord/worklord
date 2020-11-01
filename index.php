@@ -101,7 +101,8 @@ require_once("db.php");
 
             <?php 
           /* Show any 4 random job post */
-          $sql = "SELECT * FROM job_post WHERE active=1 Order By Rand() Limit 4";
+		  $today = (new DateTime())->format('Y-m-d');
+          $sql = "SELECT * FROM job_post WHERE duedate<='$today' and active=1 Order By Rand() Limit 4";
           $result = $conn->query($sql);
           if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) 

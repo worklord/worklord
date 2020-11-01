@@ -93,10 +93,11 @@ require_once("db.php");
               <?php echo "Qualification : ".stripcslashes($row['qualification']); ?>
             </div>
 			<div>
-              <?php echo "Due Date : " ?> <?php echo date("d-M-Y", strtotime($row['duedate']));  ?>
+              <?php echo "Due Date : " ?> <?php echo date("d-M-Y", strtotime($row['duedate'])); ?>
             </div>
             <?php 
 			if(isset($_SESSION['id_user'])) { 
+			
 				$sql2 = "SELECT * FROM apply_job_post WHERE id_jobpost='$_GET[id]' and id_user=$_SESSION[id_user]";
 				$result2 = $conn->query($sql2);
 			
@@ -104,6 +105,7 @@ require_once("db.php");
 				{
 					echo "<div style='color:red'>Already Applied</div>";
 				}
+			
             else if(isset($_SESSION["id_user"])) { ?>
             <div>
               <a href="apply.php?id=<?php echo $row['id_jobpost']; ?>" class="btn btn-success btn-flat margin-top-50">Apply</a>

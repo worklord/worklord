@@ -13,8 +13,8 @@ if(isset($_GET["page"])) {
 }
 
 $start_from = ($page-1) * $limit;
-
-$sql = "SELECT * FROM job_post LIMIT $start_from, $limit";
+$today = (new DateTime())->format('Y-m-d');
+$sql = "SELECT * FROM job_post WHERE (duedate>='$today') LIMIT $start_from, $limit";
 $result = $conn->query($sql);
 if($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) {
