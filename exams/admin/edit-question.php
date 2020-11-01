@@ -106,7 +106,7 @@ if ($result->num_rows > 0) {
         <ul class="nav navbar-nav">
 		<li><a href="./">Overview</a></li>
 		<li><a href="examinations.php">Examinations</a></li>
-		<li><a href="Tasks.php">Tasks</a></li>
+		<li><a href="tasks.php">Tasks</a></li>
 		<li><a href="results.php">Exam Results</a></li>
 		<li><a href="../../logout.php">Logout</a></li>   		  
         </ul>

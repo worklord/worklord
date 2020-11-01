@@ -13,7 +13,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
-header("location:../Tasks.php?rp=1185");
+header("location:../tasks.php?rp=1185");
     }
 } else {
 
@@ -21,9 +21,9 @@ $sql = "INSERT INTO tasks (task_id, task_name, passmark, terms)
 VALUES ('$task_id', '$task', '$passmark', '$terms')";
 
 if ($conn->query($sql) === TRUE) {
-header("location:../Tasks.php?rp=2932");
+header("location:../tasks.php?rp=2932");
 } else {
-header("location:../Tasks.php?rp=7788");
+header("location:../tasks.php?rp=7788");
 }
 
 
