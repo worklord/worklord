@@ -195,25 +195,16 @@ header("location:./");
 												$qs = $row['question'];
 												
                                            
-											if ($qno == "1") {
+											
 											print '
 											<div role="tabpanel" class="tab-pane active fade in" id="tab'.$qno.'">
                                              <p><b>'.$qno.'.</b> '.$qs.'</p>
 											 <p><input type="text" name="link"  class="form-control" placeholder="Enter Github link" autocomplete="off">
-											 <input type="hidden" name="qst'.$qno.'" value="'.base64_encode($qs).'">
+											 
 											 
                                              </div>
 											';	
-											}else{
-											print '
-											<div role="tabpanel" class="tab-pane fade in" id="tab'.$qno.'">
-                                             <p><b>'.$qno.'.</b> '.$qs.'</p>
-											 <p><input type="text" name="link"  class="form-control" placeholder="Enter your answer" autocomplete="off">
-					                         <input type="hidden" name="qst'.$qno.'" value="'.base64_encode($qs).'">
 											
-                                             </div>
-											';		
-											}
 
 											$qno = $qno + 1;	
 											}
@@ -221,7 +212,7 @@ header("location:./");
 										?>
 										
 										
-										 
+										<input type="hidden" name="tid" value="<?php echo "$task_id"; ?>"> 
 								<br><center><input onclick="return confirm('Are you sure you want to submit your task ?')" class="btn btn-success" name= "submit" type="submit" value="Submit Task">
 									<?php
 									
@@ -230,17 +221,17 @@ header("location:./");
 									
 									if(isset($_POST['submit']))
 									{
-										
+										include '../../db.php';
+										$task_id=$_POST['tid'];
 										$link=$_POST['link'];
 										$today_date = date("Y-m-d");
 										
 										$sql="INSERT INTO task_assessment_records (id_user, task_id, link, score, status, date) VALUES ('$myid', '$task_id', '$link', '', '', '$today_date')";
 										if($conn->query($sql)=== TRUE){
-											echo "added successfully";
-										}
-										else{
-											echo "Error:".$sql."<br>".$conn->error;
-										}											
+											  header("location:tasks.php");
+                                           } else {
+                                        header("location:tasks.php");
+                                            }									
 									
 									}
                                     ?>									

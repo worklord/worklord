@@ -99,7 +99,8 @@ if(empty($_SESSION['id_user'])) {
                                            <div class="table-responsive">
 										   <?php
 										   include '../../db.php';
-										   $sql = "SELECT * FROM tasks";
+										   $uid = $_SESSION['id_user'];
+										   $sql = "SELECT * FROM tasks where task_id NOT IN (SELECT task_id FROM task_assessment_records where id_user='$uid' and task_id=tasks.task_id)";
                                            $result = $conn->query($sql);
 
                                            if ($result->num_rows > 0) {
@@ -108,7 +109,6 @@ if(empty($_SESSION['id_user'])) {
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Status</th>
                                                 <th>Action</th>
                                    
                                             </tr>
@@ -116,7 +116,6 @@ if(empty($_SESSION['id_user'])) {
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Status</th>
                                                 <th>Action</th>
                                            
                                             </tr>
@@ -126,21 +125,18 @@ if(empty($_SESSION['id_user'])) {
                                            while($row = $result->fetch_assoc()) {
 											   $status = $row['status'];
 											   if ($status == "Active") {
-											   $st = '<p class="text-success">ACTIVE</p>';
+											   
 											   $stl = '<a class="btn btn-success" href="take-taskassessment.php?id='.$row['task_id'].'">Take Assessment</a>';
-											   }else{
-											   $st = '<p class="text-danger">INACTIVE</p>'; 
-                                               $stl = '<a class="btn btn-danger disabled" href="#">Take Assessment</a>';											   
-											   }
+											   
                                           print '
 										       <tr>
                                                 <td>'.$row['task_name'].'</td>
-                                                <td>'.$st.'</td>
+                                                
 												<td>'.$stl.'</td>
           
                                             </tr>';
                                            }
-										   
+										   } 
 										   print '
 									   </tbody>
                                        </table>  ';
