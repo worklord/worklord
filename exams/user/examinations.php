@@ -99,7 +99,8 @@ if(empty($_SESSION['id_user'])) {
                                            <div class="table-responsive">
 										   <?php
 										   include '../../db.php';
-										   $sql = "SELECT * FROM examinations";
+										   $uid = $_SESSION['id_user'];
+										   $sql = "SELECT * FROM examinations where exam_id NOT IN (SELECT exam_id FROM assessment_records where id_user='$uid' and exam_id=examinations.exam_id)";
                                            $result = $conn->query($sql);
 
                                            if ($result->num_rows > 0) {
@@ -108,7 +109,6 @@ if(empty($_SESSION['id_user'])) {
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Status</th>
                                                 <th>Action</th>
                                    
                                             </tr>
@@ -116,7 +116,6 @@ if(empty($_SESSION['id_user'])) {
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Status</th>
                                                 <th>Action</th>
                                            
                                             </tr>
@@ -126,19 +125,13 @@ if(empty($_SESSION['id_user'])) {
                                            while($row = $result->fetch_assoc()) {
 											   $status = $row['status'];
 											   if ($status == "Active") {
-											   $st = '<p class="text-success">ACTIVE</p>';
 											   $stl = '<a class="btn btn-success" href="take-assessment.php?id='.$row['exam_id'].'">Take Assessment</a>';
-											   }else{
-											   $st = '<p class="text-danger">INACTIVE</p>'; 
-                                               $stl = '<a class="btn btn-danger disabled" href="#">Take Assessment</a>';											   
-											   }
-                                          print '
+											    print '
 										       <tr>
                                                 <td>'.$row['exam_name'].'</td>
-                                                <td>'.$st.'</td>
 												<td>'.$stl.'</td>
-          
-                                            </tr>';
+												</tr>';
+											   }
                                            }
 										   
 										   print '
