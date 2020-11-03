@@ -181,7 +181,7 @@ header("location:./");
                                 </div>
 								 
                                 <div class="panel-body">
-								<form action="" method="POST">
+								 <form action="take-taskassessment.php" method="POST" name="task" id="task_form" >
 								<div class="form-group">
 								<?php 
 											include '../../db.php';
@@ -199,7 +199,7 @@ header("location:./");
 											print '
 											<div role="tabpanel" class="tab-pane active fade in" id="tab'.$qno.'">
                                              <p><b>'.$qno.'.</b> '.$qs.'</p>
-											 <p><input type="text" name="an'.$qno.'"  class="form-control" placeholder="Enter Github link" autocomplete="off">
+											 <p><input type="text" name="link"  class="form-control" placeholder="Enter Github link" autocomplete="off">
 											 <input type="hidden" name="qst'.$qno.'" value="'.base64_encode($qs).'">
 											 
                                              </div>
@@ -208,7 +208,7 @@ header("location:./");
 											print '
 											<div role="tabpanel" class="tab-pane fade in" id="tab'.$qno.'">
                                              <p><b>'.$qno.'.</b> '.$qs.'</p>
-											 <p><input type="text" name="an'.$qno.'"  class="form-control" placeholder="Enter your answer" autocomplete="off">
+											 <p><input type="text" name="link"  class="form-control" placeholder="Enter your answer" autocomplete="off">
 					                         <input type="hidden" name="qst'.$qno.'" value="'.base64_encode($qs).'">
 											
                                              </div>
@@ -220,11 +220,33 @@ header("location:./");
 											}
 										?>
 										
-										<input type="hidden" name="task_id" value="<?php echo "$task_id"; ?>">
+										
 										 
-								<br><center><input onclick="return confirm('Are you sure you want to submit your assessment ?')" class="btn btn-success" type="submit" value="Submit Task">
+								<br><center><input onclick="return confirm('Are you sure you want to submit your task ?')" class="btn btn-success" name= "submit" type="submit" value="Submit Task">
+									<?php
+									
+                                   
+                                  
+									
+									if(isset($_POST['submit']))
+									{
+										
+										$link=$_POST['link'];
+										$today_date = date("Y-m-d");
+										
+										$sql="INSERT INTO task_assessment_records (id_user, task_id, link, score, status, date) VALUES ('$myid', '$task_id', '$link', '', '', '$today_date')";
+										if($conn->query($sql)=== TRUE){
+											echo "added successfully";
+										}
+										else{
+											echo "Error:".$sql."<br>".$conn->error;
+										}											
+									
+									}
+                                    ?>									
 									</center>		
                                    </div>
+								   
 										</form>
 									</div>
                                 </div>
