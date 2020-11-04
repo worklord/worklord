@@ -165,7 +165,7 @@ if ($conn->query($sql) === TRUE) {
             <div class="page-inner">
                 <div class="page-title">
                     <h3>Examination</h3>
-					<h4>Note: Don't Refresh this page <h5>(Examination will be expired Instantly)</h5></h4>
+					<h4>Note: Don't Refresh this page or switch tabs <h5>(Examination will be expired Instantly)</h5></h4>
 
                 </div>
                 <div id="main-wrapper">
@@ -329,6 +329,9 @@ function myFunction() {
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
+document.addEventListener("visibilitychange", function() {
+      location.reload();
+});
 </script>
 
 <script type="text/javascript">
