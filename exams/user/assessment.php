@@ -333,7 +333,24 @@ document.addEventListener("visibilitychange", function() {
       location.reload();
 });
 </script>
-
+<script type="text/javascript">
+var el = document.documentElement
+    , rfs = // for newer Webkit and Firefox
+           el.requestFullscreen
+        || el.webkitRequestFullScreen
+        || el.mozRequestFullScreen
+        || el.msRequestFullscreen
+;
+if(typeof rfs!="undefined" && rfs){
+  rfs.call(el);
+} else if(typeof window.ActiveXObject!="undefined"){
+  // for Internet Explorer
+  var wscript = new ActiveXObject("WScript.Shell");
+  if (wscript!=null) {
+     wscript.SendKeys("{F11}");
+  }
+}
+</script> 
 <script type="text/javascript">
 var max_time = <?php echo "$duration" ?>;
 var c_seconds  = 0;
