@@ -11,7 +11,7 @@ if (isset($_GET['eid'])) {
 include '../../db.php';
 $exam_id = "$_GET[eid]";
 
-$sql = "SELECT * FROM examinations";
+$sql = "SELECT * FROM examinations where exam_id='$exam_id'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
