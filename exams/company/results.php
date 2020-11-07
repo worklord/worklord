@@ -1,12 +1,16 @@
 <?php 
 session_start();
-
+include 'includes/fetch_records.php';
 //If user Not logged in then redirect them back to homepage. 
-if(empty($_SESSION['id_user'])) {
+if(empty($_SESSION['id_company'])) {
   header("Location: ../../index.php");
   exit();
 }
-include 'includes/fetch_records.php';
+//If user Not logged in then redirect them back to homepage. 
+//if(empty($_SESSION['loginid'])) {
+ // header("Location: ../../index.php");
+//  exit();
+//}
 include 'includes/check_reply.php';
 ?>
 <!DOCTYPE html>
@@ -28,7 +32,7 @@ include 'includes/check_reply.php';
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
 <link rel="stylesheet" href="../../css/AdminLTE.min.css">
-        
+ 
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <link href="../assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
@@ -53,15 +57,23 @@ include 'includes/check_reply.php';
         <link href="../assets/css/snack.css" rel="stylesheet" type="text/css"/>
         <script src="../assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="../assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-		<!-- Google Font -->
+		
+<!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+        <link href="../assets/plugins/summernote-master/summernote.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-colorpicker/css/colorpicker.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"/>
+        
+		
 
         
     </head>
     <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
         <main class="content-wrap">
- <header class="main-header">
+  <header class="main-header">
 
     <!-- Logo -->
     <a href="../../index.php" class="logo logo-bg">
@@ -77,7 +89,6 @@ include 'includes/check_reply.php';
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 		<li><a href="./">Overview</a></li>
-		<li><a href="examinations.php">Examinations</a></li>
 		<li><a href="results.php">Exam Results</a></li>
 		<li><a href="../../logout.php">Logout</a></li>   		  
         </ul>
@@ -86,7 +97,9 @@ include 'includes/check_reply.php';
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>My Results</h3>
+                    <h3>Manage Results</h3>
+
+
 
                 </div>
                 <div id="main-wrapper">
@@ -97,10 +110,10 @@ include 'includes/check_reply.php';
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                           <div class="table-responsive">
+                                                        <div class="table-responsive">
 										   <?php
 										   include '../../db.php';
-										   $sql = "SELECT * FROM assessment_records,users,examinations WHERE assessment_records.id_user = '$myid' && users.id_user='$myid' && examinations.exam_id=assessment_records.exam_id ";
+										   $sql = "SELECT * FROM examinations";
                                            $result = $conn->query($sql);
 
                                            if ($result->num_rows > 0) {
@@ -108,33 +121,34 @@ include 'includes/check_reply.php';
 										<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                             <tr>
-                                                <th>Exam</th>
-												
-												<th>Score</th>
-												<th>Date</th>
-                                                
+                                                <th>Name</th>
+                                                <th>Duration</th>
+												<th>Passmark</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Exam</th>
-												
-												<th>Score</th>
-												<th>Date</th>
-                                                  
+                                                <th>Name</th>
+                                                <th>Duration</th>
+												<th>Passmark</th>
+                                                <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>';
      
                                            while($row = $result->fetch_assoc()) {
-
                                           print '
 										       <tr>
                                                 <td>'.$row['exam_name'].'</td>
-												
-												<td>'.$row['score'].'%</td>
-                                                <td>'.$row['date'].'</td>
-												
+												<td>'.$row['duration'].'<b> min.</b></td>
+												<td>'.$row['passmark'].'<b>%</b></td>
+                                                <td><div class="btn-group" role="group">
+                                               <div class="col-md-3 pull-left">
+                      <a href="view-results.php?eid='.$row['exam_id'].'" class="btn btn-success">View Results</a>
+                    </div>
+                                            </div></td>
+          
                                             </tr>';
                                            }
 										   
@@ -198,6 +212,11 @@ include 'includes/check_reply.php';
         <script src="../assets/js/modern.min.js"></script>
         <script src="../assets/js/pages/table-data.js"></script>
 		<script src="../assets/plugins/select2/js/select2.min.js"></script>
+        <script src="../assets/plugins/summernote-master/summernote.min.js"></script>
+        <script src="../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+        <script src="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+        <script src="../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        <script src="../assets/js/pages/form-elements.js"></script>
 		
 
 		<script>

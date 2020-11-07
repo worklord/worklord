@@ -166,7 +166,7 @@ include 'includes/check_reply.php';
                                                     <li>'.$stl.'</li>
 													<li><a href="edit-task.php?tid='.$row['task_id'].'">Edit Task</a></li>
 													<li><a href="view-taskquestions.php?tid='.$row['task_id'].'">View Question</a></li>
-													<li><a href="add-taskqstn.php?tid='.$row['task_id'].'">Add Questions</a></li>
+													
                                                     <li><a'; ?> onclick = "return confirm('Drop <?php echo $row['task_name']; ?> ?')" <?php print ' href="pages/drop_tsk.php?id='.$row['task_id'].'">Drop Task</a></li>
                                                 </ul>
                                             </div></td>
@@ -200,6 +200,10 @@ include 'includes/check_reply.php';
                                             <label for="exampleInputEmail1">Task Name</label>
                                             <input type="text" class="form-control" placeholder="Enter task name" name="task" required autocomplete="off">
                                         </div>
+										<div class="form-group">
+                                            <label for="exampleInputEmail1">Question</label>
+                                            <textarea style="resize: none;" rows="6" class="form-control" placeholder="Enter Question" name="question" required autocomplete="off"></textarea>
+                                     </div>
 										
 										<div class="form-group">
                                             <label for="exampleInputEmail1">Passmark (%)</label>

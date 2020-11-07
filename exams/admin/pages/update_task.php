@@ -5,7 +5,7 @@ include '../../../db.php';
 include '../../includes/uniques.php';
 $task_id = $_POST['taskid'];
 $task = ucwords(mysqli_real_escape_string($conn, $_POST['task']));
-
+$question = ucfirst(mysqli_real_escape_string($conn, $_POST['question']));
 $passmark = mysqli_real_escape_string($conn, $_POST['passmark']);
 $terms = ucfirst(mysqli_real_escape_string($conn, $_POST['instructions']));
 
@@ -19,7 +19,7 @@ header("location:../edit-task.php?rp=1185");
     }
 } else {
 
-$sql = "UPDATE tasks SET task_name = '$task', passmark = '$passmark', terms = '$terms' WHERE task_id='$task_id'";
+$sql = "UPDATE tasks SET task_name = '$task', question = '$question', passmark = '$passmark', terms = '$terms' WHERE task_id='$task_id'";
 
 if ($conn->query($sql) === TRUE) {
 header("location:../edit-task.php?rp=7823&tid=$task_id");

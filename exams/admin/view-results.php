@@ -141,18 +141,18 @@ header("location:./");
 												<th>USER ID</th>
 												<th>Exam Name</th>
                                                 <th>Score</th>
-                                                <th>Status</th>
+                                                
 												<th>Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>USER Name</th>
-												<th>USER ID</th>
+                                                <th>User Name</th>
+												
 												<th>Exam Name</th>
                                                 <th>Score</th>
-                                                <th>Status</th>
+                                               
 												<th>Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -163,10 +163,10 @@ header("location:./");
                                           print '
 										       <tr>
                                                 <td>'.$row['firstname'].' '.$row['lastname'].'</td>
-												<td>'.$row['id_user'].'</td>
+												
                                                 <td>'.$row['exam_name'].'</td>
                                                 <td><b>'.$row['score'].'%</b></td>
-												<td>'.$row['status'].'</td>
+												
 												<td>'.$row['date'].'</td>
 												<td><div class="btn-group" role="group">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

@@ -174,7 +174,7 @@ header("location:./");
                                             <div class="tab-content">
 											<?php 
 											include '../../db.php';
-											$sql = "SELECT * FROM task_questions WHERE task_id = '$task_id'";
+											$sql = "SELECT * FROM tasks WHERE task_id = '$task_id'";
                                             $result = $conn->query($sql);
 
                                             if ($result->num_rows > 0) {
@@ -183,34 +183,23 @@ header("location:./");
 												$qs = $row['question'];
 												
                                             
-											if ($qno == "1") {
+											
 											print '
 											<div role="tabpanel" class="tab-pane active fade in" id="tab'.$qno.'">
                                              <p><b>'.$qno.'.</b> '.$qs.'</p>
 											 
-											 <hr>
-											 <a  class="btn btn-twitter m-b-xs"href="edit-taskquestion.php?id='.$row['question_id'].'"><i class="fa fa-pencil"></i></a>
-											 <a';?> onclick = "return confirm('Drop this question ?')" <?php print 'class="btn btn-youtube m-b-xs"href="pages/drop_taskquestion.php?id='.$row['question_id'].'&tid='.$task_id.'"><i class="fa fa-trash-o"></i></a>
+											
+											
 											 
                                              </div>
 											';	
-											}else{
-											print '
-											<div role="tabpanel" class="tab-pane fade in" id="tab'.$qno.'">
-                                             <p><b>'.$qno.'.</b> '.$qs.'</p>
-											 
-											 <hr>
-											 <a  class="btn btn-twitter m-b-xs"href="edit-taskquestion.php?id='.$row['question_id'].'"><i class="fa fa-pencil"></i></a>
-											 <a';?> onclick = "return confirm('Drop this question ?')" <?php print 'class="btn btn-youtube m-b-xs"href="pages/drop_taskquestion.php?id='.$row['question_id'].'&tid='.$task_id.'"><i class="fa fa-trash-o"></i></a>
-                                             </div>
-											';		
 											}
 
-											$qno = $qno + 1;	
+												
 											
 
                                             }
-                                            } else {
+                                             else {
 												echo "No Questions found in Task: $task_name";
 												
                                             }
@@ -220,30 +209,7 @@ header("location:./");
                                             </div>
                  
 											
-                                            <ul class="nav nav-tabs" role="tablist">
-											<?php 
-											include '../../db.php';
-											$sql = "SELECT * FROM task_questions WHERE task_id = '$task_id'";
-                                            $result = $conn->query($sql);
-
-                                            if ($result->num_rows > 0) {
-                                            $qno = 1;
-                                            while($row = $result->fetch_assoc()) {
-											if ($qno == "1") {
-											print '<li role="presentation" class="active"><a href="#tab'.$qno.'" role="tab" data-toggle="tab">Q'.$qno.'</a></li>';	
-											}else{
-											print '<li role="presentation"><a href="#tab'.$qno.'" role="tab" data-toggle="tab">Q'.$qno.'</a></li>';		
-											}
-
-											$qno = $qno + 1;
-                                            }
-                                            } else {
- 
-                                            }
-											
-											?>
-                      
-                                            </ul>
+                                           
                                         </div>
                                     </div>
                                 </div>  

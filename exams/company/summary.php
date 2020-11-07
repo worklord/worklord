@@ -1,36 +1,70 @@
 <?php 
+session_start();
 //If user Not logged in then redirect them back to homepage. 
-if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
+if(empty($_SESSION['id_company'])) {
   header("Location: ../../index.php");
   exit();
 }
-session_start();
+
+//If user Not logged in then redirect them back to homepage. 
+//if(empty($_SESSION['loginid'])) {
+//  header("Location: ../../index.php");
+//  exit();
+//}
+
 include 'includes/check_reply.php';
-
-if (isset($_GET['tid'])) {
+if (isset($_GET['eid'])) {
 include '../../db.php';
-$task_id = "$_GET[tid]";	
-
-$sql = "SELECT * FROM tasks";
+$exam_id = mysqli_real_escape_string($conn, $_GET['eid']);
+$sql = "SELECT * FROM examinations WHERE exam_id = '$exam_id'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
-    $task_name =$row['task_name'];
+	 $exname = $row['exam_name'];
+	 $exdate = $row['date'];
+	 $exduration = $row['duration'];
+	 $expassmark = $row['passmark'];
+	 $exterms = $row['terms'];
     }
 } else {
-header("location:./");	
+    header("location:./");
 }
 
+$users_pass = 0;
+$users_fails = 0;
+
+$sql = "SELECT * FROM assessment_records WHERE exam_id = '$exam_id'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+   
+    while($row = $result->fetch_assoc()) {
+     $status = $row['status'];
+	 if ($status == "PASS"){
+		 $users_pass++;
+	 }else{
+		$users_fails++; 
+		 
+	 }
+	 
+    }
+} else {
+
+}
+
+$conn->close();	
 }else{
-header("location:./");	
+	header("location:./");
 }
 ?>
 <!DOCTYPE html>
 <html>
    
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>WorkLord</title>
 <!-- Favicons -->
 <link rel="icon" href="../../img/logo.png">
@@ -43,7 +77,7 @@ header("location:./");
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-<link rel="stylesheet" href="../../css/AdminLTE.min.css">
+<link rel="stylesheet" href="../../css/AdminLTE.min.css">/>
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <link href="../assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
@@ -60,6 +94,7 @@ header("location:./");
         <link href="../assets/plugins/datatables/css/jquery.datatables_themeroller.css" rel="stylesheet" type="text/css"/>	
         <link href="../assets/plugins/x-editable/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" type="text/css">
         <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/images/icon.png" rel="icon">
         <link href="../assets/css/modern.min.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/css/themes/green.css" class="theme-color" rel="stylesheet" type="text/css"/>
@@ -69,77 +104,18 @@ header("location:./");
         <script src="../assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-<style>
-/* Customize the label (the container) */
-.container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
-/* Hide the browser's default radio button */
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
 
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-  border-radius: 50%;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.container .checkmark:after {
-  top: 9px;
-  left: 9px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: white;
-}
-</style>
+        <link href="../assets/plugins/summernote-master/summernote.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-colorpicker/css/colorpicker.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
         <main class="content-wrap">
-<header class="main-header">
+  <header class="main-header">
 
     <!-- Logo -->
     <a href="../../index.php" class="logo logo-bg">
@@ -155,8 +131,6 @@ header("location:./");
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 		<li><a href="./">Overview</a></li>
-		<li><a href="examinations.php">Examinations</a></li>
-		<li><a href="tasks.php">Tasks</a></li>
 		<li><a href="results.php">Exam Results</a></li>
 		<li><a href="../../logout.php">Logout</a></li>   		  
         </ul>
@@ -165,7 +139,10 @@ header("location:./");
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Add Questions - <?php echo "$task_name"; ?></h3>
+                    <h3>Results Summary - <?php echo "$exname"; ?></h3>
+
+
+
                 </div>
                 <div id="main-wrapper">
                     <div class="row">
@@ -175,43 +152,37 @@ header("location:./");
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                        <div role="tabpanel">
-                                   
-                                    
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane active fade in" id="tab5">
-                                                <form action="pages/add_taskqstn.php" method="POST">
-												<div class="form-group">
-                                                <label for="exampleInputEmail1">Question</label>
-                                                <input type="text" class="form-control" placeholder="Enter question" name="question" required autocomplete="off">
-                                                </div>
-												
-                                     
-									<input type="hidden" name="task_id" value="<?php echo "$task_id"; ?>">
-									 <button type="submit" class="btn btn-primary">Submit</button>
-												
-
-												
-												</form>
-                                                       
-                                                </div>
-                                                <!--<div role="tabpanel" class="tab-pane fade" id="tab6">
-                                         <form action="pages/add_question.php?type=fib" method="POST">
-												<div class="form-group">
-                                                <label for="exampleInputEmail1">Question</label>
-                                                <input type="text" class="form-control" placeholder="Enter question" name="question" required autocomplete="off">
-                                                </div>
-												<div class="form-group">
-                                                <label for="exampleInputEmail1">Answer</label>
-                                                <input type="text" class="form-control" placeholder="Enter answer" name="answer" required autocomplete="off">
-                                                </div>
-                                         <input type="hidden" name="exam_id" value="<?php echo "$task_id"; ?>">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                       </form>
-                                                </div>-->
-
-                                            </div>
-                                        </div>
+									    <div class="table-responsive project-stats col-md-4">  
+                                       <table class="table">
+                                           </thead>
+                                           <tbody>
+                                               <tr>
+                                                   <th scope="row">1</th>
+                                                   <td>Exam Name</td>
+                                                   <td><?php echo "$exname"; ?></td>
+                                               </tr>
+											   
+											    <tr>
+                                                   <th scope="row">2</th>
+                                                   <td>Duration</td>
+                                                   <td><?php echo "$exduration"; ?> <b>min.</b></td>
+                                               </tr>
+											   
+											   
+											   <tr>
+                                                   <th scope="row">3</th>
+                                                   <td>Passmark</td>
+                                                   <td><?php echo "$expassmark"; ?>%</td>
+                                               </tr>
+											   
+					
+                                              
+                                           </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-8">
+									<div id="chartContainer" style="height: 370px;"></div>
+									</div>
                                     </div>
                                 </div>  
   
@@ -233,7 +204,30 @@ header("location:./");
 ?>
 
         <div class="cd-overlay"></div>
+<script src="../assets/js/canvasjs.min.js"></script>
+<script>
+window.onload = function() {
 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+exportEnabled: true,
+	data: [{
+		type: "pie",
+		startAngle: 240,
+				showInLegend: "true",
+		legendText: "{label}",
+		indexLabel: "{label} - {y}",
+		dataPoints: [
+			{y: <?php echo "$users_pass"; ?>, label: "Passed Users"},
+			{y: <?php echo "$users_fails"; ?>, label: "Failed Users"},
+
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
         <script src="../assets/plugins/jquery/jquery-2.1.4.min.js"></script>
         <script src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
         <script src="../assets/plugins/pace-master/pace.min.js"></script>
@@ -253,7 +247,14 @@ header("location:./");
         <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
         <script src="../assets/js/modern.min.js"></script>
         <script src="../assets/js/pages/table-data.js"></script>
-        
+		<script src="../assets/plugins/select2/js/select2.min.js"></script>
+        <script src="../assets/plugins/summernote-master/summernote.min.js"></script>
+        <script src="../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+        <script src="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+        <script src="../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        <script src="../assets/js/pages/form-elements.js"></script>
+		
+
 		<script>
 function myFunction() {
     var x = document.getElementById("snackbar")

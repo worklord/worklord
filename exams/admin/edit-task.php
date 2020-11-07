@@ -16,7 +16,7 @@ if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
 	 $tskname = $row['task_name'];
-	
+	 $question = $row['question'];
 	 $tskpassmark = $row['passmark'];
 	 $tskterms = $row['terms'];
     }
@@ -128,6 +128,10 @@ $conn->close();
                                             <label for="exampleInputEmail1">Task Name</label>
                                             <input type="text" class="form-control" value="<?php echo"$tskname"; ?>" placeholder="Enter task name" name="task" required autocomplete="off">
                                         </div>
+										<div class="form-group">
+                                            <label for="exampleInputEmail1">Question</label>
+                                            <textarea style="resize: none;" rows="6" class="form-control" placeholder="Enter Question" name="question" required autocomplete="off"><?php echo"$question"; ?></textarea>
+                                     </div>
 										
 										<div class="form-group">
                                             <label for="exampleInputEmail1">Passmark (%)</label>

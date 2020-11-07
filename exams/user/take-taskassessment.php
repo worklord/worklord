@@ -181,17 +181,17 @@ header("location:./");
                                 </div>
 								 
                                 <div class="panel-body">
-								 <form action="take-taskassessment.php" method="POST" name="task" id="task_form" >
+								 <form  method="POST" name="task" id="task_form" >
 								<div class="form-group">
 								<?php 
 											include '../../db.php';
-											$sql = "SELECT * FROM task_questions WHERE task_id = '$task_id'";
+											$sql = "SELECT * FROM tasks WHERE task_id = '$task_id'";
                                             $result = $conn->query($sql);
 
                                             if ($result->num_rows > 0) {
                                             $qno = 1;
                                             while($row = $result->fetch_assoc()) {
-												$qsid = $row['question_id'];
+												
 												$qs = $row['question'];
 												
                                            
@@ -199,14 +199,14 @@ header("location:./");
 											print '
 											<div role="tabpanel" class="tab-pane active fade in" id="tab'.$qno.'">
                                              <p><b>'.$qno.'.</b> '.$qs.'</p>
-											 <p><input type="text" name="link"  class="form-control" placeholder="Enter Github link" autocomplete="off">
+											 <p><textarea style="resize: none;"  rows="4" name="link"  class="form-control" placeholder="Enter Github link" required autocomplete="off"></textarea>
 											 
 											 
                                              </div>
 											';	
 											
 
-											$qno = $qno + 1;	
+												
 											}
 											}
 										?>
@@ -221,6 +221,7 @@ header("location:./");
 									
 									if(isset($_POST['submit']))
 									{
+										
 										include '../../db.php';
 										$task_id=$_POST['tid'];
 										$link=$_POST['link'];
