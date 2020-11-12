@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2020 at 08:41 AM
+-- Generation Time: Nov 12, 2020 at 05:38 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -48,7 +48,8 @@ INSERT INTO `alerts` (`id`, `code`, `description`) VALUES
 (7, '7732', 'Could not add category'),
 (8, '3598', 'Subject was added successfully'),
 (9, '1925', 'Could not add subject'),
-(11, '9157', 'Could not register User'),
+(10, '6310', 'Student was added successfully, default password is 123456'),
+(11, '9157', 'Could not register student'),
 (12, '2074', 'Duplicate phone number found'),
 (13, '1189', 'Duplicate email found'),
 (14, '2932', 'Examination was added successfully'),
@@ -60,7 +61,7 @@ INSERT INTO `alerts` (`id`, `code`, `description`) VALUES
 (20, '9135', 'You must be admin to access the control panel'),
 (21, '9422', 'You must login first'),
 (22, '0912', 'Invalid username or password'),
-(23, '9122', 'You must be a User to acces the exams'),
+(23, '9122', 'You must be a student to acces the exams'),
 (24, '5732', 'Your account has been disabled'),
 (25, '8924', 'Account not found'),
 (26, '1804', 'New password has been sent to you through your email'),
@@ -85,12 +86,17 @@ CREATE TABLE `apply_job_post` (
 --
 
 INSERT INTO `apply_job_post` (`id_apply`, `id_jobpost`, `id_company`, `id_user`, `status`) VALUES
-(27, 46, 24, 29, 1),
-(28, 49, 24, 29, 2),
-(29, 47, 24, 29, 0),
-(30, 48, 24, 29, 0),
-(31, 46, 24, 30, 0),
-(32, 50, 24, 29, 0);
+(27, 46, 30, 29, 1),
+(28, 49, 31, 29, 1),
+(29, 47, 31, 29, 0),
+(30, 48, 30, 29, 0),
+(31, 46, 30, 30, 2),
+(32, 50, 30, 29, 0),
+(33, 48, 30, 30, 0),
+(34, 47, 31, 30, 0),
+(35, 55, 24, 29, 1),
+(36, 56, 24, 29, 0),
+(37, 57, 24, 29, 0);
 
 -- --------------------------------------------------------
 
@@ -112,7 +118,7 @@ CREATE TABLE `assessment_records` (
 --
 
 INSERT INTO `assessment_records` (`record_id`, `id_user`, `exam_id`, `score`, `status`, `date`) VALUES
-('RS97168686727559', '29', 'EX-474901', '100', 'PASS', '09/25/2020');
+('RS96958440963105', '29', 'EX-862747', '20', 'FAIL', '11/04/2020');
 
 -- --------------------------------------------------------
 
@@ -48124,13 +48130,22 @@ CREATE TABLE `company` (
 
 INSERT INTO `company` (`id_company`, `name`, `companyname`, `country`, `state`, `city`, `contactno`, `website`, `email`, `aboutme`, `logo`, `createdAt`, `active`) VALUES
 (24, 'company', 'dsadasf', 'dsfdfdsf', 'dfdsfd', 'dfdsfsd', '4354354354', 'dfdsfdsf', 'company@gmail.com', 'dfdsfgdg', '5f6325e761e47.png', '2020-09-17 09:01:27', 1),
-(25, 'nnn', 'df', 'Australia', 'Cherrybrook', 'Select City', '5678900987', 'ghb', 'n@gmail.com', 'v bn', '5f6ce5536ed98.jpg', '2020-09-24 18:28:35', 1),
+(25, 'nnn', 'df', 'Australia', 'Cherrybrook', 'Select City', '5678900987', 'ghb', 'n@gmail.com', 'v bn', '5f6ce5536ed98.jpg', '2020-09-24 18:28:35', 3),
 (26, 'lkm', 'mmm', 'Aruba', 'Aruba', 'Aruba', '3243555555', 'nbvnb', 'coo@gmail.com', 'asdsdffgs', '5f703f9988bb9.jpg', '2020-09-27 07:30:33', 0),
 (27, 'bbbnb', 'nbnn', 'Australia', 'Chatswood', 'Chatswood', '3456788888', 'nmn', 'c2@gmail.com', 'jhjhjjk', '5f704ba15f728.jpg', '2020-09-27 08:21:53', 3),
 (28, 'ghgh', 'hjghj', 'Antigua And Barbuda', 'Saint Mary', 'Select City', '7896786767', 'nbnm', 'c1@gmail.com', 'mnbnbnmnm', '5f778dc771704.jpg', '2020-10-02 20:29:59', 1),
 (29, 'Boss', 'Micro', 'Australia', 'Chatswood', 'Chatswood', '7678986544', 'www.microsoft.com', 'micrO@gmail.com', 'bnbnbn', '5f7eab38142af.png', '2020-10-08 06:01:28', 1),
 (30, 'Boney', 'Microsoft', 'American Samoa', 'Eastern', 'Leloaloa', '7845699543', 'www.microsoft.com', 'microsoft@gmail.com', 'Microsoft Corporation  is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. It', '5f80ad80e7372.png', '2020-10-09 18:35:44', 1),
-(31, 'cruse', 'google', 'American Samoa', 'Eastern', 'Afono', '8568495049', 'www.google.com', 'google@gmail.com', 'Google is a multinational, publicly-traded organization built around the company\'s hugely popular search engine. Google\'s other enterprises include Internet analytics, cloud computing, advertising technologies, and Web app, browser and operating system de', '5f80b2aeade72.png', '2020-10-09 18:57:50', 1);
+(31, 'cruse', 'google', 'American Samoa', 'Eastern', 'Afono', '8568495049', 'www.google.com', 'google@gmail.com', 'Google is a multinational, publicly-traded organization built around the company\'s hugely popular search engine. Google\'s other enterprises include Internet analytics, cloud computing, advertising technologies, and Web app, browser and operating system de', '5f80b2aeade72.png', '2020-10-09 18:57:50', 1),
+(32, 'thrt', 'yyy', 'Argentina', 'Catamarca', 'Catamarca', '5566777777', 'yyyy', 'y@gmail.com', 'jjtf', '5f8c8381482cc.jpg', '2020-10-18 18:03:45', 2),
+(33, 'kelvin', 'Wipro', 'Australia', 'Chatswood', 'Chatswood', '7389999999', 'www.wipro.com', 'wipro@gmail.com', 'kkejd jendie ejdi', '5f8c9a983773f.png', '2020-10-18 19:42:16', 2),
+(34, 'hjb', 'ghh', 'Algeria', 'Ilizi', 'Ilizi', '8787878987', 'hbhn', 'rt@gmail.com', 'gvbvb', '5f8ca78a79c24.jpg', '2020-10-18 20:37:30', 2),
+(35, 'ndncd', 'nmbcdn', 'Algeria', 'Buirah', 'Aghbalu', '8765890456', 'ggggg', 'sw@gmail.com', 'dytuj', '5f8e06ab3ac05.png', '2020-10-19 21:35:39', 2),
+(36, 'JNF', 'j,nj', 'Armenia', 'Syunik', 'Goris', '7674678978', 'jnbjnb', 'rp@gmail.com', 'nbm', '5f8e0fe2adc06.PNG', '2020-10-19 22:14:58', 2),
+(37, 'hghgh', 'DFCVF', 'Argentina', 'Mendoza', 'Rivadavia', '7889955444', 'nmb', 'ttt@gmail.com', 'hjbjhbj', '5f8e156e1bcaa.PNG', '2020-10-19 22:38:38', 2),
+(38, 'hvbh', 'nmbnm', 'Bangladesh', 'Gopalganj', 'Tungi Para', '3445566775', 'n bn', 'vc@gmail.com', 'nbm bn', '5f8e15d3588a2.pdf', '2020-10-19 22:40:19', 2),
+(39, 'hhh', 'ddd', 'Azerbaijan', 'Sirvan', 'Kurdamir', '2355677889', 'ghjj', 'a1@gmail.com', 'dffggggggg', '5f8e16b1b9232.PNG', '2020-10-19 22:44:01', 2),
+(40, 'kjf', 'hdk', 'Australia', 'Cheltenham', 'Cheltenham', '7467382929', 'hgcdkj', 'qp@gmail.com', 'ndndm,d,n', '5f8e1c9d6b1f4.PNG', '2020-10-19 23:09:17', 2);
 
 -- --------------------------------------------------------
 
@@ -48417,18 +48432,12 @@ CREATE TABLE `examinations` (
 --
 
 INSERT INTO `examinations` (`exam_id`, `exam_name`, `duration`, `passmark`, `terms`, `status`) VALUES
-('EX-128766', 'Dsd', 23, 34, 'FGEYS', 'Active'),
-('EX-145845', 'Fdfdf', 87, 78, 'Dfdsfsd\r\n\r\n', 'Inactive'),
-('EX-148652', 'Sdsd', 43, 4, 'Vvdf\r\n', 'Active'),
-('EX-174163', 'Rfgdg', 65, 54, 'Dfd', 'Inactive'),
-('EX-238060', 'Ugugu', 67, 67, 'Jhjh', 'Inactive'),
-('EX-338375', 'Dfsdfs', 43, 454, 'Dfdsfsd', 'Inactive'),
-('EX-339110', 'Fgfd', 78, 78, 'Hjhkh\r\n', 'Inactive'),
-('EX-420852', 'Fdf', 7, 76, 'Jhhj', 'Inactive'),
-('EX-474901', 'Dsfdsf', 34, 34, 'Fdsfsd', 'Active'),
-('EX-664216', 'Cdfd', 78, 89, 'Jhhh', 'Inactive'),
-('EX-771803', 'Fdfd7', 88, 78, 'Jhjh', 'Inactive'),
-('EX-795740', 'Fdfd', 545, 545, 'Ggfg', 'Inactive');
+('EX-053269', 'Jjk', 45, 78, 'Jhhhj', 'Inactive'),
+('EX-480407', 'Erf', 56, 40, 'Gtgs', 'Active'),
+('EX-521898', 'Java', 3, 50, 'Hello', 'Active'),
+('EX-646642', 'Jj', 30, 15, 'Sfvds', 'Inactive'),
+('EX-688168', 'C++', 3, 50, 'Ttttttttttttt', 'Inactive'),
+('EX-862747', 'Android', 3, 60, 'Do correctly', 'Active');
 
 -- --------------------------------------------------------
 
@@ -48445,8 +48454,8 @@ CREATE TABLE `job_post` (
   `maximumsalary` varchar(255) NOT NULL,
   `experience` varchar(255) NOT NULL,
   `qualification` varchar(255) NOT NULL,
+  `duedate` varchar(255) NOT NULL,
   `createdat` timestamp NOT NULL DEFAULT current_timestamp(),
-  `duedate` date NOT NULL,
   `active` int(2) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -48454,12 +48463,20 @@ CREATE TABLE `job_post` (
 -- Dumping data for table `job_post`
 --
 
-INSERT INTO `job_post` (`id_jobpost`, `id_company`, `jobtitle`, `description`, `minimumsalary`, `maximumsalary`, `experience`, `qualification`, `createdat`, `duedate`, `active`) VALUES
-(46, 24, 'Java  Developer', '3+ years’ experience developing large scale web applications using Java, Kotlin, Go (or similar languages)\r\nSignificant Java programming skills, data structures and Micro-services architecture and development\r\nSignificant experience with the Spring Framework (Persistence, REST, Messaging, Integrations) such as Spring Boot.\r\nProven Experience in building RESTful APIs and a deep understanding of REST principles\r\n', '45000', '85000', '3', 'degree in computer science or related fields.', '2020-10-09 18:51:56', '0000-00-00', 1),
-(47, 24, 'Application Engineer', '\r\nApplication Engineers understand internal processes and what it takes to run Google at speed with its ever growing scale. As an Application Engineer, you\'ll focus on solving problems and creating value for Googlers by building solutions that are reliable and scalable to work with the size and scope of the company.\r\n\r\nYou will play a major role in developing, deploying, and supporting Google’s internal business applications. You will be tasked with creating custom-built software on google stack, and you will be part of teams that implement vendor sourced enterprise software, configuring that software, customizing it, and integrating with other internal systems.\r\n', '85000', '150000', '8', 'degree in computer science or related fields', '2020-10-09 19:08:42', '0000-00-00', 1),
-(48, 24, 'Database Administrator', 'The Database Administrator is responsible for maintaining operational performance, integrity and security of enterprise database services to the organization. This role will provide database expertise in planning, development and deployment of databases as well as troubleshooting issues. \r\n', '25000', '125000', '8', 'degree in computer science or related fields', '2020-10-09 19:14:51', '0000-00-00', 1),
-(49, 24, 'Test Engineer', ' Test Engineers at Google aren\'t manual testers -- you write scripts to automate testing and create tools so developers can test their own code. As a Test Engineer, you navigate Google\'s massive codebase, identify weak spots and constantly design better and creative ways to break software and identify potential problems. You\'ll have a huge impact on the quality of Google\'s growing suite of products and services.\r\n\r\nYou use your knowledge of testing and testability to influence better software design, promote proper engineering practice, bug prevention strategies, testability, accessibility, privacy, and other advanced quality concepts across products.', '50000', '90000', '2', 'degree in computer science or related fields.', '2020-10-09 19:22:26', '0000-00-00', 1),
-(50, 24, 'Android Developer', 'efmdf', '15000', '50000', '2', 'degree', '2020-10-11 00:40:55', '0000-00-00', 1);
+INSERT INTO `job_post` (`id_jobpost`, `id_company`, `jobtitle`, `description`, `minimumsalary`, `maximumsalary`, `experience`, `qualification`, `duedate`, `createdat`, `active`) VALUES
+(46, 30, 'Java  Developer', '3+ years’ experience developing large scale web applications using Java, Kotlin, Go (or similar languages)\r\nSignificant Java programming skills, data structures and Micro-services architecture and development\r\nSignificant experience with the Spring Framework (Persistence, REST, Messaging, Integrations) such as Spring Boot.\r\nProven Experience in building RESTful APIs and a deep understanding of REST principles\r\n', '45000', '85000', '3', 'degree in computer science or related fields.', '2022-04-03', '2020-10-09 18:51:56', 1),
+(47, 31, 'Application Engineer', '\r\nApplication Engineers understand internal processes and what it takes to run Google at speed with its ever growing scale. As an Application Engineer, you\'ll focus on solving problems and creating value for Googlers by building solutions that are reliable and scalable to work with the size and scope of the company.\r\n\r\nYou will play a major role in developing, deploying, and supporting Google’s internal business applications. You will be tasked with creating custom-built software on google stack, and you will be part of teams that implement vendor sourced enterprise software, configuring that software, customizing it, and integrating with other internal systems.\r\n', '85000', '150000', '8', 'degree in computer science or related fields', '2022-04-03', '2020-10-09 19:08:42', 1),
+(48, 30, 'Database Administrator', 'The Database Administrator is responsible for maintaining operational performance, integrity and security of enterprise database services to the organization. This role will provide database expertise in planning, development and deployment of databases as well as troubleshooting issues. \r\n', '25000', '125000', '8', 'degree in computer science or related fields', '2022-04-03', '2020-10-09 19:14:51', 1),
+(49, 31, 'Test Engineer', ' Test Engineers at Google aren\'t manual testers -- you write scripts to automate testing and create tools so developers can test their own code. As a Test Engineer, you navigate Google\'s massive codebase, identify weak spots and constantly design better and creative ways to break software and identify potential problems. You\'ll have a huge impact on the quality of Google\'s growing suite of products and services.\r\n\r\nYou use your knowledge of testing and testability to influence better software design, promote proper engineering practice, bug prevention strategies, testability, accessibility, privacy, and other advanced quality concepts across products.', '50000', '90000', '2', 'degree in computer science or related fields.', '2022-04-03', '2020-10-09 19:22:26', 0),
+(50, 30, 'Android Developer', 'efmdf', '15000', '50000', '2', 'degree', '2022-04-03', '2020-10-11 00:40:55', 0),
+(51, 31, 'web designer', 'bscnncm', '28000', '55000', '2', 'any dgree in related field', '2020-11-04', '2020-10-12 18:44:47', 0),
+(52, 30, 'Project manager', 'jhvjdnjfvn', '200000', '350000', '4', 'any dgree in related field', '2021-04-03', '2020-10-18 19:01:20', 0),
+(53, 24, 'graphic designer', 'hbnnnm', '30000', '50000', '2', 'pg', '2020-04-03', '2020-10-18 19:49:45', 1),
+(54, 24, 'web desiner', 'hdhdh', '13000', '25000', '2', 'any degree in related field', '2022-04-03', '2020-10-20 00:30:25', 1),
+(55, 24, 'analytics', 'hjbcshnmdb', '6000', '30000', '3', 'degree in computer science or related fields', '2020-11-11', '2020-10-20 04:10:31', 1),
+(56, 24, 'KN', 'K,M', '7800', '900000', '6', 'degree', '2020-11-13', '2020-10-20 18:33:36', 1),
+(57, 24, 'software engineer', 'jhnjknk', '7000', '12000', '2', 'degree', '2020-11-29', '2020-10-20 20:40:41', 1),
+(58, 24, 'Database Administrator', 'dfgd', '5000', '300000', '5', 'pg', '2020-10-24', '2020-10-22 06:40:13', 1);
 
 -- --------------------------------------------------------
 
@@ -48489,8 +48506,20 @@ INSERT INTO `login` (`loginid`, `email`, `password`, `role`) VALUES
 (15, 'microsoft@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
 (17, 'google@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
 (18, 'dev@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
-(19, 'althafvly@gmail.com', 'MzdlMTA4NzJhNzFlYjAxZWUxYmE5ZGU5ODQ2Zjg0Njk=', 'user'),
-(20, 'jl@gmail.com', 'MzdlMTA4NzJhNzFlYjAxZWUxYmE5ZGU5ODQ2Zjg0Njk=', 'user');
+(19, 'ghnj@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(20, 'y@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(21, 'ram@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(22, 'wipro@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(23, 'ui@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(24, 'rt@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(25, 'sw@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(26, 'rp@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(27, 'ttt@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(28, 'vc@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(29, 'a1@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(30, 'fr@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(31, 'qp@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(32, 'geo@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user');
 
 -- --------------------------------------------------------
 
@@ -48507,28 +48536,6 @@ CREATE TABLE `mailbox` (
   `message` text NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `notice`
---
-
-CREATE TABLE `notice` (
-  `id` int(255) NOT NULL,
-  `notice_id` varchar(255) NOT NULL,
-  `post_date` varchar(255) NOT NULL,
-  `last_update` varchar(255) NOT NULL,
-  `description` longtext NOT NULL,
-  `title` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `notice`
---
-
-INSERT INTO `notice` (`id`, `notice_id`, `post_date`, `last_update`, `description`, `title`) VALUES
-(3, 'NT-95754735', '25/09/2020 06:44:54', '25/09/2020 06:44:54', 'dsfdsf', 'Dffdf');
 
 -- --------------------------------------------------------
 
@@ -48553,10 +48560,19 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`question_id`, `exam_id`, `type`, `question`, `option1`, `option2`, `option3`, `option4`, `answer`) VALUES
-('QS-207021', 'EX-474901', 'MC', 'dfdsf', 'fdf', 'fdsf', 'fdsf', 'fdsf', 'option2'),
-('QS-621160', 'EX-128766', 'MC', 'fdf', 'hhj', 'hjhj', 'jh', 'jhj', 'option1'),
-('QS-635418', '', 'MC', '', '', '', '', '', ''),
-('QS-683095', 'EX-128766', 'MC', 'kjk', 'jojlj', 'lj', 'ds', 'k', 'option2');
+('QS-020944', '', 'MC', 'JKNJHN', '', '', '', '', ''),
+('QS-028234', 'EX-646642', 'MC', 'The binary coded decimal(BCD) uses', '6 bits', '64 bits', '16 bits', '32 bits', 'option1'),
+('QS-118844', '', 'MC', 'dgdfg', '', '', '', '', ''),
+('QS-121279', 'EX-862747', 'MC', 'which in an input device?', 'mouse', 'sim', 'torch', 'light', 'option1'),
+('QS-124613', 'EX-688168', 'MC', 'What is the full form of STL?', 'Standard template library', 'System template library', 'Standard topics library.', 'None of the above', 'option1'),
+('QS-135640', '', 'MC', 'nvm', '', '', '', '', ''),
+('QS-181888', 'EX-862747', 'MC', 'What does http client.execute() returns in android?', ' Http ', 'Http response', 'Http result', 'None of the above', 'option3'),
+('QS-416765', 'EX-862747', 'MC', 'On which thread services work in android?', ' Worker Thread', 'Own Thread', 'Main Thread', 'None of the above', 'option3'),
+('QS-524529', 'EX-646642', 'MC', 'fdhgh', 'f', 'h', 'j', 'j', 'option3'),
+('QS-803237', 'EX-862747', 'MC', 'How many orientations does android support?', '4', '10', '2', 'None of the above', 'option1'),
+('QS-855626', 'EX-688168', 'MC', 'By default the members of the structure are', 'private', 'protected', 'public', 'Access specifiers not applicable for structures.', 'option3'),
+('QS-855648', 'EX-862747', 'MC', 'Which features are considered while creating android application?', 'Screen Size', 'Input configuration', ' Platform Version', 'All of the above', 'option3'),
+('QS-985655', '', 'MC', 'jbnb', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -52686,6 +52702,83 @@ INSERT INTO `states` (`id`, `name`, `country_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `task_id` varchar(255) NOT NULL,
+  `task_name` varchar(255) NOT NULL,
+  `passmark` int(255) NOT NULL,
+  `terms` longtext NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`task_id`, `task_name`, `passmark`, `terms`, `status`) VALUES
+('TA-178668', 'Ttttt', 40, 'Ghhhhhh', 'Inactive'),
+('TA-413860', 'Test1', 45, 'Nothing\r\n', 'Active'),
+('TA-722841', 'Vooog', 40, 'Fh', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_assessment_records`
+--
+
+CREATE TABLE `task_assessment_records` (
+  `record_id` int(11) NOT NULL,
+  `id_user` varchar(255) NOT NULL,
+  `task_id` varchar(255) NOT NULL,
+  `link` varchar(500) NOT NULL,
+  `score` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `task_assessment_records`
+--
+
+INSERT INTO `task_assessment_records` (`record_id`, `id_user`, `task_id`, `link`, `score`, `status`, `date`) VALUES
+(16, '30', 'TA-722841', 'testmmmmmmmmmm', '', '', '2020-11-03'),
+(17, '30', 'TA-722841', 'lalalalal', '', '', '2020-11-03'),
+(18, '30', 'TA-722841', 'kulukulu', '', '', '2020-11-03'),
+(19, '30', 'TA-722841', 'prcdre', '', '', '2020-11-03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_questions`
+--
+
+CREATE TABLE `task_questions` (
+  `question_id` varchar(255) NOT NULL,
+  `task_id` varchar(255) NOT NULL,
+  `question` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `task_questions`
+--
+
+INSERT INTO `task_questions` (`question_id`, `task_id`, `question`) VALUES
+('QS-041981', 'TA-178668', 'krrrrrrrrrrrrr'),
+('QS-042240', 'TA-722841', 'qqqq'),
+('QS-108744', 'TA-732225', 'duke'),
+('QS-317405', 'TA-545177', 'do this?'),
+('QS-370725', 'TA-413860', 'how to?'),
+('QS-473607', 'TA-732225', 'duke'),
+('QS-521414', 'TA-545177', 'question'),
+('QS-667751', 'TA-732225', 'duke'),
+('QS-852119', 'TA-732225', 'duke'),
+('QS-930884', 'TA-942666', 'kmmmm');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -52717,8 +52810,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id_user`, `firstname`, `lastname`, `email`, `address`, `city`, `state`, `contactno`, `qualification`, `stream`, `passingyear`, `dob`, `age`, `designation`, `resume`, `active`, `aboutme`, `skills`) VALUES
 (29, 'user', 'user', 'user@gmail.com', 'user_Addressses', 'city', 'dfdsfs', '3432425435', 'gfdgfdg', 'fdgdfg', '2020-09-25', '1999-01-15', '', 'dfdsfsd', '5f6324ec86f5c.pdf', 1, 'sdasd', 'fsdfdsf'),
 (30, 'Deepak', 'Dev', 'dev@gmail.com', 'calicut', 'Kozhikode', 'Kerala', '3242355346', 'pg', 'cs', '2020-10-03', '2002-01-22', '18', 'ef', '5f80e4c78d749.pdf', 1, 'efergeg', 'sfdf'),
-(31, 'althaf', 'mohammed', 'althafvly@gmail.com', 'fdfds', 'Malappuram', 'Kerala', '4342342343', 'pg', 'mca', '2020-10-16', '2002-01-18', '18', 'fdfsd', '5f8d2f5d6ccd2.pdf', 1, 'ffsdfdsf', 'dsd'),
-(32, 'dsffqkj', 'jl', 'jl@gmail.com', 'dfd', 'Select City', 'Su urland', '3435435345', 'sdsdDS', 'JIJLIJ', '2020-10-22', '2002-01-20', '18', 'dsfs', '5f8d3030ed2c1.pdf', 1, 'klkljlj', 'dsdsd');
+(31, 'hh', 'hh', 'ghnj@gmail.com', 'HGGH', 'Amlai', 'Madhya Pradesh', '5676787988', 'pg', 'cs', '2020-05-12', '2001-12-31', '18', 'hgh', '5f8c8169d32ad.pdf', 1, 'cgvcbbb', 'xvcv'),
+(32, 'Ram', 'Tom', 'ram@gmail.com', 'GFCGH', 'Aluva', 'Kerala', '8472882893', 'pg ', 'cs', '1997-05-23', '1997-04-03', '23', 'JFBGJ', '5f8c8f7a7ae80.pdf', 1, 'BHBNNM', 'HGFV'),
+(33, 'bnn', 'nmn', 'ui@gmail.com', 'vbvb', 'Neumarkt', 'Salzburg', '4367852345', 'PG', 'CS', '2020-05-04', '1995-04-06', '25', 'MNNMM', '5f8c9f85c7612.pdf', 1, 'kjk', 'uhjhjh'),
+(34, 'nbnm', 'jbn', 'fr@gmail.com', ' bnn', 'Hallwang', 'Salzburg', '8976543654', 'PG', 'cs', '2020-04-03', '1997-05-03', '23', 'juu', '5f8e1a7b66094.pdf', 1, 'fgggggggggggggggg', 'jhg'),
+(35, 'geo', 'mathew', 'geo@gmail.com', 'bvb', 'Lochau', 'Vorarlberg', '6578954312', 'pg', 'cs', '2020-03-02', '1997-12-05', '22', 'cv', '5f9bb3ad14dba.pdf', 1, 'nbdhdh', 'ghh\r\nyyy\r\nfgg');
 
 --
 -- Indexes for dumped tables
@@ -52788,13 +52884,6 @@ ALTER TABLE `mailbox`
   ADD PRIMARY KEY (`id_mailbox`);
 
 --
--- Indexes for table `notice`
---
-ALTER TABLE `notice`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `notice_id` (`notice_id`);
-
---
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
@@ -52805,6 +52894,24 @@ ALTER TABLE `questions`
 --
 ALTER TABLE `states`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`task_id`);
+
+--
+-- Indexes for table `task_assessment_records`
+--
+ALTER TABLE `task_assessment_records`
+  ADD PRIMARY KEY (`record_id`);
+
+--
+-- Indexes for table `task_questions`
+--
+ALTER TABLE `task_questions`
+  ADD PRIMARY KEY (`question_id`);
 
 --
 -- Indexes for table `users`
@@ -52828,7 +52935,7 @@ ALTER TABLE `alerts`
 -- AUTO_INCREMENT for table `apply_job_post`
 --
 ALTER TABLE `apply_job_post`
-  MODIFY `id_apply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_apply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -52840,7 +52947,7 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `id_company` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_company` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -52852,13 +52959,13 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `job_post`
 --
 ALTER TABLE `job_post`
-  MODIFY `id_jobpost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_jobpost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `loginid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `loginid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `mailbox`
@@ -52867,22 +52974,22 @@ ALTER TABLE `mailbox`
   MODIFY `id_mailbox` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `notice`
---
-ALTER TABLE `notice`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `states`
 --
 ALTER TABLE `states`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4122;
 
 --
+-- AUTO_INCREMENT for table `task_assessment_records`
+--
+ALTER TABLE `task_assessment_records`
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
