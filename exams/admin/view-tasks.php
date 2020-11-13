@@ -4,34 +4,35 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
   exit();
 }
-session_start();
 include 'includes/check_reply.php';
+
 if (isset($_GET['tid'])) {
 include '../../db.php';
-$task_id = mysqli_real_escape_string($conn, $_GET['tid']);
-$sql = "SELECT * FROM tasks WHERE task_id = '$task_id'";
+$task_id = $_GET['tid'];
+$sql = "SELECT * FROM task_assessment_records WHERE task_id = '$task_id'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
-	 $tskname = $row['task_name'];
-	 $question = $row['question'];
-	 $tskpassmark = $row['passmark'];
-	 $tskterms = $row['terms'];
+    $task_id = $row['task_id'];
     }
 } else {
-    header("location:./");
+
 }
-$conn->close();	
+$conn->close();
+	
 }else{
-	header("location:./");
+	
+header("location:./");	
 }
 ?>
 <!DOCTYPE html>
 <html>
    
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>WorkLord</title>
 <!-- Favicons -->
 <link rel="icon" href="../../img/logo.png">
@@ -45,7 +46,6 @@ $conn->close();
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
 <link rel="stylesheet" href="../../css/AdminLTE.min.css">
-
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <link href="../assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
@@ -70,10 +70,9 @@ $conn->close();
         <link href="../assets/css/snack.css" rel="stylesheet" type="text/css"/>
         <script src="../assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="../assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-		
-	
-<!-- Google Font -->
+		<!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
 
         <link href="../assets/plugins/summernote-master/summernote.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
@@ -81,10 +80,13 @@ $conn->close();
         <link href="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"/>
         
+		
+
+        
     </head>
     <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
         <main class="content-wrap">
-<header class="main-header">
+  <header class="main-header">
 
     <!-- Logo -->
     <a href="../../index.php" class="logo logo-bg">
@@ -111,7 +113,7 @@ $conn->close();
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Edit Task - <?php echo "$tskname"; ?></h3>
+                    <h3><?php echo "$task_id" ?> Review</h3>
 
 
 
@@ -124,29 +126,79 @@ $conn->close();
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                         <form action="pages/update_task.php" method="POST">
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Task Name</label>
-                                            <input type="text" class="form-control" value="<?php echo"$tskname"; ?>" placeholder="Enter task name" name="task" required autocomplete="off">
-                                        </div>
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Question</label>
-                                            <textarea style="resize: none;" rows="6" class="form-control" placeholder="Enter Question" name="question" required autocomplete="off"><?php echo"$question"; ?></textarea>
-                                     </div>
-										
-										<div class="form-group">
-                                            <label for="exampleInputEmail1">Passmark (%)</label>
-                                            <input type="number" class="form-control" value="<?php echo"$tskpassmark"; ?>" placeholder="Enter passmark" name="passmark" required autocomplete="off">
-                                        </div>
-									<div class="form-group">
-                                            <label for="exampleInputEmail1">Terms and conditions</label>
-                                            <textarea style="resize: none;" rows="6" class="form-control" placeholder="Enter Terms and conditions" name="instructions" required autocomplete="off"><?php echo"$tskterms"; ?></textarea>
-                                     </div>
-									 <input type="hidden" name="taskid" value="<?php echo "$task_id"; ?>">
+                                                        <div class="table-responsive">
+										   <?php
+										   include '../../db.php';
+										   $sql = "SELECT * FROM task_assessment_records,users,tasks WHERE task_assessment_records.task_id = '$task_id' && tasks.task_id = '$task_id' && users.id_user=task_assessment_records.id_user && task_assessment_records.status=0";
+										  
+                                           $result = $conn->query($sql);
+
+                                           if ($result->num_rows > 0) {
+										print '
+										<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                        <thead>
+                                            <tr>
+                                                <th>User Name</th>
+												<th>Task Name</th>
+                                                <th>Score</th>
+												<th>Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>User Name</th>
+												<th>Task Name</th>
+                                                <th>Score</th>
+												<th>Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>';
+     
+                                           while($row = $result->fetch_assoc()) {
+											   if($row['score']==0)
+												{
+												$score="Not Reviewed";
+												}
+												else{
+												$score=$row['score'].'%';
+												}
+                                          print '
+										       <tr>
+                                                <td>'.$row['firstname'].' '.$row['lastname'].'</td>
+												
+                                                <td>'.$row['task_name'].'</td>
+                                                <td><b>'.$score.'</b></td>
+												<td>'.$row['date'].'</td>
+												<td><div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-default" >
+                                                <a'; ?> onclick = "return confirm('Review task for <?php echo $row['firstname'].' '.$row['lastname']; ?> ?')" <?php print ' href="review-taskassessment.php?rid='.$row['record_id'].'&tid='.$task_id.'">Review</a>
+                                                </button>
+
+                                            </div></td>
+          
+                                            </tr>';
+                                           }
+										   
+										   print '
+									   </tbody>
+                                       </table>  ';
+                                            } else {
+											print '
+												<div class="alert alert-info" role="alert">
+                                        Nothing was found in database.
+                                    </div>';
+    
+                                           }
+                                           $conn->close();
+										   
+										   ?>
 
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                       </form>
+                 
+
+                                    </div>
                                     </div>
                                 </div>  
   

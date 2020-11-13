@@ -84,6 +84,7 @@ include 'includes/check_reply.php';
 		<li><a href="examinations.php">Examinations</a></li>
 		<li><a href="tasks.php">Tasks</a></li>
 		<li><a href="results.php">Exam Results</a></li>
+		<li><a href="reviewtask.php">Review Task</a></li>
 		<li><a href="../../logout.php">Logout</a></li>   		  
         </ul>
       </div>
@@ -101,7 +102,7 @@ include 'includes/check_reply.php';
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                                        <div class="table-responsive">
+                                    <div class="table-responsive">
 										   <?php
 										   include '../../db.php';
 										   $sql = "SELECT * FROM examinations";

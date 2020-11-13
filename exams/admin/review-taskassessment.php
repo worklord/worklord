@@ -2,32 +2,30 @@
 
 session_start();
 include 'includes/fetch_records.php';
-//If user Not logged in then redirect them back to homepage. 
-if(empty($_SESSION['id_user'])) {
+
+if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
   exit();
 }
 
-if (isset($_GET['id'])) {
+if (isset($_GET['rid'])) {
 include '../../db.php';	
-$task_id = mysqli_real_escape_string($conn, $_GET['id']);
+$assess_id = mysqli_real_escape_string($conn, $_GET['rid']);
+$task_id = mysqli_real_escape_string($conn, $_GET['tid']);
 $record_found = 0;
-$sql = "SELECT * FROM tasks WHERE task_id = '$task_id'";
+$sql = "SELECT * FROM tasks,task_assessment_records,task_questions WHERE ( task_questions.task_id='$task_id' && tasks.task_id='$task_id' &&  task_assessment_records.task_id='$task_id') && record_id = '$assess_id' ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
 	$task_name = $row['task_name'];
-	
+	$task_question = $row['question'];
 	$passmark = $row['passmark'];
 	$terms = $row['terms'];
 	$status = $row['status'];
-	$today_date = date('Y/m/d');
-	$dcv = date_format(date_create_from_format('m/d/Y', $deadline), 'Y/m/d');
-	
 
-	if ($status == "Inactive") {
+	if ($status == !0) {
 	header("location:./");	
 	}
     }
@@ -114,6 +112,7 @@ header("location:./");
 		<li><a href="examinations.php">Examinations</a></li>
 		<li><a href="tasks.php">Tasks</a></li>
 		<li><a href="results.php">Exam Results</a></li>
+		<li><a href="reviewtask.php">Review Task</a></li>
 		<li><a href="../../logout.php">Logout</a></li>   		  
         </ul>
       </div>
@@ -142,9 +141,7 @@ header("location:./");
                                                    <td>Task Name</td>
                                                    <td><?php echo "$task_name"; ?></td>
                                                </tr>
-											   
-											   
-											   
+
 											   <tr>
                                                    <th scope="row">2</th>
                                                    <td>Passmark</td>
@@ -166,10 +163,10 @@ header("location:./");
                            <div class="col-md-6">
                             <div class="panel panel-white">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Terms and conditions</h3>
+                                    <h3 class="panel-title">Question</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <?php echo "$terms"; ?>
+                                    <?php echo "$task_question"; ?>
                                 </div>
                             </div>
                         </div>
@@ -177,28 +174,25 @@ header("location:./");
 						<div class="col-md-6">
                             <div class="panel panel-white">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Task</h3>
+                                    <h3 class="panel-title">Task Github Link</h3>
                                 </div>
 								 
                                 <div class="panel-body">
-								 <form  method="POST" name="task" id="task_form" >
+								 <form action="pages/update_taskscore.php" method="POST" name="task" id="task_form" >
 								<div class="form-group">
 								<?php 
 											include '../../db.php';
-											$sql = "SELECT * FROM tasks WHERE task_id = '$task_id'";
+											$sql = "SELECT * FROM task_assessment_records WHERE task_id = '$task_id' && record_id='$assess_id'";
                                             $result = $conn->query($sql);
 
                                             if ($result->num_rows > 0) {
                                             $qno = 1;
                                             while($row = $result->fetch_assoc()) {
-												$qs = $row['question'];
-												
-                                           
-											
+												$link = $row['link'];
+
 											print '
 											<div role="tabpanel" class="tab-pane active fade in" id="tab'.$qno.'">
-                                             <p><b>'.$qno.'.</b> '.$qs.'</p>
-											 <p><textarea style="resize: none;"  rows="4" name="link"  class="form-control" placeholder="Enter Github link" required autocomplete="off"></textarea>
+											 <p><textarea style="resize: none;"  rows="2" name="link"  class="form-control" readonly="readonly" autocomplete="off">'.$link.'</textarea>
 											 
 											 
                                              </div>
@@ -210,31 +204,10 @@ header("location:./");
 											}
 										?>
 										
-										
+										<input type="number" name="tscore" class="form-control" placeholder="Enter score" min="1" max="100" step="1" required>
 										<input type="hidden" name="tid" value="<?php echo "$task_id"; ?>"> 
-								<br><center><input onclick="return confirm('Are you sure you want to submit your task ?')" class="btn btn-success" name= "submit" type="submit" value="Submit Task">
-									<?php
-									
-                                   
-                                  
-									
-									if(isset($_POST['submit']))
-									{
-										
-										include '../../db.php';
-										$task_id=$_POST['tid'];
-										$link=$_POST['link'];
-										$today_date = date("Y-m-d");
-										
-										$sql="INSERT INTO task_assessment_records (id_user, task_id, link, score, status, date) VALUES ('$myid', '$task_id', '$link', '', '', '$today_date')";
-										if($conn->query($sql)=== TRUE){
-											  header("location:tasks.php");
-                                           } else {
-                                        header("location:tasks.php");
-                                            }									
-									
-									}
-                                    ?>									
+										<input type="hidden" name="aid" value="<?php echo "$assess_id"; ?>"> 
+								<br><center><input onclick="return confirm('Are you sure you want to submit your task ?')" class="btn btn-success" name= "submit" type="submit" placeholder="Review Task">							
 									</center>		
                                    </div>
 								   
