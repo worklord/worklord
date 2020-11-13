@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2020 at 05:38 AM
+-- Generation Time: Nov 13, 2020 at 07:35 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -52710,17 +52710,17 @@ CREATE TABLE `tasks` (
   `task_name` varchar(255) NOT NULL,
   `passmark` int(255) NOT NULL,
   `terms` longtext NOT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'Inactive'
+  `status` varchar(255) NOT NULL DEFAULT 'Inactive',
+  `question` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`task_id`, `task_name`, `passmark`, `terms`, `status`) VALUES
-('TA-178668', 'Ttttt', 40, 'Ghhhhhh', 'Inactive'),
-('TA-413860', 'Test1', 45, 'Nothing\r\n', 'Active'),
-('TA-722841', 'Vooog', 40, 'Fh', 'Active');
+INSERT INTO `tasks` (`task_id`, `task_name`, `passmark`, `terms`, `status`, `question`) VALUES
+('TA-413860', 'Test1', 47, 'Nothing\r\n', 'Active', 'fsdfsdfs'),
+('TA-722841', 'Ttttt', 40, 'Ghhhhhh', 'Active', 'dfdsfsd');
 
 -- --------------------------------------------------------
 
@@ -52733,8 +52733,8 @@ CREATE TABLE `task_assessment_records` (
   `id_user` varchar(255) NOT NULL,
   `task_id` varchar(255) NOT NULL,
   `link` varchar(500) NOT NULL,
-  `score` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
+  `score` int(255) NOT NULL DEFAULT 0,
+  `status` int(255) NOT NULL DEFAULT 0,
   `date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -52743,38 +52743,7 @@ CREATE TABLE `task_assessment_records` (
 --
 
 INSERT INTO `task_assessment_records` (`record_id`, `id_user`, `task_id`, `link`, `score`, `status`, `date`) VALUES
-(16, '30', 'TA-722841', 'testmmmmmmmmmm', '', '', '2020-11-03'),
-(17, '30', 'TA-722841', 'lalalalal', '', '', '2020-11-03'),
-(18, '30', 'TA-722841', 'kulukulu', '', '', '2020-11-03'),
-(19, '30', 'TA-722841', 'prcdre', '', '', '2020-11-03');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `task_questions`
---
-
-CREATE TABLE `task_questions` (
-  `question_id` varchar(255) NOT NULL,
-  `task_id` varchar(255) NOT NULL,
-  `question` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `task_questions`
---
-
-INSERT INTO `task_questions` (`question_id`, `task_id`, `question`) VALUES
-('QS-041981', 'TA-178668', 'krrrrrrrrrrrrr'),
-('QS-042240', 'TA-722841', 'qqqq'),
-('QS-108744', 'TA-732225', 'duke'),
-('QS-317405', 'TA-545177', 'do this?'),
-('QS-370725', 'TA-413860', 'how to?'),
-('QS-473607', 'TA-732225', 'duke'),
-('QS-521414', 'TA-545177', 'question'),
-('QS-667751', 'TA-732225', 'duke'),
-('QS-852119', 'TA-732225', 'duke'),
-('QS-930884', 'TA-942666', 'kmmmm');
+(16, '30', 'TA-722841', 'testmmmmmmmmmm', 45, 1, '2020-11-03');
 
 -- --------------------------------------------------------
 
@@ -52908,12 +52877,6 @@ ALTER TABLE `task_assessment_records`
   ADD PRIMARY KEY (`record_id`);
 
 --
--- Indexes for table `task_questions`
---
-ALTER TABLE `task_questions`
-  ADD PRIMARY KEY (`question_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -52983,7 +52946,7 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `task_assessment_records`
 --
 ALTER TABLE `task_assessment_records`
-  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
