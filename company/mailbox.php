@@ -80,10 +80,10 @@ require_once("../db.php");
                   <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                   <li><a href=""><i class="fa fa-tv"></i> My Company</a></li>
                   <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Create Job Post</a></li>
-                  <li class="active"><a href="view-posted-job.php"><i class="fa fa-file-o"></i> My Job Post</a></li>
+                  <li><a href="view-posted-job.php"><i class="fa fa-file-o"></i> My Job Post</a></li>
                   <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Job Application</a></li>
 				  <li><a href="../exams/company"><i class="fa fa-book"></i> Exam </a></li>
-                  <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
+                  <li class="active"><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
                   <li><a href=""><i class="fa fa-gear"></i> Settings</a></li>
                   <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
@@ -91,42 +91,64 @@ require_once("../db.php");
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
-            <h2><i>My Job Posts</i></h2>
-            <p>In this section you can view all job posts created by you.</p>
-            <div class="row margin-top-20">
-              <div class="col-md-12">
-                <div class="box-body table-responsive no-padding">
-                  <table id="example2" class="table table-hover">
-                    <thead>
-                      <th>Job Title</th>
-                      <th>View</th>
-					  <th>Delete</th>
-                    </thead>
-                    <tbody>
-                    <?php
-                     $sql = "SELECT * FROM job_post WHERE id_company='$_SESSION[id_company]' AND active=1";
-                      $result = $conn->query($sql);
-
-                      //If Job Post exists then display details of post
-                      if($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) 
-                        {
-                      ?>
-                      <tr>
-                        <td><?php echo $row['jobtitle']; ?></td>
-                        <td><a href="../view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-address-card-o"></i></a></td>
-						<td><a href="delete-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><input type="button" value="Delete"></a></td>
-                      </tr>
-                      <?php
-                       }
-                     }
-                     ?>
-                    </tbody>                    
-                  </table>
-                </div>
+          <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title" style="margin-bottom: 20px;">Mailbox</h3>
+              <div class="pull-right">
+                <a href="create-mail.php" class="btn btn-warning btn-flat"><i class="fa fa-envelope"></i> Create</a>
               </div>
+              <!-- /.box-tools -->
             </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="table-responsive mailbox-messages">
+                <table id="example1" class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>Subject</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                    $sql = "SELECT * FROM mailbox WHERE id_fromuser='$_SESSION[id_company]' OR id_touser='$_SESSION[id_company]'";
+                    $result = $conn->query($sql);
+                    if($result->num_rows >  0 ){
+                        while($row = $result->fetch_assoc()) {
+                  ?>
+                  <tr>
+                    <td class="mailbox-subject"><a href="read-mail.php?id_mail=<?php echo $row['id_mailbox']; ?>"><?php echo $row['subject']; ?></a></td>
+                    <td class="mailbox-date"><?php echo date("d-M-Y h:i a", strtotime($row['createdAt'])); ?></td>
+                  </tr>
+                  <?php
+                      }
+                    }
+                  ?>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>Subject</th>
+                      <th>Date</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <!-- /.table -->
+              </div>
+              <!-- /.mail-box-messages -->
+            </div>
+            <!-- /.box-body -->
             
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
           </div>
         </div>
       </div>
@@ -135,6 +157,7 @@ require_once("../db.php");
     
 
   </div>
+  <!-- /.content-wrapper -->
 
   <footer class="main-footer" style="margin-left: 0px;">
     <div class="text-center">
@@ -144,7 +167,10 @@ require_once("../db.php");
   </footer>
 
 
+
+
 </div>
+<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -152,8 +178,13 @@ require_once("../db.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script>
-$('.error').fadeIn(400).delay(3000).fadeOut(400); //fade out after 3 seconds
+  $(function () {
+    $('#example1').DataTable();
+  })
 </script>
+
 </body>
 </html>
