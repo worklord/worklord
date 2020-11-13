@@ -93,7 +93,7 @@ include 'includes/check_reply.php';
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Review Task</h3>
+                    <h3>Task Results</h3>
                 </div>
                 <div id="main-wrapper">
                     <div class="row">
@@ -116,32 +116,23 @@ include 'includes/check_reply.php';
                                             <tr>
                                                 <th>Task Name</th>
 												<th>Passmark</th>
-												<th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Task Name</th>
+                                                <th>Name</th>
 												<th>Passmark</th>
-												<th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>';
      
                                            while($row = $result->fetch_assoc()) {
-											   $status = $row['status'];
-											   if ($status == "Active") {
-											   $st = '<p class="text-success">ACTIVE</p>';
-											   }else{
-											   $st = '<p class="text-danger">INACTIVE</p>'; 
-											   }
                                           print '
 										       <tr>
                                                 <td>'.$row['task_name'].'</td>
 												<td>'.$row['passmark'].'<b>%</b></td>
-												<td>'.$st.'</td>
                                                 <td><div class="btn-group" role="group">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     Select Action
@@ -149,7 +140,7 @@ include 'includes/check_reply.php';
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                   
-													<li><a href="view-tasks.php?tid='.$row['task_id'].'">Review Task</a></li>
+													<li><a href="view-resultstasks.php?tid='.$row['task_id'].'">View Results</a></li>
 									                
 													
                                                 </ul>

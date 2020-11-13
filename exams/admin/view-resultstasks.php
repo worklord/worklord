@@ -5,6 +5,27 @@ if(!empty($_SESSION['id_company']) || !empty($_SESSION['id_user'])) {
   exit();
 }
 include 'includes/check_reply.php';
+
+if (isset($_GET['tid'])) {
+include '../../db.php';
+$task_id = $_GET['tid'];
+$sql = "SELECT * FROM task_assessment_records WHERE task_id = '$task_id'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    while($row = $result->fetch_assoc()) {
+    $task_id = $row['task_id'];
+    }
+} else {
+
+}
+$conn->close();
+	
+}else{
+	
+header("location:./");	
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,8 +80,6 @@ include 'includes/check_reply.php';
         <link href="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"/>
         
-		
-
         
     </head>
     <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
@@ -93,7 +112,10 @@ include 'includes/check_reply.php';
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Review Task</h3>
+                    <h3><?php echo "$exam_name" ?> Results</h3>
+
+
+
                 </div>
                 <div id="main-wrapper">
                     <div class="row">
@@ -103,10 +125,11 @@ include 'includes/check_reply.php';
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                    <div class="table-responsive">
+                                                        <div class="table-responsive">
 										   <?php
 										   include '../../db.php';
-										   $sql = "SELECT * FROM tasks";
+										   $sql = "SELECT * FROM task_assessment_records,users,tasks WHERE task_assessment_records.task_id = '$task_id' && tasks.task_id = '$task_id' && users.id_user=task_assessment_records.id_user && task_assessment_records.status=1";
+										  
                                            $result = $conn->query($sql);
 
                                            if ($result->num_rows > 0) {
@@ -114,46 +137,33 @@ include 'includes/check_reply.php';
 										<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                             <tr>
-                                                <th>Task Name</th>
-												<th>Passmark</th>
-												<th>Status</th>
-                                                <th>Action</th>
+                                                <th>User Name</th>
+												<th>Task Name</th>
+                                                <th>Score</th>
+												<th>Date</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Task Name</th>
-												<th>Passmark</th>
-												<th>Status</th>
-                                                <th>Action</th>
+                                                <th>User Name</th>
+												<th>Task Name</th>
+                                                <th>Score</th>
+												<th>Date</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>';
      
                                            while($row = $result->fetch_assoc()) {
-											   $status = $row['status'];
-											   if ($status == "Active") {
-											   $st = '<p class="text-success">ACTIVE</p>';
-											   }else{
-											   $st = '<p class="text-danger">INACTIVE</p>'; 
-											   }
+											   $stat=$row['status'];
+											   $scr=$row['score'].'%';
                                           print '
 										       <tr>
+                                                <td>'.$row['firstname'].' '.$row['lastname'].'</td>
+												
                                                 <td>'.$row['task_name'].'</td>
-												<td>'.$row['passmark'].'<b>%</b></td>
-												<td>'.$st.'</td>
-                                                <td><div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                    Select Action
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                  
-													<li><a href="view-tasks.php?tid='.$row['task_id'].'">Review Task</a></li>
-									                
-													
-                                                </ul>
-                                            </div></td>
+                                                <td><b>'.$scr.'</b></td>
+												
+												<td>'.$row['date'].'</td>
           
                                             </tr>';
                                            }

@@ -82,7 +82,7 @@ require_once("../db.php");
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                   <li><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
-                  <li><a href=""><i class="fa fa-address-card-o"></i> Applicants</a></li>
+                  <li><a href="candidates.php"><i class="fa fa-address-card-o"></i> Applicants</a></li>
 				  <li><a href="../exams/admin/index.php"><i class="fa fa-book"></i> Exams</a></li>
                   <li class="active"><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li>
                   <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>

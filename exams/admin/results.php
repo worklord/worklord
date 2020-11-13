@@ -84,6 +84,7 @@ include 'includes/check_reply.php';
 		<li><a href="examinations.php">Examinations</a></li>
 		<li><a href="tasks.php">Tasks</a></li>
 		<li><a href="results.php">Exam Results</a></li>
+		<li><a href="view-taskresults.php">Task Results</a></li>
 		<li><a href="reviewtask.php">Review Task</a></li>
 		<li><a href="../../logout.php">Logout</a></li>   		  
         </ul>
@@ -92,7 +93,7 @@ include 'includes/check_reply.php';
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Results</h3>
+                    <h3>Exam Results</h3>
                 </div>
                 <div id="main-wrapper">
                     <div class="row">
@@ -116,7 +117,6 @@ include 'includes/check_reply.php';
                                                 <th>Name</th>
                                                 <th>Duration</th>
 												<th>Passmark</th>
-												<th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -125,27 +125,17 @@ include 'includes/check_reply.php';
                                                 <th>Name</th>
                                                 <th>Duration</th>
 												<th>Passmark</th>
-												<th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>';
      
                                            while($row = $result->fetch_assoc()) {
-											   $status = $row['status'];
-											   if ($status == "Active") {
-											   $st = '<p class="text-success">ACTIVE</p>';
-											   $stl = '<a href="pages/make_ex_in.php?id='.$row['exam_id'].'">Make Inactive</a>';
-											   }else{
-											   $st = '<p class="text-danger">INACTIVE</p>'; 
-                                               $stl = '<a href="pages/make_ex_ac.php?id='.$row['exam_id'].'">Make Active</a>';											   
-											   }
                                           print '
 										       <tr>
                                                 <td>'.$row['exam_name'].'</td>
 												<td>'.$row['duration'].'<b> min.</b></td>
 												<td>'.$row['passmark'].'<b>%</b></td>
-												<td>'.$st.'</td>
                                                 <td><div class="btn-group" role="group">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     Select Action
