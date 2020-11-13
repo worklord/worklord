@@ -138,11 +138,9 @@ header("location:./");
 										<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                             <tr>
-                                                <th>USER Name</th>
-												<th>USER ID</th>
+                                                <th>User Name</th>
 												<th>Exam Name</th>
                                                 <th>Score</th>
-                                                
 												<th>Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -150,10 +148,8 @@ header("location:./");
                                         <tfoot>
                                             <tr>
                                                 <th>User Name</th>
-												
 												<th>Exam Name</th>
                                                 <th>Score</th>
-                                               
 												<th>Date</th>
                                                 <th>Action</th>
                                             </tr>

@@ -13,7 +13,7 @@ include '../../db.php';
 $assess_id = mysqli_real_escape_string($conn, $_GET['rid']);
 $task_id = mysqli_real_escape_string($conn, $_GET['tid']);
 $record_found = 0;
-$sql = "SELECT * FROM tasks,task_assessment_records,task_questions WHERE ( task_questions.task_id='$task_id' && tasks.task_id='$task_id' &&  task_assessment_records.task_id='$task_id') && record_id = '$assess_id' ";
+$sql = "SELECT * FROM tasks,task_assessment_records WHERE (tasks.task_id='$task_id' &&  task_assessment_records.task_id='$task_id') && record_id = '$assess_id' ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
