@@ -1,12 +1,12 @@
 <?php 
 session_start();
-
-include 'includes/fetch_records.php';
 //If user Not logged in then redirect them back to homepage. 
 if(empty($_SESSION['id_user'])) {
   header("Location: ../../index.php");
   exit();
 }
+include 'includes/check_reply.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,16 +51,23 @@ if(empty($_SESSION['id_user'])) {
         <link href="../assets/css/snack.css" rel="stylesheet" type="text/css"/>
         <script src="../assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="../assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-		
-<!-- Google Font -->
+		<!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+
+        <link href="../assets/plugins/summernote-master/summernote.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-colorpicker/css/colorpicker.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"/>
+        
+		
 
         
     </head>
     <body <?php if ($ms == "1") { print 'onload="myFunction()"'; } ?> >
         <main class="content-wrap">
- <header class="main-header">
+  <header class="main-header">
 
     <!-- Logo -->
     <a href="../../index.php" class="logo logo-bg">
@@ -87,7 +94,7 @@ if(empty($_SESSION['id_user'])) {
   </header>
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>My Examinations</h3>
+                    <h3>Task Results</h3>
                 </div>
                 <div id="main-wrapper">
                     <div class="row">
@@ -97,11 +104,11 @@ if(empty($_SESSION['id_user'])) {
 
                                 <div class="panel panel-white">
                                     <div class="panel-body">
-                                           <div class="table-responsive">
+                                                        <div class="table-responsive">
 										   <?php
 										   include '../../db.php';
-										   $uid = $_SESSION['id_user'];
-										   $sql = "SELECT * FROM examinations where exam_id NOT IN (SELECT exam_id FROM assessment_records where id_user='$uid' and exam_id=examinations.exam_id)";
+										   $sql = "SELECT * FROM task_assessment_records,users,tasks WHERE tasks.task_id=task_assessment_records.task_id && users.id_user=task_assessment_records.id_user && task_assessment_records.status=1";
+										  
                                            $result = $conn->query($sql);
 
                                            if ($result->num_rows > 0) {
@@ -109,30 +116,30 @@ if(empty($_SESSION['id_user'])) {
 										<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Action</th>
-                                   
+												<th>Task Name</th>
+                                                <th>Score</th>
+												<th>Date</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Action</th>
-                                           
+												<th>Task Name</th>
+                                                <th>Score</th>
+												<th>Date</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>';
      
                                            while($row = $result->fetch_assoc()) {
-											   $status = $row['status'];
-											   if ($status == "Active") {
-											   $stl = '<a class="btn btn-success" href="take-assessment.php?id='.$row['exam_id'].'">Take Assessment</a>';
-											    print '
+											   $stat=$row['status'];
+											   $scr=$row['score'].'%';
+                                          print '
 										       <tr>
-                                                <td>'.$row['exam_name'].'</td>
-												<td>'.$stl.'</td>
-												</tr>';
-											   }
+                                                <td>'.$row['task_name'].'</td>
+                                                <td><b>'.$scr.'</b></td>
+												<td>'.$row['date'].'</td>
+          
+                                            </tr>';
                                            }
 										   
 										   print '
@@ -195,6 +202,11 @@ if(empty($_SESSION['id_user'])) {
         <script src="../assets/js/modern.min.js"></script>
         <script src="../assets/js/pages/table-data.js"></script>
 		<script src="../assets/plugins/select2/js/select2.min.js"></script>
+        <script src="../assets/plugins/summernote-master/summernote.min.js"></script>
+        <script src="../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+        <script src="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+        <script src="../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        <script src="../assets/js/pages/form-elements.js"></script>
 		
 
 		<script>

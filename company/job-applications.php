@@ -79,7 +79,7 @@ require_once("../db.php");
                   <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Create Job Post</a></li>
                   <li><a href="view-posted-job.php"><i class="fa fa-file-o"></i> My Job Post</a></li>
                   <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Job Application</a></li>
-				  <li><a href=""><i class="fa fa-book"></i> Exam </a></li>
+				  <li><a href="../exams/company"><i class="fa fa-book"></i> Exam </a></li>
                   <li><a href=""><i class="fa fa-envelope"></i> Mailbox</a></li>
                   <li><a href=""><i class="fa fa-gear"></i> Settings</a></li>
                   <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
