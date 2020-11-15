@@ -82,6 +82,7 @@ include 'includes/check_reply.php';
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+		<li><a href="">Hi <b><?php echo $_SESSION['name']; ?></b></a></li>
 		<li><a href="./">Overview</a></li>
 		<li><a href="examinations.php">Examinations</a></li>
 		<li><a href="tasks.php">Tasks</a></li>

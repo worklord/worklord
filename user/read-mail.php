@@ -176,7 +176,7 @@ if($result->num_rows >  0 ){
                     <div class="mailbox-read-message">
                       <form action="reply-mailbox.php" method="post">
                         <div class="form-group">
-                          <textarea class="form-control input-lg" id="description" name="description" placeholder="Job Description"></textarea>
+                          <textarea class="form-control input-lg" id="description" name="description" required></textarea>
                           <input type="hidden" name="id_mail" value="<?php echo $_GET['id_mail']; ?>">
                         </div>
                         <div class="form-group">

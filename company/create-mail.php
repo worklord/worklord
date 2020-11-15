@@ -112,10 +112,10 @@ require_once("../db.php");
                   </select>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" name="subject" placeholder="Subject:">
+                  <input class="form-control" name="subject" placeholder="Subject" required>
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control input-lg" id="description" name="description" placeholder="Compose Message"></textarea>
+                  <textarea class="form-control input-lg" id="description" name="description" placeholder="Compose Message" required></textarea>
                 </div>
               </div>
               <!-- /.box-body -->

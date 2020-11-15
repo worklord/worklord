@@ -20,7 +20,7 @@ if(isset($_POST)) {
 	//sql query to check user login
 	$sql = "UPDATE company SET name='$name' WHERE id_company='$_SESSION[id_company]'";
 	if($conn->query($sql) === true) {
-		header("Location: index.php");
+		header("Location: settings.php");
 		exit();
 	} else {
 		echo $conn->error;

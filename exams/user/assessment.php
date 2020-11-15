@@ -147,6 +147,7 @@ if ($conn->query($sql) === TRUE) {
 
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
+							<li>Hi <b><?php echo $_SESSION['name']; ?></b></li>
                                 <li>
                                     <a href="../../logout.php" class="log-out waves-effect waves-button waves-classic">
                                         <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>

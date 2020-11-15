@@ -130,6 +130,7 @@ $conn->close();
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+		<li><a href="">Hi <b><?php echo $_SESSION['name']; ?></b></a></li>
 		<li><a href="./">Overview</a></li>
 		<li><a href="results.php">Exam Results</a></li>
 		<li><a href="view-taskresults.php">Task Results</a></li>

@@ -77,7 +77,7 @@ if(isset($_POST)) {
 	if($conn->query($sql) === TRUE) {
 		$_SESSION['name'] = $firstname.' '.$lastname;
 		//If data Updated successfully then redirect to dashboard
-		header("Location: index.php");
+		header("Location: edit-profile.php");
 		exit();
 	} else {
 		echo "Error ". $sql . "<br>" . $conn->error;

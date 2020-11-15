@@ -98,7 +98,8 @@ require_once("../db.php");
             <div class="box-header with-border">
               <h3 class="box-title" style="margin-bottom: 20px;">Mailbox</h3>
               <div class="pull-right">
-                <a href="create-mail.php" class="btn btn-warning btn-flat"><i class="fa fa-envelope"></i> Create</a>
+                <a href="create-mail.php" class="btn btn-warning btn-flat"><i class="fa fa-envelope"></i> Create Mail</a>
+				<a href="mailto:worklord@gmail.com" class="btn btn-flat"><i class="fa fa-envelope"></i> Contact Admin</a>
               </div>
               <!-- /.box-tools -->
             </div>
