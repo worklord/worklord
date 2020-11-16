@@ -114,7 +114,7 @@ require_once("../db.php");
                 <form action="update-name.php" method="post">
                   <div class="form-group">
                     <label>Your Name (Full Name)</label>
-                    <input class="form-control input-lg" name="name" type="text">
+                    <input class="form-control input-lg" name="name" type="text" required>
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-flat btn-primary btn-lg">Change Name</button>
