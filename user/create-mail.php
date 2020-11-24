@@ -99,11 +99,11 @@ require_once("../db.php");
                 <div class="form-group">
                   <select name="to" class="form-control">
                     <?php 
-                    $sql = "SELECT * FROM apply_job_post INNER JOIN company ON apply_job_post.id_company=company.id_company WHERE apply_job_post.id_user='$_SESSION[id_user]' AND apply_job_post.status='2'";
+                    $sql = "SELECT * FROM job_post ,apply_job_post INNER JOIN company ON apply_job_post.id_company=company.id_company WHERE apply_job_post.id_jobpost=job_post.id_jobpost AND apply_job_post.id_user='$_SESSION[id_user]' AND apply_job_post.status='2'";
                     $result = $conn->query($sql);
                     if($result->num_rows > 0) {
                       while($row = $result->fetch_assoc()) {
-                        echo '<option value="'.$row['id_company'].'">'.$row['companyname'].'</option>';
+                        echo '<option value="'.$row['id_company'].'">'.$row['companyname'].' '.$row['jobtitle'].'</option>';
                       }
                     }
                     ?>
