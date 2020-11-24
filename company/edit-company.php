@@ -94,6 +94,7 @@ require_once("../db.php");
             <h2><i>My Company</i></h2>
             <p>In this section you can change your company details</p>
             <div class="row">
+
               <form action="update-company.php" method="post" enctype="multipart/form-data">
                 <?php
                 $sql = "SELECT * FROM company WHERE id_company='$_SESSION[id_company]'";
@@ -103,6 +104,10 @@ require_once("../db.php");
                   while($row = $result->fetch_assoc()) {
                 ?>
                 <div class="col-md-6 latest-job ">
+							 <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control input-lg" id="name" placeholder="name" value="<?php echo $row['name']; ?>" readonly>
+                  </div>
                   <div class="form-group">
                      <label>Company Name</label>
                     <input type="text" class="form-control input-lg" name="companyname" value="<?php echo $row['companyname']; ?>" required="">
@@ -115,9 +120,13 @@ require_once("../db.php");
                     <label for="email">Email address</label>
                     <input type="email" class="form-control input-lg" id="email" placeholder="Email" value="<?php echo $row['email']; ?>" readonly>
                   </div>
-                  <div class="form-group">
-                    <label>About Me</label>
-                    <textarea class="form-control input-lg" rows="4" name="aboutme"><?php echo $row['aboutme']; ?></textarea>
+
+				                    <div class="form-group">
+                    <label>Change Company Logo</label>
+                    <input type="file" name="image" class="btn btn-default">
+                    <?php if($row['logo'] != "") { ?>
+                    <img src="../uploads/logo/<?php echo $row['logo']; ?>" class="img-responsive" style="max-height: 200px; max-width: 200px;">
+                    <?php } ?>
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-flat btn-success">Update Company Profile</button>
@@ -128,22 +137,37 @@ require_once("../db.php");
                     <label for="contactno">Contact Number</label>
                     <input type="text" class="form-control input-lg" id="contactno" name="contactno" placeholder="Contact Number" onkeypress="return validatePhone(event);" minlength="10" maxlength="10" value="<?php echo $row['contactno']; ?>">
                   </div>
+
                   <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control input-lg" id="city" name="city"
-                    onkeypress="return validateName(event);" value="<?php echo $row['city']; ?>" placeholder="city">
+                    <label>About Me</label>
+                    <textarea class="form-control input-lg" rows="4" name="aboutme"><?php echo $row['aboutme']; ?></textarea>
                   </div>
-                  <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" class="form-control input-lg" id="state" onkeypress="return validateName(event);" name="state" placeholder="state" value="<?php echo $row['state']; ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Change Company Logo</label>
-                    <input type="file" name="image" class="btn btn-default">
-                    <?php if($row['logo'] != "") { ?>
-                    <img src="../uploads/logo/<?php echo $row['logo']; ?>" class="img-responsive" style="max-height: 200px; max-width: 200px;">
-                    <?php } ?>
-                  </div>
+				<div class="form-group">
+                <select class="form-control  input-lg" id="country" name="country" required>
+                <option selected="" value="">Select Country</option>
+                <?php
+                  $sql="SELECT * FROM countries";
+                  $result=$conn->query($sql);
+
+                  if($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                      echo "<option value='".$row['name']."' data-id='".$row['id']."'>".$row['name']."</option>";
+                    }
+                  }
+                ?>
+                  
+                </select>
+              </div>  
+              <div id="stateDiv" class="form-group" style="display: none;">
+                <select class="form-control  input-lg" id="state" name="state" required>
+                  <option value="" selected="">Select State</option>
+                </select>
+              </div>   
+              <div id="cityDiv" class="form-group" style="display: none;">
+                <select class="form-control  input-lg" id="city" name="city" required>
+                  <option value="" selected="">Select City</option>
+                </select>
+              </div>
                 </div>
                     <?php
                     }
@@ -224,6 +248,36 @@ require_once("../db.php");
         } else return true;
       }
 
+</script>
+<script>
+  $("#country").on("change", function() {
+    var id = $(this).find(':selected').attr("data-id");
+    $("#state").find('option:not(:first)').remove();
+    if(id != '') {
+      $.post("../state.php", {id: id}).done(function(data) {
+        $("#state").append(data);
+      });
+      $('#stateDiv').show();
+    } else {
+      $('#stateDiv').hide();
+      $('#cityDiv').hide();
+    }
+  });
+</script>
+
+<script>
+  $("#state").on("change", function() {
+    var id = $(this).find(':selected').attr("data-id");
+    $("#city").find('option:not(:first)').remove();
+    if(id != '') {
+      $.post("../city.php", {id: id}).done(function(data) {
+        $("#city").append(data);
+      });
+      $('#cityDiv').show();
+    } else {
+      $('#cityDiv').hide();
+    }
+  });
 </script>
 </body>
 </html>

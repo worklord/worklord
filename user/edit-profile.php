@@ -119,12 +119,12 @@ require_once("../db.php");
                     <textarea id="address" name="address" class="form-control input-lg" rows="5" placeholder="Address"><?php echo $row['address']; ?></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control input-lg" id="city" name="city" onkeypress="return validateName(event);" value="<?php echo $row['city']; ?>" placeholder="city">
+                    <label>About Me</label>
+                    <textarea class="form-control input-lg" rows="4" name="aboutme"><?php echo $row['aboutme']; ?></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" class="form-control input-lg" id="state" name="state"  placeholder="state" onkeypress="return validateName(event);" value="<?php echo $row['state']; ?>">
+                    <label>Upload/Change Resume</label>
+                    <input type="file" name="resume" class="btn btn-default">
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-flat btn-success">Update Profile</button>
@@ -147,14 +147,33 @@ require_once("../db.php");
                     <label>Skills</label>
                     <textarea class="form-control input-lg" rows="4" name="skills" onkeypress="return validateName(event);" ><?php echo $row['skills']; ?></textarea>
                   </div>
-                  <div class="form-group">
-                    <label>About Me</label>
-                    <textarea class="form-control input-lg" rows="4" name="aboutme"><?php echo $row['aboutme']; ?></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label>Upload/Change Resume</label>
-                    <input type="file" name="resume" class="btn btn-default">
-                  </div>
+
+				                <div class="form-group">
+                <select class="form-control  input-lg" id="country" name="country" required>
+                <option selected="" value="">Select Country</option>
+                <?php
+                  $sql="SELECT * FROM countries";
+                  $result=$conn->query($sql);
+
+                  if($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                      echo "<option value='".$row['name']."' data-id='".$row['id']."'>".$row['name']."</option>";
+                    }
+                  }
+                ?>
+                  
+                </select>
+              </div>  
+              <div id="stateDiv" class="form-group" style="display: none;">
+                <select class="form-control  input-lg" id="state" name="state" required>
+                  <option value="" selected="">Select State</option>
+                </select>
+              </div>   
+              <div id="cityDiv" class="form-group" style="display: none;">
+                <select class="form-control  input-lg" id="city" name="city" required>
+                  <option value="" selected="">Select City</option>
+                </select>
+              </div>
                 </div>
               </div>
               <?php
@@ -241,6 +260,36 @@ require_once("../db.php");
       }
 
 
+</script>
+<script>
+  $("#country").on("change", function() {
+    var id = $(this).find(':selected').attr("data-id");
+    $("#state").find('option:not(:first)').remove();
+    if(id != '') {
+      $.post("../state.php", {id: id}).done(function(data) {
+        $("#state").append(data);
+      });
+      $('#stateDiv').show();
+    } else {
+      $('#stateDiv').hide();
+      $('#cityDiv').hide();
+    }
+  });
+</script>
+
+<script>
+  $("#state").on("change", function() {
+    var id = $(this).find(':selected').attr("data-id");
+    $("#city").find('option:not(:first)').remove();
+    if(id != '') {
+      $.post("../city.php", {id: id}).done(function(data) {
+        $("#city").append(data);
+      });
+      $('#cityDiv').show();
+    } else {
+      $('#cityDiv').hide();
+    }
+  });
 </script>
 </body>
 </html>
