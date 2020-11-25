@@ -12,6 +12,16 @@ if (isset($_GET['id'])) {
 include '../../db.php';	
 $task_id = mysqli_real_escape_string($conn, $_GET['id']);
 $record_found = 0;
+
+$uid=$_SESSION['id_user'];
+
+$assesscheck = "SELECT * FROM task_assessment_records WHERE task_id='$task_id' and id_user='$uid'";
+$result = $conn->query($assesscheck);
+if ($result->num_rows > 0) {
+  header("location:./");
+  exit();
+}
+
 $sql = "SELECT * FROM tasks WHERE task_id = '$task_id'";
 $result = $conn->query($sql);
 
@@ -34,11 +44,6 @@ if ($result->num_rows > 0) {
 } else {
 header("location:./");	
 }
-
-
-
-
-
 
 $conn->close();
 }else{
@@ -183,7 +188,7 @@ header("location:./");
                                 </div>
 								 
                                 <div class="panel-body">
-								 <form  method="POST" name="task" id="task_form" >
+								 <form action="pages/submit_assessmenttask.php" method="POST" name="task" id="task_form" >
 								<div class="form-group">
 								<?php 
 											include '../../db.php';
@@ -194,20 +199,13 @@ header("location:./");
                                             $qno = 1;
                                             while($row = $result->fetch_assoc()) {
 												$qs = $row['question'];
-												
-                                           
-											
+
 											print '
 											<div role="tabpanel" class="tab-pane active fade in" id="tab'.$qno.'">
                                              <p><b>'.$qno.'.</b> '.$qs.'</p>
 											 <p><textarea style="resize: none;"  rows="4" name="link"  class="form-control" placeholder="Enter Github link" required autocomplete="off"></textarea>
-											 
-											 
                                              </div>
 											';	
-											
-
-												
 											}
 											}
 										?>
@@ -215,28 +213,6 @@ header("location:./");
 										
 										<input type="hidden" name="tid" value="<?php echo "$task_id"; ?>"> 
 								<br><center><input onclick="return confirm('Are you sure you want to submit your task ?')" class="btn btn-success" name= "submit" type="submit" value="Submit Task">
-									<?php
-									
-                                   
-                                  
-									
-									if(isset($_POST['submit']))
-									{
-										
-										include '../../db.php';
-										$task_id=$_POST['tid'];
-										$link=$_POST['link'];
-										$today_date = date("Y-m-d");
-										
-										$sql="INSERT INTO task_assessment_records (id_user, task_id, link, score, status, date) VALUES ('$myid', '$task_id', '$link', '', '', '$today_date')";
-										if($conn->query($sql)=== TRUE){
-											  header("location:tasks.php");
-                                           } else {
-                                        header("location:tasks.php");
-                                            }									
-									
-									}
-                                    ?>									
 									</center>		
                                    </div>
 								   
@@ -246,8 +222,7 @@ header("location:./");
                             </div>
                         </div>
 						
-                    </div>
-
+                    </div>				
                 </div>
                 
             </div>
