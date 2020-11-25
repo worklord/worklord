@@ -100,10 +100,12 @@ require_once("../db.php");
                     <thead>
                       <th>Job Title</th>
                       <th>View</th>
+					  <th>Status</th>
 					  <th>Delete</th>
                     </thead>
                     <tbody>
                     <?php
+					$today = (new DateTime())->format('Y-m-d');
                      $sql = "SELECT * FROM job_post WHERE id_company='$_SESSION[id_company]' AND active=1";
                       $result = $conn->query($sql);
 
@@ -115,6 +117,15 @@ require_once("../db.php");
                       <tr>
                         <td><?php echo $row['jobtitle']; ?></td>
                         <td><a href="../view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-address-card-o"></i></a></td>
+						<td><?php 
+						if($row['duedate']>=$today) {
+							echo "Active";
+						}else
+						{
+							echo "Expired";
+						}
+
+						?></td>
 						<td><a href="delete-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><input type="button" value="Delete"></a></td>
                       </tr>
                       <?php

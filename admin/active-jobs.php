@@ -107,7 +107,8 @@ require_once("../db.php");
                     </thead>
                     <tbody>
                       <?php
-                      $sql = "SELECT job_post.*, company.companyname FROM job_post INNER JOIN company ON job_post.id_company=company.id_company where job_post.active=1";
+					  $today = (new DateTime())->format('Y-m-d');
+                      $sql = "SELECT job_post.*, company.companyname FROM job_post INNER JOIN company ON job_post.id_company=company.id_company where job_post.active=1 and (duedate>='$today')";
                       $result = $conn->query($sql);
                       if($result->num_rows > 0) {
                         $i = 0;
