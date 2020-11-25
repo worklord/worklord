@@ -123,7 +123,7 @@ require_once("../db.php");
                         <td>
                           <?php
                           foreach ($skills as $value) {
-                            echo $value;
+                            echo $value.'<br>';
 							
                           }
                           ?>

@@ -97,7 +97,16 @@ require_once("../db.php");
                   <span class="info-box-icon bg-red"><i class="ion ion-briefcase"></i></span>
                   <div class="info-box-content">
                     <span class="info-box-text">Active Company Registered</span>
-                    <span class="info-box-number">5</span>
+					 <?php
+                      $sql = "SELECT * FROM company WHERE active='1'";
+                      $result = $conn->query($sql);
+                      if($result->num_rows > 0) {
+                        $totalno = $result->num_rows;
+                      } else {
+                        $totalno = 0;
+                      }
+                    ?>
+                    <span class="info-box-number"><?php echo $totalno; ?></span>
                   </div>
                 </div>                
               </div>
@@ -106,7 +115,16 @@ require_once("../db.php");
                   <span class="info-box-icon bg-red"><i class="ion ion-briefcase"></i></span>
                   <div class="info-box-content">
                     <span class="info-box-text">Pending Company Approval</span>
-                    <span class="info-box-number">6</span>
+                    <?php
+                      $sql = "SELECT * FROM company WHERE active='2'";
+                      $result = $conn->query($sql);
+                      if($result->num_rows > 0) {
+                        $totalno = $result->num_rows;
+                      } else {
+                        $totalno = 0;
+                      }
+                    ?>
+                    <span class="info-box-number"><?php echo $totalno; ?></span>
                     
                   </div>
                 </div>                
@@ -116,7 +134,22 @@ require_once("../db.php");
                   <span class="info-box-icon bg-green"><i class="ion ion-person-stalker"></i></span>
                   <div class="info-box-content">
                     <span class="info-box-text">Registered Candidates</span>
-                    <span class="info-box-number">25</span>
+                    <?php
+						$abc="SELECT count(*) as c FROM users";
+						$result=mysqli_query($conn,$abc);
+						if($result)
+						 {
+							while($row=mysqli_fetch_assoc($result))
+						  {
+								$totalno=$row['c'];
+						  }     
+						 }
+						 else
+						 {
+							 $totalno= 0;
+						 }
+                    ?>
+                    <span class="info-box-number"><?php echo $totalno; ?></span>
                   </div>
                 </div>
               </div>
@@ -125,7 +158,16 @@ require_once("../db.php");
                   <span class="info-box-icon bg-aqua"><i class="ion ion-person-add"></i></span>
                   <div class="info-box-content">
                     <span class="info-box-text">Total Job Posts</span>
-                    <span class="info-box-number">5</span>
+                    <?php
+                      $sql = "SELECT * FROM job_post";
+                      $result = $conn->query($sql);
+                      if($result->num_rows > 0) {
+                        $totalno = $result->num_rows;
+                      } else {
+                        $totalno = 0;
+                      }
+                    ?>
+                    <span class="info-box-number"><?php echo $totalno; ?></span>
                   </div>
                 </div>
               </div>
@@ -134,7 +176,16 @@ require_once("../db.php");
                   <span class="info-box-icon bg-yellow"><i class="ion ion-ios-browsers"></i></span>
                   <div class="info-box-content">
                     <span class="info-box-text">Total Applications</span>
-                    <span class="info-box-number">5</span>
+                    <?php
+                      $sql = "SELECT * FROM apply_job_post";
+                      $result = $conn->query($sql);
+                      if($result->num_rows > 0) {
+                        $totalno = $result->num_rows;
+                      } else {
+                        $totalno = 0;
+                      }
+                    ?>
+                    <span class="info-box-number"><?php echo $totalno; ?></span>
                   </div>
                 </div>
               </div>
