@@ -77,8 +77,9 @@ require_once("db.php");
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex flex-column justify-content-center">
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
-      <h1>WorkLord</h1>
-      <p>WorkLord is <span class="typed" data-typed-items="here for you, searching job for you, waiting, giving you opportunities"></span></p>
+      <div class="row"><h1> WorkLord </h1>
+	  <p> &nbsp is <span class="typed" data-typed-items="here for you, searching jobs, waiting, giving opportunities, ready"></span></p>
+      </div>
     </div>
   </section><!-- End Hero -->
   
@@ -90,7 +91,8 @@ require_once("db.php");
           <h2>Jobs</h2>
 		   <div class="row">
           <div class="col-md-12 text-center index-head">
-            <h1>“If you can <strong>DREAM</strong> it, you can DO it ”</h1>
+            <h1>If you can dream it, you can do it.</h1>
+			<br>
             <p><a class="btn btn-success btn-lg" href="jobs.php" role="button">Search Jobs</a></p>
           </div>
         </div>
