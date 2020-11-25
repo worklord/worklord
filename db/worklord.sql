@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2020 at 07:35 PM
+-- Generation Time: Nov 25, 2020 at 09:48 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -81,23 +81,6 @@ CREATE TABLE `apply_job_post` (
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `apply_job_post`
---
-
-INSERT INTO `apply_job_post` (`id_apply`, `id_jobpost`, `id_company`, `id_user`, `status`) VALUES
-(27, 46, 30, 29, 1),
-(28, 49, 31, 29, 1),
-(29, 47, 31, 29, 0),
-(30, 48, 30, 29, 0),
-(31, 46, 30, 30, 2),
-(32, 50, 30, 29, 0),
-(33, 48, 30, 30, 0),
-(34, 47, 31, 30, 0),
-(35, 55, 24, 29, 1),
-(36, 56, 24, 29, 0),
-(37, 57, 24, 29, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -118,7 +101,11 @@ CREATE TABLE `assessment_records` (
 --
 
 INSERT INTO `assessment_records` (`record_id`, `id_user`, `exam_id`, `score`, `status`, `date`) VALUES
-('RS96958440963105', '29', 'EX-862747', '20', 'FAIL', '11/04/2020');
+('RS01219694462925', '29', 'EX-862747', '75', 'PASS', '11/07/2020'),
+('RS46201206736592', '29', 'EX-994055', '0', 'FAIL', '10/31/2020'),
+('RS73621109794834', '30', 'EX-994055', '66', 'FAIL', '11/03/2020'),
+('RS79160157148753', '30', 'EX-862747', '80', 'PASS', '11/25/2020'),
+('RS97168686727559', '29', 'EX-474901', '100', 'PASS', '09/25/2020');
 
 -- --------------------------------------------------------
 
@@ -48129,23 +48116,22 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`id_company`, `name`, `companyname`, `country`, `state`, `city`, `contactno`, `website`, `email`, `aboutme`, `logo`, `createdAt`, `active`) VALUES
-(24, 'company', 'dsadasf', 'dsfdfdsf', 'dfdsfd', 'dfdsfsd', '4354354354', 'dfdsfdsf', 'company@gmail.com', 'dfdsfgdg', '5f6325e761e47.png', '2020-09-17 09:01:27', 1),
-(25, 'nnn', 'df', 'Australia', 'Cherrybrook', 'Select City', '5678900987', 'ghb', 'n@gmail.com', 'v bn', '5f6ce5536ed98.jpg', '2020-09-24 18:28:35', 3),
-(26, 'lkm', 'mmm', 'Aruba', 'Aruba', 'Aruba', '3243555555', 'nbvnb', 'coo@gmail.com', 'asdsdffgs', '5f703f9988bb9.jpg', '2020-09-27 07:30:33', 0),
-(27, 'bbbnb', 'nbnn', 'Australia', 'Chatswood', 'Chatswood', '3456788888', 'nmn', 'c2@gmail.com', 'jhjhjjk', '5f704ba15f728.jpg', '2020-09-27 08:21:53', 3),
-(28, 'ghgh', 'hjghj', 'Antigua And Barbuda', 'Saint Mary', 'Select City', '7896786767', 'nbnm', 'c1@gmail.com', 'mnbnbnmnm', '5f778dc771704.jpg', '2020-10-02 20:29:59', 1),
-(29, 'Boss', 'Micro', 'Australia', 'Chatswood', 'Chatswood', '7678986544', 'www.microsoft.com', 'micrO@gmail.com', 'bnbnbn', '5f7eab38142af.png', '2020-10-08 06:01:28', 1),
-(30, 'Boney', 'Microsoft', 'American Samoa', 'Eastern', 'Leloaloa', '7845699543', 'www.microsoft.com', 'microsoft@gmail.com', 'Microsoft Corporation  is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. It', '5f80ad80e7372.png', '2020-10-09 18:35:44', 1),
+(24, 'Joseph', 'skyline web solutions', 'India', 'Karnataka', 'Benguluru', '7354354354', 'www.skyline.com', 'skyline@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7373.png', '2020-09-17 09:01:27', 1),
+(25, 'Thomas', 'Sage Solutions', 'Australia', 'Cherrybrook', 'Cheryybrook', '9678900987', 'www.sage.com', 'sage@gmail.com', 'v bn', '5f80ad80e7373.jpg', '2020-09-24 18:28:35', 2),
+(26, 'jerry', 'GianTecht ', 'Aruba', 'Aruba', 'Aruba', '9243555555', 'www.giant.com', 'giant@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7373.jpg', '2020-09-27 07:30:33', 0),
+(27, 'Sidharth', 'Magneto IT Solutions', 'Australia', 'Chatswood', 'Chatswood', '9456788888', 'www.magneto.com', 'magneto@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7373.jpg', '2020-09-27 08:21:53', 3),
+(28, 'peeter', 'Mphasis', 'Antigua And Barbuda', 'Saint Mary', 'Saint Mry', '7896786767', 'www.mphasis.com', 'mphasis@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7373.jpg', '2020-10-02 20:29:59', 1),
+(29, 'Bonny', 'Micro', 'Australia', 'Chatswood', 'Chatswood', '7678986544', 'www.microsoft.com', 'micrO@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7374.PNG', '2020-10-08 06:01:28', 1),
+(30, 'david', 'Microsoft', 'American Samoa', 'Eastern', 'Leloala', '7845699542', 'www.microsoft.com', 'microsoft@gmail.com', 'Microsoft Corporation  is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7372.png', '2020-10-09 18:35:44', 1),
 (31, 'cruse', 'google', 'American Samoa', 'Eastern', 'Afono', '8568495049', 'www.google.com', 'google@gmail.com', 'Google is a multinational, publicly-traded organization built around the company\'s hugely popular search engine. Google\'s other enterprises include Internet analytics, cloud computing, advertising technologies, and Web app, browser and operating system de', '5f80b2aeade72.png', '2020-10-09 18:57:50', 1),
-(32, 'thrt', 'yyy', 'Argentina', 'Catamarca', 'Catamarca', '5566777777', 'yyyy', 'y@gmail.com', 'jjtf', '5f8c8381482cc.jpg', '2020-10-18 18:03:45', 2),
-(33, 'kelvin', 'Wipro', 'Australia', 'Chatswood', 'Chatswood', '7389999999', 'www.wipro.com', 'wipro@gmail.com', 'kkejd jendie ejdi', '5f8c9a983773f.png', '2020-10-18 19:42:16', 2),
-(34, 'hjb', 'ghh', 'Algeria', 'Ilizi', 'Ilizi', '8787878987', 'hbhn', 'rt@gmail.com', 'gvbvb', '5f8ca78a79c24.jpg', '2020-10-18 20:37:30', 2),
-(35, 'ndncd', 'nmbcdn', 'Algeria', 'Buirah', 'Aghbalu', '8765890456', 'ggggg', 'sw@gmail.com', 'dytuj', '5f8e06ab3ac05.png', '2020-10-19 21:35:39', 2),
-(36, 'JNF', 'j,nj', 'Armenia', 'Syunik', 'Goris', '7674678978', 'jnbjnb', 'rp@gmail.com', 'nbm', '5f8e0fe2adc06.PNG', '2020-10-19 22:14:58', 2),
-(37, 'hghgh', 'DFCVF', 'Argentina', 'Mendoza', 'Rivadavia', '7889955444', 'nmb', 'ttt@gmail.com', 'hjbjhbj', '5f8e156e1bcaa.PNG', '2020-10-19 22:38:38', 2),
-(38, 'hvbh', 'nmbnm', 'Bangladesh', 'Gopalganj', 'Tungi Para', '3445566775', 'n bn', 'vc@gmail.com', 'nbm bn', '5f8e15d3588a2.pdf', '2020-10-19 22:40:19', 2),
-(39, 'hhh', 'ddd', 'Azerbaijan', 'Sirvan', 'Kurdamir', '2355677889', 'ghjj', 'a1@gmail.com', 'dffggggggg', '5f8e16b1b9232.PNG', '2020-10-19 22:44:01', 2),
-(40, 'kjf', 'hdk', 'Australia', 'Cheltenham', 'Cheltenham', '7467382929', 'hgcdkj', 'qp@gmail.com', 'ndndm,d,n', '5f8e1c9d6b1f4.PNG', '2020-10-19 23:09:17', 2);
+(32, 'vicky', 'Appentus', 'Argentina', 'Catamarca', 'Catamarca', '9566777777', 'www.appentus.com', 'appentus@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7374.png', '2020-10-18 18:03:45', 2),
+(34, 'Villiam', 'Endive Software', 'Algeria', 'Ilizi', 'Ilizi', '8787878987', 'www.endive.com', 'endive@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7374.PNG', '2020-10-18 20:37:30', 2),
+(35, 'Nelson', 'Clarion Technologies', 'Algeria', 'Buirah', 'Aghbalu', '8765890456', 'www.clarion.com', 'clarion@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7374.PNG', '2020-10-19 21:35:39', 2),
+(36, 'Jennyfer', 'Cybage', 'Armenia', 'Syunik', 'Goris', '7274678978', 'www.cybage.com', 'cybage@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7374.PNG', '2020-10-19 22:14:58', 2),
+(37, 'Mathew', 'Sasken', 'Argentina', 'Mendoza', 'Rivadavia', '7889955444', 'www.sasken.com', 'sasken@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7374.PNG', '2020-10-19 22:38:38', 2),
+(38, 'Gokul', 'HCL Technologies', 'Bangladesh', 'Gopalganj', 'Tungi Para', '9445566775', 'www.hcltch.com', 'hcl@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7375.png', '2020-10-19 22:40:19', 2),
+(39, 'Sree Ram', 'Wildnet Technologies', 'Azerbaijan', 'Sirvan', 'Kurdamir', '9355677889', 'www.wildnet.com', 'wildnet@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7375.png', '2020-10-19 22:44:01', 2),
+(40, 'Delna', 'Trigent', 'Australia', 'Cheltenham', 'Cheltenham', '7467382929', 'www.trigent.com', 'trignt@gmail.com', 'American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services. ', '5f80ad80e7375.png', '2020-10-19 23:09:17', 2);
 
 -- --------------------------------------------------------
 
@@ -48432,12 +48418,10 @@ CREATE TABLE `examinations` (
 --
 
 INSERT INTO `examinations` (`exam_id`, `exam_name`, `duration`, `passmark`, `terms`, `status`) VALUES
-('EX-053269', 'Jjk', 45, 78, 'Jhhhj', 'Inactive'),
-('EX-480407', 'Erf', 56, 40, 'Gtgs', 'Active'),
-('EX-521898', 'Java', 3, 50, 'Hello', 'Active'),
-('EX-646642', 'Jj', 30, 15, 'Sfvds', 'Inactive'),
-('EX-688168', 'C++', 3, 50, 'Ttttttttttttt', 'Inactive'),
-('EX-862747', 'Android', 3, 60, 'Do correctly', 'Active');
+('EX-015749', 'Java', 3, 50, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Inactive'),
+('EX-646642', 'Python', 3, 60, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Active'),
+('EX-688168', 'C++', 3, 50, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Active'),
+('EX-862747', 'Android', 1, 60, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Active');
 
 -- --------------------------------------------------------
 
@@ -48464,19 +48448,17 @@ CREATE TABLE `job_post` (
 --
 
 INSERT INTO `job_post` (`id_jobpost`, `id_company`, `jobtitle`, `description`, `minimumsalary`, `maximumsalary`, `experience`, `qualification`, `duedate`, `createdat`, `active`) VALUES
-(46, 30, 'Java  Developer', '3+ years’ experience developing large scale web applications using Java, Kotlin, Go (or similar languages)\r\nSignificant Java programming skills, data structures and Micro-services architecture and development\r\nSignificant experience with the Spring Framework (Persistence, REST, Messaging, Integrations) such as Spring Boot.\r\nProven Experience in building RESTful APIs and a deep understanding of REST principles\r\n', '45000', '85000', '3', 'degree in computer science or related fields.', '2022-04-03', '2020-10-09 18:51:56', 1),
-(47, 31, 'Application Engineer', '\r\nApplication Engineers understand internal processes and what it takes to run Google at speed with its ever growing scale. As an Application Engineer, you\'ll focus on solving problems and creating value for Googlers by building solutions that are reliable and scalable to work with the size and scope of the company.\r\n\r\nYou will play a major role in developing, deploying, and supporting Google’s internal business applications. You will be tasked with creating custom-built software on google stack, and you will be part of teams that implement vendor sourced enterprise software, configuring that software, customizing it, and integrating with other internal systems.\r\n', '85000', '150000', '8', 'degree in computer science or related fields', '2022-04-03', '2020-10-09 19:08:42', 1),
-(48, 30, 'Database Administrator', 'The Database Administrator is responsible for maintaining operational performance, integrity and security of enterprise database services to the organization. This role will provide database expertise in planning, development and deployment of databases as well as troubleshooting issues. \r\n', '25000', '125000', '8', 'degree in computer science or related fields', '2022-04-03', '2020-10-09 19:14:51', 1),
-(49, 31, 'Test Engineer', ' Test Engineers at Google aren\'t manual testers -- you write scripts to automate testing and create tools so developers can test their own code. As a Test Engineer, you navigate Google\'s massive codebase, identify weak spots and constantly design better and creative ways to break software and identify potential problems. You\'ll have a huge impact on the quality of Google\'s growing suite of products and services.\r\n\r\nYou use your knowledge of testing and testability to influence better software design, promote proper engineering practice, bug prevention strategies, testability, accessibility, privacy, and other advanced quality concepts across products.', '50000', '90000', '2', 'degree in computer science or related fields.', '2022-04-03', '2020-10-09 19:22:26', 0),
-(50, 30, 'Android Developer', 'efmdf', '15000', '50000', '2', 'degree', '2022-04-03', '2020-10-11 00:40:55', 0),
-(51, 31, 'web designer', 'bscnncm', '28000', '55000', '2', 'any dgree in related field', '2020-11-04', '2020-10-12 18:44:47', 0),
-(52, 30, 'Project manager', 'jhvjdnjfvn', '200000', '350000', '4', 'any dgree in related field', '2021-04-03', '2020-10-18 19:01:20', 0),
-(53, 24, 'graphic designer', 'hbnnnm', '30000', '50000', '2', 'pg', '2020-04-03', '2020-10-18 19:49:45', 1),
-(54, 24, 'web desiner', 'hdhdh', '13000', '25000', '2', 'any degree in related field', '2022-04-03', '2020-10-20 00:30:25', 1),
-(55, 24, 'analytics', 'hjbcshnmdb', '6000', '30000', '3', 'degree in computer science or related fields', '2020-11-11', '2020-10-20 04:10:31', 1),
-(56, 24, 'KN', 'K,M', '7800', '900000', '6', 'degree', '2020-11-13', '2020-10-20 18:33:36', 1),
-(57, 24, 'software engineer', 'jhnjknk', '7000', '12000', '2', 'degree', '2020-11-29', '2020-10-20 20:40:41', 1),
-(58, 24, 'Database Administrator', 'dfgd', '5000', '300000', '5', 'pg', '2020-10-24', '2020-10-22 06:40:13', 1);
+(46, 30, 'Java  Developer', '3+ years’ experience developing large scale web applications using Java, Kotlin, Go (or similar languages)\r\nSignificant Java programming skills, data structures and Micro-services architecture and development\r\nSignificant experience with the Spring Framework (Persistence, REST, Messaging, Integrations) such as Spring Boot.\r\nProven Experience in building RESTful APIs and a deep understanding of REST principles\r\n', '45000', '85000', '3', 'degree in computer science or related fields.', '2021-04-02', '2020-10-09 18:51:56', 1),
+(47, 31, 'Application Engineer', '\r\nApplication Engineers understand internal processes and what it takes to run Google at speed with its ever growing scale. As an Application Engineer, you\'ll focus on solving problems and creating value for Googlers by building solutions that are reliable and scalable to work with the size and scope of the company.\r\n\r\nYou will play a major role in developing, deploying, and supporting Google’s internal business applications. You will be tasked with creating custom-built software on google stack, and you will be part of teams that implement vendor sourced enterprise software, configuring that software, customizing it, and integrating with other internal systems.\r\n', '85000', '150000', '8', 'degree in computer science or related fields', '2020-12-12', '2020-10-09 19:08:42', 1),
+(48, 30, 'Database Administrator', 'The Database Administrator is responsible for maintaining operational performance, integrity and security of enterprise database services to the organization. This role will provide database expertise in planning, development and deployment of databases as well as troubleshooting issues. \r\n', '25000', '125000', '8', 'degree in computer science or related fields', '2021-04-03', '2020-10-09 19:14:51', 1),
+(49, 31, 'Test Engineer', ' Test Engineers at Google aren\'t manual testers -- you write scripts to automate testing and create tools so developers can test their own code. As a Test Engineer, you navigate Google\'s massive codebase, identify weak spots and constantly design better and creative ways to break software and identify potential problems. You\'ll have a huge impact on the quality of Google\'s growing suite of products and services.\r\n\r\nYou use your knowledge of testing and testability to influence better software design, promote proper engineering practice, bug prevention strategies, testability, accessibility, privacy, and other advanced quality concepts across products.', '50000', '90000', '2', 'degree in computer science or related fields.', '2021-04-23', '2020-10-09 19:22:26', 1),
+(50, 30, 'Android Developer', 'efmdfDesigning and developing advanced applications for the Android platform. Unit-testing code for robustness, including edge cases, usability, and general reliability. Bug fixing and improving application performance.', '15000', '50000', '2', 'degreedegree in computer science or related fields', '2021-01-03', '2020-10-11 00:40:55', 1),
+(51, 31, 'web designer', 'designing and building the interface, navigation and aesthetic of websites for businesses and clients.', '28000', '55000', '2', 'any dgree in related field', '2021-02-08', '2020-10-12 18:44:47', 1),
+(53, 24, 'graphic designer', 'use two or three-dimensional art to create visual concepts. They design logos and layout designs for print and electronic media including websites, magazines, brochures, user interfaces, product labels, reports and advertisements.', '30000', '50000', '2', 'degree in computer science or related fields', '2020-12-02', '2020-10-18 19:49:45', 1),
+(54, 24, 'web desiner', 'hdhdhdesigning and building the interface, navigation and aesthetic of websites for businesses and clients.', '13000', '25000', '2', 'any degree in related field', '2021-04-03', '2020-10-20 00:30:25', 1),
+(55, 24, 'analytics', 'collects and stores data on sales numbers, market research, logistics, linguistics, or other behaviors. They bring technical expertise to ensure the quality and accuracy of that data, then process, design and present it in ways to help people, businesses, and organizations make better decisions.', '6000', '30000', '3', 'degree in computer science or related fields', '2020-10-11', '2020-10-20 04:10:31', 1),
+(57, 24, 'software engineer', 'Improving system quality by identifying issues and common patterns, and developing standard operating procedures. Enhancing applications by identifying opportunities for improvement, making recommendations and designing and implementing systems.', '7000', '12000', '2', 'degree in computer science or related fields', '2020-10-29', '2020-10-20 20:40:41', 1),
+(58, 24, 'Database Administrator', 'dfgdDatabase administrators (DBAs) work with technology, using specialized types of software to store and organize a company\'s data. This could include a variety of information, from confidential financial numbers, to payroll data, to customer shipping records.', '5000', '300000', '5', 'degree in computer science or related fields', '2020-12-24', '2020-10-22 06:40:13', 1);
 
 -- --------------------------------------------------------
 
@@ -48497,28 +48479,27 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`loginid`, `email`, `password`, `role`) VALUES
 (1, 'admin@gmail.com', 'MDdiNDMyZDI1MTcwYjQ2OWI1NzA5NWNhMjY5YmMyMDI=', 'admin'),
-(9, 'user@gmail.com', 'MDdiNDMyZDI1MTcwYjQ2OWI1NzA5NWNhMjY5YmMyMDI=', 'user'),
-(10, 'company@gmail.com', 'MDdiNDMyZDI1MTcwYjQ2OWI1NzA5NWNhMjY5YmMyMDI=', 'company'),
-(11, 'n@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(12, 'coo@gmail.com', 'M2U5ZmJlNzM1ZDNkYmMyNTg2NDgwMWY1NTcwOWU4Nzg=', 'company'),
-(13, 'c2@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(14, 'c1@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(9, 'ameya@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(10, 'skyline@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(11, 'sage@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(12, 'giant@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(13, 'magneto@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(14, 'mphasis@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
 (15, 'microsoft@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
 (17, 'google@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(18, 'dev@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
-(19, 'ghnj@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
-(20, 'y@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(21, 'ram@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
-(22, 'wipro@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(23, 'ui@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
-(24, 'rt@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(25, 'sw@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(26, 'rp@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(27, 'ttt@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(28, 'vc@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(29, 'a1@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
-(30, 'fr@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
-(31, 'qp@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(18, 'dev@gmail.com', 'MDdiNDMyZDI1MTcwYjQ2OWI1NzA5NWNhMjY5YmMyMDI=', 'user'),
+(19, 'ali@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(20, 'appentus@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(21, 'tom@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(23, 'madhav@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(24, 'endive@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(25, 'clarion@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(26, 'cybage@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(27, 'sasken@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(28, 'hcl@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(29, 'wildnet@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
+(30, 'divin@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user'),
+(31, 'trignt@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'company'),
 (32, 'geo@gmail.com', 'ZmM2ZjkwNGRmOGViMDY2YWEzNmFiOWZiZDU3NmY5NDQ=', 'user');
 
 -- --------------------------------------------------------
@@ -48536,6 +48517,13 @@ CREATE TABLE `mailbox` (
   `message` text NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `mailbox`
+--
+
+INSERT INTO `mailbox` (`id_mailbox`, `id_fromuser`, `fromuser`, `id_touser`, `subject`, `message`, `createdAt`) VALUES
+(13, 30, 'company', 30, 'Job Application', 'You are selected', '2020-11-12 20:01:32');
 
 -- --------------------------------------------------------
 
@@ -48560,15 +48548,23 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`question_id`, `exam_id`, `type`, `question`, `option1`, `option2`, `option3`, `option4`, `answer`) VALUES
+('QS-005561', 'EX-646642', 'MC', 'We can create an image in canvas. Select the option to do so?  ', 'Image = PhotoImage(imagefilename)  ', ' Canvas.create_image(filename) ', 'Image = Photoimage(file=imagefilename)  ', 'Image = Photoimage(imagefilename)', 'option3'),
 ('QS-020944', '', 'MC', 'JKNJHN', '', '', '', '', ''),
-('QS-028234', 'EX-646642', 'MC', 'The binary coded decimal(BCD) uses', '6 bits', '64 bits', '16 bits', '32 bits', 'option1'),
+('QS-059098', 'EX-015749', 'MC', 'What is the return type of the hashCode() method in the Object class?  ', 'Object', 'int', 'long', 'void', 'option2'),
+('QS-072459', 'EX-646642', 'MC', 'python was released publicly in', '1941', '1971', '1981', '1991', 'option3'),
+('QS-079824', 'EX-015749', 'MC', 'Evaluate the following Java expression, if x=3, y=5, and z=10:  ++z + y - y + z + x++', ' 24', '23', '20', '25', 'option1'),
 ('QS-118844', '', 'MC', 'dgdfg', '', '', '', '', ''),
-('QS-121279', 'EX-862747', 'MC', 'which in an input device?', 'mouse', 'sim', 'torch', 'light', 'option1'),
 ('QS-124613', 'EX-688168', 'MC', 'What is the full form of STL?', 'Standard template library', 'System template library', 'Standard topics library.', 'None of the above', 'option1'),
 ('QS-135640', '', 'MC', 'nvm', '', '', '', '', ''),
-('QS-181888', 'EX-862747', 'MC', 'What does http client.execute() returns in android?', ' Http ', 'Http response', 'Http result', 'None of the above', 'option3'),
+('QS-174520', 'EX-862747', 'MC', 'Android operating system is based on', 'Mac', 'windows', 'Linux', 'solaris', 'option3'),
+('QS-181888', 'EX-862747', 'MC', 'What does httpclient.execute() returns in android?', ' Http entity', 'Http response', 'Http result', 'None of the above', 'option2'),
+('QS-250976', 'EX-688168', 'MC', 'At what point of time a variable comes into existence in memory is determined by its', 'scope', 'storage class  ', 'data type ', ' d) all of the above', 'option2'),
+('QS-330778', 'EX-015749', 'MC', 'The jdb is used to', 'Create a jar archive', 'Debug a java program', 'Create a C header file', 'Generate java documentation', 'option2'),
 ('QS-416765', 'EX-862747', 'MC', 'On which thread services work in android?', ' Worker Thread', 'Own Thread', 'Main Thread', 'None of the above', 'option3'),
-('QS-524529', 'EX-646642', 'MC', 'fdhgh', 'f', 'h', 'j', 'j', 'option3'),
+('QS-548360', 'EX-015749', 'MC', '_____ is used to find and fix bugs in the Java programs.', 'JVM', 'JRE', 'JDK', 'JDB', 'option3'),
+('QS-563743', 'EX-015749', 'MC', 'Which of the following is not a Java features?', 'Dynamic', 'Architecture Neutral', 'Use of pointers', 'Object-oriented', 'option3'),
+('QS-758950', 'EX-646642', 'MC', 'In the following options which are python libraries which are used for data analysis and scientific computations', 'Numpy   ', 'Scipy ', ' Pandas', 'All the above', 'option3'),
+('QS-793055', 'EX-688168', 'MC', 'Overloading is otherwise called as', ' virtual polymorphism', ' transient polymorphism', 'pseudo polymorphism', 'ad-hoc polymorphism', 'option3'),
 ('QS-803237', 'EX-862747', 'MC', 'How many orientations does android support?', '4', '10', '2', 'None of the above', 'option1'),
 ('QS-855626', 'EX-688168', 'MC', 'By default the members of the structure are', 'private', 'protected', 'public', 'Access specifiers not applicable for structures.', 'option3'),
 ('QS-855648', 'EX-862747', 'MC', 'Which features are considered while creating android application?', 'Screen Size', 'Input configuration', ' Platform Version', 'All of the above', 'option3'),
@@ -48588,6 +48584,14 @@ CREATE TABLE `reply_mailbox` (
   `message` text NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `reply_mailbox`
+--
+
+INSERT INTO `reply_mailbox` (`id_reply`, `id_mailbox`, `id_user`, `usertype`, `message`, `createdAt`) VALUES
+(0, 13, 30, 'user', 'done', '2020-11-12 20:12:38'),
+(0, 13, 30, 'company', 'well', '2020-11-12 20:21:22');
 
 -- --------------------------------------------------------
 
@@ -52708,19 +52712,21 @@ INSERT INTO `states` (`id`, `name`, `country_id`) VALUES
 CREATE TABLE `tasks` (
   `task_id` varchar(255) NOT NULL,
   `task_name` varchar(255) NOT NULL,
+  `question` longtext NOT NULL,
   `passmark` int(255) NOT NULL,
   `terms` longtext NOT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'Inactive',
-  `question` longtext NOT NULL
+  `status` varchar(255) NOT NULL DEFAULT 'Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`task_id`, `task_name`, `passmark`, `terms`, `status`, `question`) VALUES
-('TA-413860', 'Test1', 47, 'Nothing\r\n', 'Active', 'fsdfsdfs'),
-('TA-722841', 'Ttttt', 40, 'Ghhhhhh', 'Active', 'dfdsfsd');
+INSERT INTO `tasks` (`task_id`, `task_name`, `question`, `passmark`, `terms`, `status`) VALUES
+('TA-178668', 'Android', 'Create an app to track money transactions?', 40, 'Upload the Github link of your work. Score awarded for your task will be visible to you after the review of your work.', 'Active'),
+('TA-545177', 'PHP', 'Create a facebook clone webpage?', 60, 'Upload the Github link of your work. Score awarded for your task will be visible to you after the review of your work.', 'Active'),
+('TA-653110', 'C++', 'Create an app to calculate total income of a family?', 60, 'Upload the Github link of your work. Score awarded for your task will be visible to you after the review of your work.', 'Inactive'),
+('TA-961684', 'PYTHON', 'Create a GUI Application to Manage files?', 50, 'Upload the Github link of your work. Score awarded for your task will be visible to you after the review of your work.', 'Active');
 
 -- --------------------------------------------------------
 
@@ -52733,8 +52739,8 @@ CREATE TABLE `task_assessment_records` (
   `id_user` varchar(255) NOT NULL,
   `task_id` varchar(255) NOT NULL,
   `link` varchar(500) NOT NULL,
-  `score` int(255) NOT NULL DEFAULT 0,
-  `status` int(255) NOT NULL DEFAULT 0,
+  `score` int(3) NOT NULL DEFAULT 0,
+  `status` int(3) NOT NULL DEFAULT 0,
   `date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -52743,7 +52749,7 @@ CREATE TABLE `task_assessment_records` (
 --
 
 INSERT INTO `task_assessment_records` (`record_id`, `id_user`, `task_id`, `link`, `score`, `status`, `date`) VALUES
-(16, '30', 'TA-722841', 'testmmmmmmmmmm', 45, 1, '2020-11-03');
+(27, '30', 'TA-178668', 'https://github.com/LineageOS/android_device_xiaomi_beryllium', 34, 1, '2020-11-25');
 
 -- --------------------------------------------------------
 
@@ -52777,13 +52783,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `firstname`, `lastname`, `email`, `address`, `city`, `state`, `contactno`, `qualification`, `stream`, `passingyear`, `dob`, `age`, `designation`, `resume`, `active`, `aboutme`, `skills`) VALUES
-(29, 'user', 'user', 'user@gmail.com', 'user_Addressses', 'city', 'dfdsfs', '3432425435', 'gfdgfdg', 'fdgdfg', '2020-09-25', '1999-01-15', '', 'dfdsfsd', '5f6324ec86f5c.pdf', 1, 'sdasd', 'fsdfdsf'),
-(30, 'Deepak', 'Dev', 'dev@gmail.com', 'calicut', 'Kozhikode', 'Kerala', '3242355346', 'pg', 'cs', '2020-10-03', '2002-01-22', '18', 'ef', '5f80e4c78d749.pdf', 1, 'efergeg', 'sfdf'),
-(31, 'hh', 'hh', 'ghnj@gmail.com', 'HGGH', 'Amlai', 'Madhya Pradesh', '5676787988', 'pg', 'cs', '2020-05-12', '2001-12-31', '18', 'hgh', '5f8c8169d32ad.pdf', 1, 'cgvcbbb', 'xvcv'),
-(32, 'Ram', 'Tom', 'ram@gmail.com', 'GFCGH', 'Aluva', 'Kerala', '8472882893', 'pg ', 'cs', '1997-05-23', '1997-04-03', '23', 'JFBGJ', '5f8c8f7a7ae80.pdf', 1, 'BHBNNM', 'HGFV'),
-(33, 'bnn', 'nmn', 'ui@gmail.com', 'vbvb', 'Neumarkt', 'Salzburg', '4367852345', 'PG', 'CS', '2020-05-04', '1995-04-06', '25', 'MNNMM', '5f8c9f85c7612.pdf', 1, 'kjk', 'uhjhjh'),
-(34, 'nbnm', 'jbn', 'fr@gmail.com', ' bnn', 'Hallwang', 'Salzburg', '8976543654', 'PG', 'cs', '2020-04-03', '1997-05-03', '23', 'juu', '5f8e1a7b66094.pdf', 1, 'fgggggggggggggggg', 'jhg'),
-(35, 'geo', 'mathew', 'geo@gmail.com', 'bvb', 'Lochau', 'Vorarlberg', '6578954312', 'pg', 'cs', '2020-03-02', '1997-12-05', '22', 'cv', '5f9bb3ad14dba.pdf', 1, 'nbdhdh', 'ghh\r\nyyy\r\nfgg');
+(29, 'Ameya', 'jhon', 'ameya@gmail.com', 'neelgiri', 'iduki', 'kerala', '9432222222', 'degree', 'BCA', '2020-09-25', '1999-01-15', '21', 'Software Engineer', '5f8d2f5d6ccd2.', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'Teamwork,Multitasking'),
+(30, 'Deepak', 'Dev', 'dev@gmail.com', 'calicut', 'Kozhikode', 'Kerala', '9542355346', 'pg', 'pg', '2020-10-03', '2002-01-22', '18', 'Trainee Engineer', '5f8d2f5d6ccd2.', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'Attention to details,coding'),
+(31, 'Yoosaf', 'Ali', 'ali@gmail.com', 'westhill', 'calicut', 'kerala', '9676787988', 'pg', 'cs', '2020-05-12', '2001-12-31', '18', 'Technical Leader', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'multitasking,coding'),
+(32, 'Ram', 'Tom', 'tom@gmail.com', 'vythiri', 'Aluva', 'Kerala', '8472882893', 'pg ', 'cs', '1997-05-23', '1997-04-03', '23', 'Project Leader', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'communication,coding'),
+(33, 'Akhil', 'Madhav', 'madhav@gmail.com', 'perumballi nagar', 'kochi', 'kerala', '4367852345', 'degree', 'cs', '2020-05-04', '1995-04-06', '25', 'System engineer', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'coding'),
+(34, 'Divin', 'Prabhakar', 'divin@gmail.com', ' recruzi villa', 'Hallwang', 'Salzburg', '8976543654', 'PG', 'cs', '2020-04-03', '1997-05-03', '23', 'programmer', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'communication,coding'),
+(35, 'geo', 'mathew', 'geo@gmail.com', 'ternar villa', 'Lochau', 'Vorarlberg', '6578954312', 'pg', 'cs', '2020-03-02', '1997-12-05', '22', 'Softwaew Engineer', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'team-work,coding');
 
 --
 -- Indexes for dumped tables
@@ -52898,7 +52904,7 @@ ALTER TABLE `alerts`
 -- AUTO_INCREMENT for table `apply_job_post`
 --
 ALTER TABLE `apply_job_post`
-  MODIFY `id_apply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_apply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -52934,7 +52940,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `mailbox`
 --
 ALTER TABLE `mailbox`
-  MODIFY `id_mailbox` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_mailbox` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `states`
@@ -52946,7 +52952,7 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `task_assessment_records`
 --
 ALTER TABLE `task_assessment_records`
-  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
