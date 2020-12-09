@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2020 at 09:48 PM
+-- Generation Time: Dec 09, 2020 at 11:47 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -81,6 +81,13 @@ CREATE TABLE `apply_job_post` (
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `apply_job_post`
+--
+
+INSERT INTO `apply_job_post` (`id_apply`, `id_jobpost`, `id_company`, `id_user`, `status`) VALUES
+(35, 47, 31, 30, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -103,6 +110,8 @@ CREATE TABLE `assessment_records` (
 INSERT INTO `assessment_records` (`record_id`, `id_user`, `exam_id`, `score`, `status`, `date`) VALUES
 ('RS01219694462925', '29', 'EX-862747', '75', 'PASS', '11/07/2020'),
 ('RS46201206736592', '29', 'EX-994055', '0', 'FAIL', '10/31/2020'),
+('RS50347219760295', '30', 'EX-688168', '0', 'FAIL', '11/26/2020'),
+('RS51822476145140', '30', 'EX-646642', '66', 'PASS', '11/26/2020'),
 ('RS73621109794834', '30', 'EX-994055', '66', 'FAIL', '11/03/2020'),
 ('RS79160157148753', '30', 'EX-862747', '80', 'PASS', '11/25/2020'),
 ('RS97168686727559', '29', 'EX-474901', '100', 'PASS', '09/25/2020');
@@ -48421,7 +48430,7 @@ INSERT INTO `examinations` (`exam_id`, `exam_name`, `duration`, `passmark`, `ter
 ('EX-015749', 'Java', 3, 50, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Inactive'),
 ('EX-646642', 'Python', 3, 60, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Active'),
 ('EX-688168', 'C++', 3, 50, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Active'),
-('EX-862747', 'Android', 1, 60, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Active');
+('EX-862747', 'Android', 1, 50, 'The exam is an Online Examination System to streamline your preparation and performance.The score awarded by atending this exam is visible to the companies who willing to provide a job for you.', 'Active');
 
 -- --------------------------------------------------------
 
@@ -48523,7 +48532,8 @@ CREATE TABLE `mailbox` (
 --
 
 INSERT INTO `mailbox` (`id_mailbox`, `id_fromuser`, `fromuser`, `id_touser`, `subject`, `message`, `createdAt`) VALUES
-(13, 30, 'company', 30, 'Job Application', 'You are selected', '2020-11-12 20:01:32');
+(13, 30, 'company', 30, 'Job Application', 'You are selected', '2020-11-12 20:01:32'),
+(14, 31, 'company', 30, 'JOb', 'hi', '2020-11-26 04:09:53');
 
 -- --------------------------------------------------------
 
@@ -48591,7 +48601,8 @@ CREATE TABLE `reply_mailbox` (
 
 INSERT INTO `reply_mailbox` (`id_reply`, `id_mailbox`, `id_user`, `usertype`, `message`, `createdAt`) VALUES
 (0, 13, 30, 'user', 'done', '2020-11-12 20:12:38'),
-(0, 13, 30, 'company', 'well', '2020-11-12 20:21:22');
+(0, 13, 30, 'company', 'well', '2020-11-12 20:21:22'),
+(0, 14, 30, 'user', 'ok', '2020-11-26 04:10:20');
 
 -- --------------------------------------------------------
 
@@ -52749,7 +52760,8 @@ CREATE TABLE `task_assessment_records` (
 --
 
 INSERT INTO `task_assessment_records` (`record_id`, `id_user`, `task_id`, `link`, `score`, `status`, `date`) VALUES
-(27, '30', 'TA-178668', 'https://github.com/LineageOS/android_device_xiaomi_beryllium', 34, 1, '2020-11-25');
+(27, '30', 'TA-178668', 'https://github.com/LineageOS/android_device_xiaomi_beryllium', 34, 1, '2020-11-25'),
+(28, '30', 'TA-545177', 'https://github.com/moto-m8916', 70, 1, '2020-11-26');
 
 -- --------------------------------------------------------
 
@@ -52783,8 +52795,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `firstname`, `lastname`, `email`, `address`, `city`, `state`, `contactno`, `qualification`, `stream`, `passingyear`, `dob`, `age`, `designation`, `resume`, `active`, `aboutme`, `skills`) VALUES
-(29, 'Ameya', 'jhon', 'ameya@gmail.com', 'neelgiri', 'iduki', 'kerala', '9432222222', 'degree', 'BCA', '2020-09-25', '1999-01-15', '21', 'Software Engineer', '5f8d2f5d6ccd2.', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'Teamwork,Multitasking'),
-(30, 'Deepak', 'Dev', 'dev@gmail.com', 'calicut', 'Kozhikode', 'Kerala', '9542355346', 'pg', 'pg', '2020-10-03', '2002-01-22', '18', 'Trainee Engineer', '5f8d2f5d6ccd2.', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'Attention to details,coding'),
+(29, 'Ameya', 'jhon', 'ameya@gmail.com', 'neelgiri', 'iduki', 'kerala', '9432222222', 'degree', 'BCA', '2020-09-25', '1999-01-15', '21', 'Software Engineer', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'Teamwork,Multitasking'),
+(30, 'Deepak', 'Dev', 'dev@gmail.com', 'calicut', 'Kozhikode', 'Kerala', '9542355346', 'pg', 'pg', '2020-10-03', '2002-01-22', '18', 'Trainee Engineer', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'Attention to details,coding'),
 (31, 'Yoosaf', 'Ali', 'ali@gmail.com', 'westhill', 'calicut', 'kerala', '9676787988', 'pg', 'cs', '2020-05-12', '2001-12-31', '18', 'Technical Leader', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'multitasking,coding'),
 (32, 'Ram', 'Tom', 'tom@gmail.com', 'vythiri', 'Aluva', 'Kerala', '8472882893', 'pg ', 'cs', '1997-05-23', '1997-04-03', '23', 'Project Leader', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'communication,coding'),
 (33, 'Akhil', 'Madhav', 'madhav@gmail.com', 'perumballi nagar', 'kochi', 'kerala', '4367852345', 'degree', 'cs', '2020-05-04', '1995-04-06', '25', 'System engineer', '5f8d2f5d6ccd2.pdf', 1, 'i am able to handle multiple tasks on a daily basis. I use a creative approach to problem solve. I am always energetic and eager to learn new skills.', 'coding'),
@@ -52904,7 +52916,7 @@ ALTER TABLE `alerts`
 -- AUTO_INCREMENT for table `apply_job_post`
 --
 ALTER TABLE `apply_job_post`
-  MODIFY `id_apply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_apply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -52940,7 +52952,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `mailbox`
 --
 ALTER TABLE `mailbox`
-  MODIFY `id_mailbox` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_mailbox` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `states`
@@ -52952,7 +52964,7 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `task_assessment_records`
 --
 ALTER TABLE `task_assessment_records`
-  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
